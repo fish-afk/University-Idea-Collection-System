@@ -1,0 +1,10 @@
+idea_documents
+idea_categories
+staff_types
+departments
+user_roles
+users
+ideas
+comments
+likes_and_dislikes
+reported_posts

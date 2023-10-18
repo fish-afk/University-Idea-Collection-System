@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const {connection}= require('./models/_mysql')
 
 require("dotenv").config();
 const server = express();
