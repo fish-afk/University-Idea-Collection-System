@@ -12,13 +12,13 @@ step 1: Clone this repository using the following commands
 Linux and macOS:
 
 ```bash
-sudo git clone https://github.com/UsmanTheGuy/UoG-Comp-1682-Group-Project.git
+sudo git clone https://github.com/fish-afk/Uog_COMP1640_Group1_EWSD_Assignment_2023_24.git
 ```
 
 Windows:
 
 ```bash
-git clone https://github.com/UsmanTheGuy/UoG-Comp-1682-Group-Project.git
+git clone https://github.com/fish-afk/Uog_COMP1640_Group1_EWSD_Assignment_2023_24.git
 ```
 
 step 2: open a terminal / windows cmd prompt inside the "Idea_collection_system" repository
