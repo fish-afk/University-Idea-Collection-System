@@ -11,7 +11,9 @@ Any documentation related to the system will be found in the current folder. The
 
 Note: You need to have  ```node v16.18.1``` and ```npm v8.10.0``` installed on your system before you proceed.
 
-step 1: Clone this repository using the following commands 
+### step 1: 
+
+Clone this repository using the following commands 
 
 Linux and macOS:
 
@@ -25,15 +27,19 @@ Windows:
 git clone https://github.com/fish-afk/Uog_COMP1640_Group1_EWSD_Assignment_2023_24.git
 ```
 
-step 2: open a terminal / windows cmd prompt inside the "Idea_collection_system" folder. Make sure its inside that folder.
+### step 2: 
+open a terminal / windows cmd prompt inside the "Idea_collection_system" folder. Make sure its inside that folder.
 
-step 3: run this command to install node packages.
+### step 3: 
+run this command to install node packages.
 
 ```npm install```
 
-step 4: run this command to start up the server
+### step 4: 
+run this command to start up the server
 
 ```node index.js```
 
-step 5: go to browser on http://localhost:4455 and you're done.
+### step 5: 
+go to browser on http://localhost:4455 and you're done.
 
