@@ -3,12 +3,12 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
-const generateJwtToken = (username, privs = "staff") => {
+const generateJwtToken = (username, privs = "staff") => { 
 	const date = new Date();
 	const JWT_EXPIRATION_TIME =
-		privs === "Admin"
+		privs === "admin" // privs can either be staff, qa_manager, qa_coordinator or admin
 			? Math.floor(date.getTime() / 1000) + 60 * 20 // 20 minutes from now if admin
-			: Math.floor(date.getTime() / 1000) + 60 * 30; // 30 minutes from now if staff/qa-manager/qa-coordinator
+			: Math.floor(date.getTime() / 1000) + 60 * 30; // 30 minutes from now if staff/qa_manager/qa_coordinator
 
 	const freshJwt = jwt.sign(
 		{ username, exp: JWT_EXPIRATION_TIME, privs: privs },
