@@ -1,10 +1,12 @@
-idea_documents
+This is the order in which the tables should be created: 
+
 idea_categories
 staff_types
 departments
 user_roles
 users
 ideas
+idea_documents
 comments
 likes_and_dislikes
 reported_posts

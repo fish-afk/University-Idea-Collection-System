@@ -2,20 +2,10 @@
 -- DATABASE CREATION
 
 CREATE DATABASE IF NOT EXISTS Idea_Collection_System;
+USE Idea_Collection_System;
 
+-- TABLES CREATION 
 
--- ************************************** `idea_documents`
-
-CREATE TABLE IF NOT EXISTS `idea_documents`
-(
- `document_id`  int NOT NULL ,
- `document_uri` text NOT NULL ,
- `idea_id`      int NOT NULL ,
-
-PRIMARY KEY (`document_id`),
-KEY `FK_1` (`idea_id`),
-CONSTRAINT `FK_6` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`)
-);
 
 -- ************************************** `idea_categories`
 
@@ -27,7 +17,6 @@ CREATE TABLE IF NOT EXISTS `idea_categories`
 
 PRIMARY KEY (`category_id`)
 );
-
 
 
 -- ************************************** `staff_type`
@@ -108,6 +97,20 @@ KEY `FK_2` (`category_id`),
 CONSTRAINT `FK_9` FOREIGN KEY `FK_2` (`category_id`) REFERENCES `idea_categories` (`category_id`)
 );
 
+
+
+-- ************************************** `idea_documents`
+
+CREATE TABLE IF NOT EXISTS `idea_documents`
+(
+ `document_id`  int NOT NULL ,
+ `document_uri` text NOT NULL ,
+ `idea_id`      int NOT NULL ,
+
+PRIMARY KEY (`document_id`),
+KEY `FK_1` (`idea_id`),
+CONSTRAINT `FK_6` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`)
+);
 
 
 -- ************************************** `comments`

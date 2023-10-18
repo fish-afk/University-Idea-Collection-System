@@ -5,7 +5,11 @@
 
 Any documentation related to the system will be found in the current folder. The system itself will be found in the "Idea_collection_system" folder.
 
-### How to run this project locally
+## How to run this project locally
+
+### Prerequisites: 
+
+Note: You need to have  ```node v16.18.1``` and ```npm v8.10.0``` installed on your system before you proceed.
 
 step 1: Clone this repository using the following commands 
 
