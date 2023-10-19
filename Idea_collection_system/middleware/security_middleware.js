@@ -3,7 +3,7 @@ function securityMiddleware(req, res, next) {
 		/(?:<[^>]*|\b)(on\w+\s*=|javascript\s*:|expression\s*\(|eval\s*\()|<\s*script|<\s*img|<\s*iframe|<\s*link|<\s*meta|<\s*form|<\s*svg|data\s*:|vbscript\s*:|<\s*object/i;
 
 	const sqlInjectionRegex =
-		/(SELECT.*FROM|INSERT INTO|UPDATE.*SET|DELETE FROM|DROP)/gi;
+		/(SELECT.*FROM|INSERT INTO|UPDATE.*SET|DELETE FROM|DROP|UNION)/gi;
 
 	const params = req.query;
 	const body = req.body;

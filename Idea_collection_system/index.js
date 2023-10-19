@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-const {connection}= require('./models/_mysql')
+const security = require('./middleware/security_middleware')
 
 require("dotenv").config();
 const server = express();
@@ -15,7 +15,8 @@ const limiter = rateLimit({
 });
 
 server.use(express.json({ limit: "10mb" })); // max request size 10 mb
-server.use(cors({origin: "*"}));
+server.use(cors({ origin: "*" }));
+server.use(security.securityMiddleware);
 
 server.set("trust proxy", 1); // to trust loadbalancers like nginx so that, that ip doesn`t get limited.
 
