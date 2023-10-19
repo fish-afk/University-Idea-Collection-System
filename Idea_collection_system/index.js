@@ -19,6 +19,12 @@ server.use(cors({origin: "*"}));
 
 server.set("trust proxy", 1); // to trust loadbalancers like nginx so that, that ip doesn`t get limited.
 
+
+const usersRouter = require("./routers/users_router")
+
+server.use('/user', limiter, usersRouter)
+
+
 server.get("/apiversion", limiter, (req, res) => {
 	return res.send({
 		status: "SUCCESS",
