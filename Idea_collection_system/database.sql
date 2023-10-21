@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `users`
  `auth_refresh_token`        text NULL ,
  `account_active`            tinyint NOT NULL DEFAULT 1,
  `registration_timestamp`    datetime NOT NULL ,
+ `last_log_in`               datetime NULL,
  `hidden_posts_and_comments` tinyint NOT NULL ,
  `role_id`                   int NULL ,
  `staff_type_id`             int NULL ,

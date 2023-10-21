@@ -162,7 +162,7 @@ const login = (req, res) => {
 				bcrypt.compare(password, user.password, async (error, result) => {
 					if (result && !error) {
 
-						let privs;
+						let privs = "staff";
 
 						switch (user?.role_id) {
 							case "1":
@@ -173,8 +173,6 @@ const login = (req, res) => {
 								privs = "qa_manager";
 							case "4":
 								privs = "admin";
-							default:
-								privs = "staff";
 						}
 
 						const jwtToken = authMiddleware.generateJwtToken(user.username, privs, "normal")
