@@ -19,9 +19,11 @@ const newIdeaPost = (req, res) => {
 		(err, results) => {
 			if (err) {
 				console.error("Error creating an idea:", err);
-				res.status(500).send("Error creating an idea");
+                res.status(500).send({ status: "FAILURE", message: "Error creating an idea" });
 			} else {
-				res.status(201).json({ message: "Idea created successfully" });
+				res
+					.status(201)
+					.json({ status: "SUCCESS", message: "Idea created successfully" });
 			}
 		},
 	);
@@ -33,9 +35,9 @@ const getAllIdeas = (req, res) => {
 	Mysql.connection.query(query, (err, results) => {
 		if (err) {
 			console.error("Error fetching ideas:", err);
-			res.status(500).send("Error fetching ideas");
+            res.status(500).send({ status: "FAILURE", message: "Error fetching ideas" });
 		} else {
-			res.status(200).json(results);
+            res.status(200).json({ status: "SUCCESS", data: results });
 		}
 	});
 }
@@ -50,9 +52,9 @@ const getIdeaById = (req, res) => {
 			res.status(500).send("Error fetching idea");
 		} else {
 			if (results.length > 0) {
-				res.status(200).json(results[0]);
+                res.status(200).json({ status: "SUCCESS", data: results[0] });
 			} else {
-				res.status(404).send("Idea not found");
+                res.status(404).send({ status: "FAILURE", message: "Idea not found" });
 			}
 		}
 	});
@@ -85,9 +87,13 @@ const updateIdeaByID = (req, res) => {
 		(err, results) => {
 			if (err) {
 				console.error("Error updating idea:", err);
-				res.status(500).send("Error updating idea");
+                res
+									.status(500)
+									.send({ status: "FAILURE", message: "Error updating idea" });
 			} else {
-				res.status(200).json({ message: "Idea updated successfully" });
+				res
+					.status(200)
+					.json({ status: "SUCCESS", message: "Idea updated successfully" });
 			}
 		},
 	);
@@ -100,9 +106,11 @@ const deleteIdeaById = (req, res) => {
 	Mysql.connection.query(query, [idea_id], (err, results) => {
 		if (err) {
 			console.error("Error deleting idea:", err);
-			res.status(500).send("Error deleting idea");
+            res.status(500).send({ status: "FAILURE", message: "Error deleting idea" });
 		} else {
-			res.status(200).json({ message: "Idea deleted successfully" });
+			res
+				.status(200)
+				.json({ status: "SUCCESS", message: "Idea deleted successfully" });
 		}
 	});
 }
