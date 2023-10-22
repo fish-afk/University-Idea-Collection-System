@@ -85,7 +85,8 @@ CONSTRAINT `FK_12_2` FOREIGN KEY `FK_3` (`role_id`) REFERENCES `user_roles` (`ro
 CREATE TABLE IF NOT EXISTS `ideas`
 (
  `idea_id`                 int NOT NULL ,
- `idea`                    text NOT NULL ,
+ `idea_title`              text NOT NULL ,
+ `idea_body`               text NOT NULL,
  `date_and_time_posted_on` datetime NOT NULL ,
  `category_id`             int NOT NULL ,
  `post_is_anonymous`       tinyint NOT NULL ,
