@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-const security = require('./middleware/security_middleware')
+const security = require("./middleware/security_middleware");
 
 require("dotenv").config();
 const server = express();
@@ -20,16 +20,16 @@ server.use(security.securityMiddleware);
 
 server.set("trust proxy", 1); // to trust loadbalancers like nginx so that, that ip doesn`t get limited.
 
+const usersRouter = require("./routers/users_router");
+const ideasRouter = require("./routers/ideas_router");
 
-const usersRouter = require("./routers/users_router")
-
-server.use('/user', limiter, usersRouter)
-
+server.use("/users", limiter, usersRouter);
+server.use("/ideas", limiter, ideasRouter);
 
 server.get("/apiversion", limiter, (req, res) => {
 	return res.send({
 		status: "SUCCESS",
-		data: process.env.API_VERSION ? "v" + process.env.API_VERSION : "v1.0.0"
+		data: process.env.API_VERSION ? "v" + process.env.API_VERSION : "v1.0.0",
 	});
 });
 
