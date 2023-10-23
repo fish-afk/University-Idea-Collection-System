@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `comments`
 (
  `comment_id`        int NOT NULL ,
  `comment`           text NOT NULL ,
- `date_posted`       date NOT NULL ,
+ `date_and_time_posted_on` datetime NOT NULL ,
  `post_is_anonymous` tinyint NOT NULL ,
  `idea_id`           int NOT NULL ,
  `username`          varchar(255) NOT NULL ,

@@ -7,9 +7,21 @@ Any documentation related to the system will be found in the current folder. The
 
 ## How to run this project locally
 
-### Prerequisites: 
+## Prerequisites: 
 
-Note: You need to have  ```node v16.18.1``` and ```npm v8.10.0``` installed on your system before you proceed.
+### 1 
+
+You need to have  ```node v16.18.1``` and ```npm v8.10.0``` installed on your system before you proceed.
+
+### 2
+
+Make sure to install and setup MySQL on your system.
+
+### 3 
+
+Make sure you have the .env file with all the necessary environment variables.
+
+## Steps
 
 ### step 1: 
 
