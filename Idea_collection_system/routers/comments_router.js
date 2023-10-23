@@ -5,9 +5,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get(
-	"/getallcomments",
+	"/getallcommentsforidea",
 	authMiddleware.verifyJWT,
-	commentsController.getAllcomments,
+	commentsController.getCommentsByIdeaId,
 );
 router.get(
 	"/getcommentbyid",
