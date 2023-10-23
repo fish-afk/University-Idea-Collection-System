@@ -5,27 +5,27 @@ const express = require("express");
 const router = express.Router();
 
 router.get(
-	"/getallcomments",
+	"/getalldepartments",
 	authMiddleware.verifyJWT,
 	departmentsController.getAllDepartments,
 );
 router.get(
-	"/getcommentbyid",
+	"/getdepartmentbyid",
 	authMiddleware.verifyJWT,
 	departmentsController.getDepartmentById,
 );
 router.post(
-	"/newcomment",
+	"/newdepartment",
 	authMiddleware.verifyJWT,
 	departmentsController.newDepartment,
 );
 router.post(
-	"/deletecomment",
+	"/deletedepartment",
 	authMiddleware.verifyJWT,
 	departmentsController.deleteDepartmentById,
 );
 router.patch(
-	"updatecomment",
+	"updatedepartment",
 	authMiddleware.verifyJWT,
 	departmentsController.updateDepartmentById,
 );
