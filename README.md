@@ -15,7 +15,7 @@ You need to have  ```node v16.18.1``` and ```npm v8.10.0``` installed on your sy
 
 ### 2
 
-Make sure to install and setup MySQL on your system.
+Make sure to install and setup MySQL > v8.0 on your system.
 
 ### 3 
 

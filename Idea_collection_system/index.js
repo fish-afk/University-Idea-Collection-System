@@ -23,10 +23,14 @@ server.set("trust proxy", 1); // to trust loadbalancers like nginx so that, that
 const usersRouter = require("./routers/users_router");
 const ideasRouter = require("./routers/ideas_router");
 const commentsRouter = require('./routers/comments_router');
+const categoriesRouter = require('./routers/categories_router')
+const departmentsRouter = require('./routers/departments_router')
 
 server.use("/users", limiter, usersRouter);
 server.use("/ideas", limiter, ideasRouter);
 server.use('/comments', limiter, commentsRouter)
+server.use("/categories", limiter, categoriesRouter);
+server.use("/departments", limiter, departmentsRouter);
 
 server.get("/apiversion", limiter, (req, res) => {
 	return res.send({

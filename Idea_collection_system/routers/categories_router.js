@@ -1,33 +1,33 @@
-const departmentsController = require("../controllers/departments");
+const categoriesController = require("../controllers/categories");
 const authMiddleware = require("../middleware/auth_middleware");
 const express = require("express");
 
 const router = express.Router();
 
 router.get(
-	"/getallcomments",
+	"/getallcategories",
 	authMiddleware.verifyJWT,
-	departmentsController.getAllDepartments,
+	categoriesController.getAllCategories,
 );
 router.get(
-	"/getcommentbyid",
+	"/getcategorybyid",
 	authMiddleware.verifyJWT,
-	departmentsController.getDepartmentById,
+	categoriesController.getCategoryById,
 );
 router.post(
-	"/newcomment",
+	"/newcategory",
 	authMiddleware.verifyJWT,
-	departmentsController.newDepartment,
+	categoriesController.newCategory,
 );
 router.post(
-	"/deletecomment",
+	"/deletecategory",
 	authMiddleware.verifyJWT,
-	departmentsController.deleteDepartmentById,
+	categoriesController.deleteCategoryById,
 );
 router.patch(
-	"updatecomment",
+	"updatecategory",
 	authMiddleware.verifyJWT,
-	departmentsController.updateDepartmentById,
+	categoriesController.updateCategoryById,
 );
 
 module.exports = router;
