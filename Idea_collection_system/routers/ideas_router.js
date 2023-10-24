@@ -15,8 +15,16 @@ router.put(
 	multerMiddleware.upload.single("file"),
 	ideaController.uploadIdeaDocument,
 );
-router.get('/getideadocuments',authMiddleware.verifyJWT, ideaController.getIdeaDocuments)
-router.get('/getdocumentfile',authMiddleware.verifyJWT, ideaController.getDocumentFile)
+router.get(
+	"/getideadocuments",
+	authMiddleware.verifyJWT,
+	ideaController.getIdeaDocuments,
+);
+router.get(
+	"/getdocumentfile",
+	authMiddleware.verifyJWT,
+	ideaController.getDocumentFile,
+);
 router.get(
 	"/getideabyid",
 	authMiddleware.verifyJWT,
@@ -32,6 +40,14 @@ router.patch(
 	"updateidea",
 	authMiddleware.verifyJWT,
 	ideaController.updateIdeaByID,
+);
+
+router.patch("/likepost", authMiddleware.verifyJWT, ideaController.likePost);
+
+router.patch(
+	"/dislikepost",
+	authMiddleware.verifyJWT,
+	ideaController.dislikePost,
 );
 
 module.exports = router;
