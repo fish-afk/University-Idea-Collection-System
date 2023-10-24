@@ -1,5 +1,6 @@
 const ideaController = require("../controllers/ideas");
 const authMiddleware = require("../middleware/auth_middleware");
+const multerMiddleware = require("../middleware/multer_middleware");
 const express = require("express");
 
 const router = express.Router();
@@ -9,6 +10,13 @@ router.get(
 	authMiddleware.verifyJWT,
 	ideaController.getAllIdeas,
 );
+router.put(
+	"/uploadideadocument",
+	multerMiddleware.upload.single("file"),
+	ideaController.uploadIdeaDocument,
+);
+router.get('/getideadocuments',authMiddleware.verifyJWT, ideaController.getIdeaDocuments)
+router.get('/getdocumentfile',authMiddleware.verifyJWT, ideaController.getDocumentFile)
 router.get(
 	"/getideabyid",
 	authMiddleware.verifyJWT,

@@ -11,7 +11,7 @@ USE Idea_Collection_System;
 
 CREATE TABLE IF NOT EXISTS `idea_categories`
 (
- `category_id` int NOT NULL ,
+ `category_id` int AUTO_INCREMENT  NOT NULL ,
  `name`        varchar(255) NOT NULL ,
  `description` text NOT NULL ,
 
@@ -23,7 +23,7 @@ PRIMARY KEY (`category_id`)
 
 CREATE TABLE IF NOT EXISTS `staff_type`
 (
- `type_id`     int NOT NULL ,
+ `type_id`     int AUTO_INCREMENT  NOT NULL ,
  `type`        varchar(255) NOT NULL ,
  `description` varchar(255) NOT NULL ,
 
@@ -34,7 +34,7 @@ PRIMARY KEY (`type_id`)
 
 CREATE TABLE IF NOT EXISTS `departments`
 (
- `department_id` int NOT NULL ,
+ `department_id` int AUTO_INCREMENT  NOT NULL ,
  `name`          varchar(255) NOT NULL ,
  `description`   text NOT NULL ,
 
@@ -46,7 +46,7 @@ PRIMARY KEY (`department_id`)
 
 CREATE TABLE IF NOT EXISTS `user_roles`
 (
- `role_id`   int NOT NULL ,
+ `role_id`   int AUTO_INCREMENT  NOT NULL ,
  `role_name` varchar(255) NOT NULL ,
 
 PRIMARY KEY (`role_id`)
@@ -84,7 +84,7 @@ CONSTRAINT `FK_12_2` FOREIGN KEY `FK_3` (`role_id`) REFERENCES `user_roles` (`ro
 
 CREATE TABLE IF NOT EXISTS `ideas`
 (
- `idea_id`                 int NOT NULL ,
+ `idea_id`                 int AUTO_INCREMENT NOT NULL,
  `idea_title`              text NOT NULL ,
  `idea_body`               text NOT NULL,
  `date_and_time_posted_on` datetime NOT NULL ,
@@ -105,8 +105,8 @@ CONSTRAINT `FK_9` FOREIGN KEY `FK_2` (`category_id`) REFERENCES `idea_categories
 
 CREATE TABLE IF NOT EXISTS `idea_documents`
 (
- `document_id`  int NOT NULL ,
- `document_uri` text NOT NULL ,
+ `document_id`  int AUTO_INCREMENT NOT NULL ,
+ `filename` text NOT NULL ,
  `idea_id`      int NOT NULL ,
 
 PRIMARY KEY (`document_id`),
@@ -119,7 +119,7 @@ CONSTRAINT `FK_6` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`)
 
 CREATE TABLE IF NOT EXISTS `comments`
 (
- `comment_id`        int NOT NULL ,
+ `comment_id`        int AUTO_INCREMENT NOT NULL ,
  `comment`           text NOT NULL ,
  `date_and_time_posted_on` datetime NOT NULL ,
  `post_is_anonymous` tinyint NOT NULL ,
@@ -137,7 +137,7 @@ CONSTRAINT `FK_12` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username
 
 CREATE TABLE IF NOT EXISTS `likes_and_dislikes`
 (
- `impression_id`   int NOT NULL ,
+ `impression_id`   int AUTO_INCREMENT  NOT NULL ,
  `like_or_dislike` tinyint NOT NULL ,
  `idea_id`         int NOT NULL ,
  `username`        varchar(255) NOT NULL ,
@@ -154,7 +154,7 @@ CONSTRAINT `FK_5` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`
 
 CREATE TABLE IF NOT EXISTS `reported_posts`
 (
- `report_id`        int NOT NULL ,
+ `report_id`        int AUTO_INCREMENT  NOT NULL ,
  `report`           text NOT NULL ,
  `report_date_time` datetime NOT NULL ,
  `idea_id`          int NOT NULL ,
