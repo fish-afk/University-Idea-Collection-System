@@ -101,7 +101,7 @@ const updateAccountDetails = (req, res) => {
 
 	const query = `UPDATE users SET firstname = ?, lastname = ?, email = ?, staff_type_id = ?, department_id = ? WHERE username = ?`;
 
-	Mysql.connection.query(query, [firstname, lastname, email, staff_type_id, username], (err, results) => {
+	Mysql.connection.query(query, [firstname, lastname, email, staff_type_id, department_id, username], (err, results) => {
 		if (err) {
 			return res.status(500).send({
 				status: "FAILURE",
@@ -115,6 +115,69 @@ const updateAccountDetails = (req, res) => {
 		}
 	})
 }
+
+// only qa manager and above roles can do this
+
+const disableAccount = (req, res) => {
+
+	const { accountUsername } = req.body;
+
+	const username = req.decoded['username']
+	const privs = req.decoded['privs']
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res.status(401).send({ status: 'FAILURE', message: 'Insufficient privileges' })
+		
+	} else {
+		const query = `UPDATE users SET account_active = 0 WHERE username = ?`
+
+		Mysql.connection.query(query, [username], (err, results) => {
+			if (err) {
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.status(200).send({
+					status: "SUCCESS",
+					message: "Account for user " + username + " has been disabled successfully",
+				});
+			}
+		})
+	}
+}
+
+// only qa manager and above roles can do this
+
+const enableAccount = (req, res) => {
+	const { accountUsername } = req.body;
+
+	const username = req.decoded["username"];
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `UPDATE users SET account_active = 1 WHERE username = ?`;
+
+		Mysql.connection.query(query, [username], (err, results) => {
+			if (err) {
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.status(200).send({
+					status: "SUCCESS",
+					message:
+						"Account for user " + username + " has been enabled successfully",
+				});
+			}
+		});
+	}
+};
 
 
 const signup = (req, res) => {
@@ -274,5 +337,7 @@ module.exports = {
 	login,
 	refresh,
 	changePassword,
-	updateAccountDetails
+	updateAccountDetails,
+	enableAccount,
+	disableAccount
 };

@@ -9,5 +9,7 @@ router.post('/login', userController.login)
 router.post('/refresh', userController.refresh)
 router.patch('/changepassword', authMiddleware.verifyJWT, userController.changePassword)
 router.patch('/updatedetails', authMiddleware.verifyJWT, userController.updateAccountDetails)
+router.patch('/enableaccount', authMiddleware.verifyJWT, userController.enableAccount)
+router.patch('/disableaccount',authMiddleware.verifyJWT,userController.disableAccount);
 
 module.exports = router;
