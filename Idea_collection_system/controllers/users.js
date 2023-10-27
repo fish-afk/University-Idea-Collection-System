@@ -62,6 +62,61 @@ const getUserByUsername = (username, cb) => {
 	});
 };
 
+const changePassword = (req, res) => {
+
+	const { newPassword } = req.body;
+
+	const username = req.decoded['username'];
+
+	const query = `UPDATE users SET password = ? WHERE username = ?`
+
+	bcrypt.hash(newPassword, SALT_ROUNDS, (err, hashedPassword) => { 
+
+		if (err) {
+			return res.status(500).send({
+				status: "FAILURE",
+				message: "Unknown error",
+			});
+		} else {
+			Mysql.connection.query(query, [hashedPassword, username], (err, results) => {
+				if (err) {
+					return res.status(500).send({
+						status: "FAILURE",
+						message: "Unknown error",
+					});
+				} else {
+					return res.status(200).send({
+						status: "SUCCESS",
+						message: "Password changed successfully !"
+					})
+				}
+			})
+		}
+	})
+}
+
+const updateAccountDetails = (req, res) => {
+	const { firstname, lastname, email, staff_type_id, department_id } = req.body;
+	const username = req.decoded['username']
+
+	const query = `UPDATE users SET firstname = ?, lastname = ?, email = ?, staff_type_id = ?, department_id = ? WHERE username = ?`;
+
+	Mysql.connection.query(query, [firstname, lastname, email, staff_type_id, username], (err, results) => {
+		if (err) {
+			return res.status(500).send({
+				status: "FAILURE",
+				message: "Unknown error",
+			});
+		} else {
+			return res.status(200).send({
+				status: "SUCCESS",
+				message: "Details updated successfully !",
+			});
+		}
+	})
+}
+
+
 const signup = (req, res) => {
 	const {
 		username,
@@ -217,5 +272,7 @@ const refresh = async (req, res) => {
 module.exports = {
 	signup,
 	login,
-	refresh
+	refresh,
+	changePassword,
+	updateAccountDetails
 };
