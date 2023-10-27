@@ -1,5 +1,19 @@
 const Mysql = require("../models/_mysql")
 const path = require('path')
+const nodemailer = require("nodemailer");
+
+require('dotenv').config()
+
+//setup nodemailer for sending new idea post and new comment emails
+const transport = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 587,
+	auth: {
+		user: process.env.GMAIL_EMAIL,
+		pass: process.env.GMAIL_APP_PASSWORD,
+	},
+});
+
 
 // Create an idea
 const newIdeaPost = (req, res) => {
