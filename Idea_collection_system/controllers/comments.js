@@ -1,7 +1,60 @@
 const Mysql = require("../models/_mysql");
+const nodemailer = require("nodemailer");
+
+require("dotenv").config();
+
+//setup nodemailer for sending new idea post and new comment emails
+const transport = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 587,
+	auth: {
+		user: process.env.GMAIL_EMAIL,
+		pass: process.env.GMAIL_APP_PASSWORD,
+	},
+});
+
+
+function getCurrentDate() {
+	const today = new Date();
+	const day = String(today.getDate()).padStart(2, "0");
+	const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+	const year = today.getFullYear();
+
+	return `${day}/${month}/${year}`;
+}
+
+function hasClosurePassed(currentDate, closureDate) {
+	const parts1 = currentDate.split("/"); // Split the first date string into day, month, and year
+	const parts2 = closureDate.split("/"); // Split the second date string into day, month, and year
+
+	// Create Date objects from the parts
+	const dateObj1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0]}`);
+	const dateObj2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
+
+	if (dateObj1 >= dateObj2) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 // Create a comment
 const newCommentPost = (req, res) => {
+
+	const todaysDate = getCurrentDate();
+	const hasClosurePassed_ = hasClosurePassed(
+		todaysDate,
+		process.env.FINAL_CLOSURE_DATE,
+	);
+
+	if (hasClosurePassed_ == true) {
+		return res.send({
+			status: "FAILURE",
+			message:
+				"Sorry, The closure date for comments has passed, and comments can no longer be posted",
+		});
+	}
+
 	const {
 		comment,
 		date_and_time_posted_on,

@@ -15,8 +15,47 @@ const transport = nodemailer.createTransport({
 });
 
 
+function getCurrentDate() {
+	const today = new Date();
+	const day = String(today.getDate()).padStart(2, "0");
+	const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+	const year = today.getFullYear();
+
+	return `${day}/${month}/${year}`;
+}
+
+function hasClosurePassed(currentDate, closureDate) {
+	const parts1 = currentDate.split("/"); // Split the first date string into day, month, and year
+	const parts2 = closureDate.split("/"); // Split the second date string into day, month, and year
+
+	// Create Date objects from the parts
+	const dateObj1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0]}`);
+	const dateObj2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
+
+	if (dateObj1 >= dateObj2) {
+		return true
+	} else {
+		return false;
+	} 
+}
+
 // Create an idea
 const newIdeaPost = (req, res) => {
+
+	const todaysDate = getCurrentDate();
+	const hasClosurePassed_ = hasClosurePassed(
+		todaysDate,
+		process.env.CLOSURE_DATE,
+	);
+
+	if (hasClosurePassed_ == true) {
+		return res.send({
+			status: "FAILURE",
+			message:
+				"Sorry, The closure date for ideas has passed, and ideas can no longer be posted",
+		});
+	}
+
 	const {
 		idea_title,
 		idea_body,
