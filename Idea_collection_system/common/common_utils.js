@@ -1,3 +1,9 @@
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+
+const envFilePath = path.resolve(__dirname, ".env");
+
 const setEnvValue = (key, value) => {
 	const envVars = readEnvVars();
 	const targetLine = envVars.find((line) => line.split("=")[0] === key);
@@ -38,9 +44,8 @@ function hasClosurePassed(currentDate, closureDate) {
 	}
 }
 
-
 module.exports = {
-    hasClosurePassed,
-    getCurrentDate,
-    setEnvValue
-}
+	hasClosurePassed,
+	getCurrentDate,
+	setEnvValue,
+};
