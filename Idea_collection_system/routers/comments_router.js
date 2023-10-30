@@ -26,4 +26,6 @@ router.patch(
 	commentsController.updateCommentById,
 );
 
+router.patch('/setfinalclosuredate', authMiddleware.verifyJWT, commentsController.setClosureDateForComments);
+
 module.exports = router;

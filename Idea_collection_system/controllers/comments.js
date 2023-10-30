@@ -104,6 +104,29 @@ const newCommentPost = (req, res) => {
 	);
 };
 
+function setClosureDateForComments(req, res) {
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const { newClosureDate } = req.body;
+
+		if (!newClosureDate) {
+			return res.send({ status: "FAILURE", message: "Missing details" });
+		} else {
+			setEnvValue("FINAL_CLOSURE_DATE", newClosureDate);
+
+			return res.send({
+				status: "SUCCESS",
+				message: "Set new closure date successfully",
+			});
+		}
+	}
+}
+
 // Read all comments for a specific idea
 const getCommentsByIdeaId = (req, res) => {
 	const idea_id = req.query.idea_id;
@@ -203,4 +226,5 @@ module.exports = {
 	getCommentById,
 	updateCommentById,
 	deleteCommentById,
+	setClosureDateForComments
 };

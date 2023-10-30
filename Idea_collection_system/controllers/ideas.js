@@ -116,6 +116,28 @@ const newIdeaPost = async (req, res) => {
 	);
 };
 
+function setClosureDateForIdeas(req, res) {
+	const privs = req.decoded['privs']
+
+	if (privs != "admin") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else { 
+
+		const { newClosureDate } = req.body;
+
+		if (!newClosureDate) {
+			return res
+				.send({ status: "FAILURE", message: "Missing details" });
+		} else {
+			setEnvValue("CLOSURE_DATE", newClosureDate);
+
+			return res.send({ status: "SUCCESS", message: "Set new closure date successfully" });
+		}
+	}
+}
+
 function getDocumentFile(req, res) {
 	const Filename = req.query.filename;
 	if (Filename == undefined) {
@@ -402,4 +424,5 @@ module.exports = {
 	getDocumentFile,
 	likePost,
 	dislikePost,
+	setClosureDateForIdeas
 };

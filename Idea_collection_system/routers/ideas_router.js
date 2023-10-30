@@ -50,4 +50,10 @@ router.patch(
 	ideaController.dislikePost,
 );
 
+router.patch(
+	"/setclosuredate",
+	authMiddleware.verifyJWT,
+	ideaController.setClosureDateForIdeas,
+);
+
 module.exports = router;
