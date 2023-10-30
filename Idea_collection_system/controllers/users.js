@@ -1,7 +1,7 @@
 const Mysql = require("../models/_mysql");
 const bcrypt = require("bcrypt");
 const moment = require("moment");
-const authMiddleware = require('../middleware/auth_middleware')
+const authMiddleware = require("../middleware/auth_middleware");
 const SALT_ROUNDS = 10; // for hashing
 
 function formatDate(date) {
@@ -63,75 +63,50 @@ const getUserByUsername = (username, cb) => {
 };
 
 const changePassword = (req, res) => {
-
 	const { newPassword } = req.body;
 
-	const username = req.decoded['username'];
+	const username = req.decoded["username"];
 
-	const query = `UPDATE users SET password = ? WHERE username = ?`
+	const query = `UPDATE users SET password = ? WHERE username = ?`;
 
-	bcrypt.hash(newPassword, SALT_ROUNDS, (err, hashedPassword) => { 
-
+	bcrypt.hash(newPassword, SALT_ROUNDS, (err, hashedPassword) => {
 		if (err) {
 			return res.status(500).send({
 				status: "FAILURE",
 				message: "Unknown error",
 			});
 		} else {
-			Mysql.connection.query(query, [hashedPassword, username], (err, results) => {
-				if (err) {
-					return res.status(500).send({
-						status: "FAILURE",
-						message: "Unknown error",
-					});
-				} else {
-					return res.status(200).send({
-						status: "SUCCESS",
-						message: "Password changed successfully !"
-					})
-				}
-			})
+			Mysql.connection.query(
+				query,
+				[hashedPassword, username],
+				(err, results) => {
+					if (err) {
+						return res.status(500).send({
+							status: "FAILURE",
+							message: "Unknown error",
+						});
+					} else {
+						return res.status(200).send({
+							status: "SUCCESS",
+							message: "Password changed successfully !",
+						});
+					}
+				},
+			);
 		}
-	})
-}
+	});
+};
 
 const updateAccountDetails = (req, res) => {
 	const { firstname, lastname, email, staff_type_id, department_id } = req.body;
-	const username = req.decoded['username']
+	const username = req.decoded["username"];
 
 	const query = `UPDATE users SET firstname = ?, lastname = ?, email = ?, staff_type_id = ?, department_id = ? WHERE username = ?`;
 
-	Mysql.connection.query(query, [firstname, lastname, email, staff_type_id, department_id, username], (err, results) => {
-		if (err) {
-			return res.status(500).send({
-				status: "FAILURE",
-				message: "Unknown error",
-			});
-		} else {
-			return res.status(200).send({
-				status: "SUCCESS",
-				message: "Details updated successfully !",
-			});
-		}
-	})
-}
-
-// only qa manager and above roles can do this
-
-const disableAccount = (req, res) => {
-
-	const { accountUsername } = req.body;
-
-	const username = req.decoded['username']
-	const privs = req.decoded['privs']
-
-	if (privs != "admin" && privs != "qa_manager") {
-		return res.status(401).send({ status: 'FAILURE', message: 'Insufficient privileges' })
-		
-	} else {
-		const query = `UPDATE users SET account_active = 0 WHERE username = ?`
-
-		Mysql.connection.query(query, [username], (err, results) => {
+	Mysql.connection.query(
+		query,
+		[firstname, lastname, email, staff_type_id, department_id, username],
+		(err, results) => {
 			if (err) {
 				return res.status(500).send({
 					status: "FAILURE",
@@ -140,12 +115,44 @@ const disableAccount = (req, res) => {
 			} else {
 				return res.status(200).send({
 					status: "SUCCESS",
-					message: "Account for user " + username + " has been disabled successfully",
+					message: "Details updated successfully !",
 				});
 			}
-		})
+		},
+	);
+};
+
+// only qa manager and above roles can do this
+
+const disableAccount = (req, res) => {
+	const { accountUsername } = req.body;
+
+	const username = req.decoded["username"];
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `UPDATE users SET account_active = 0 WHERE username = ?`;
+
+		Mysql.connection.query(query, [accountUsername], (err, results) => {
+			if (err) {
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.status(200).send({
+					status: "SUCCESS",
+					message:
+						"Account for user " + username + " has been disabled successfully",
+				});
+			}
+		});
 	}
-}
+};
 
 // only qa manager and above roles can do this
 
@@ -162,7 +169,7 @@ const enableAccount = (req, res) => {
 	} else {
 		const query = `UPDATE users SET account_active = 1 WHERE username = ?`;
 
-		Mysql.connection.query(query, [username], (err, results) => {
+		Mysql.connection.query(query, [accountUsername], (err, results) => {
 			if (err) {
 				return res.status(500).send({
 					status: "FAILURE",
@@ -178,7 +185,6 @@ const enableAccount = (req, res) => {
 		});
 	}
 };
-
 
 const signup = (req, res) => {
 	const {
@@ -209,6 +215,7 @@ const signup = (req, res) => {
 	} else {
 		getUserByUsername(username.toLowerCase(), (err, user) => {
 			if (err) {
+				console.log(err);
 				return res.send({
 					status: "FAILURE",
 					message: "Error looking up user",
@@ -217,32 +224,80 @@ const signup = (req, res) => {
 			}
 
 			if (!user) {
-				createUser(
-					username.toLowerCase(),
-					firstname,
-					lastname,
-					email,
-					password,
-					1,
-					0,
-					role_id,
-					staff_type_id,
-					department_id,
-					(err, results) => {
+				if ((role_id == 2 || role_id == "2") && department_id) {
+					const query = `SELECT * FROM users WHERE department_id = ?`;
+					Mysql.connection.query(query, [department_id], (err, results) => {
 						if (err) {
 							console.log(err);
 							return res.send({
 								status: "FAILURE",
-								message: "Error creating account",
+								message: "Error looking up department check",
+								code: "102",
 							});
 						} else {
-							return res.send({
-								status: "SUCCESS",
-								message: "Account created successfully",
-							});
+							if (results.length > 0) {
+								return res.send({
+									status: "FAILURE",
+									message: "A coordinator for this department already exists",
+								});
+							} else {
+								createUser(
+									username.toLowerCase(),
+									firstname,
+									lastname,
+									email,
+									password,
+									1,
+									0,
+									role_id,
+									staff_type_id,
+									department_id,
+									(err, results) => {
+										if (err) {
+											console.log(err);
+											return res.send({
+												status: "FAILURE",
+												message: "Error creating account",
+											});
+										} else {
+											return res.send({
+												status: "SUCCESS",
+												message: "Account created successfully",
+											});
+										}
+									},
+								);
+							}
 						}
-					},
-				);
+					});
+				} else {
+					createUser(
+						username.toLowerCase(),
+						firstname,
+						lastname,
+						email,
+						password,
+						1,
+						0,
+						role_id,
+						staff_type_id,
+						department_id,
+						(err, results) => {
+							if (err) {
+								console.log(err);
+								return res.send({
+									status: "FAILURE",
+									message: "Error creating account",
+								});
+							} else {
+								return res.send({
+									status: "SUCCESS",
+									message: "Account created successfully",
+								});
+							}
+						},
+					);
+				}
 			} else {
 				return res.send({
 					status: "FAILURE",
@@ -279,7 +334,6 @@ const login = (req, res) => {
 			if (user) {
 				bcrypt.compare(password, user.password, async (error, result) => {
 					if (result && !error) {
-
 						let privs = "staff";
 
 						switch (user?.role_id) {
@@ -293,9 +347,16 @@ const login = (req, res) => {
 								privs = "admin";
 						}
 
-						const jwtToken = authMiddleware.generateJwtToken(user.username, privs, "normal")
-						const refreshToken = await authMiddleware.generateRefreshToken(user.username, privs);
-						
+						const jwtToken = authMiddleware.generateJwtToken(
+							user.username,
+							privs,
+							"normal",
+						);
+						const refreshToken = await authMiddleware.generateRefreshToken(
+							user.username,
+							privs,
+						);
+
 						if (refreshToken == false || !jwtToken) {
 							return res.send({
 								message: "Error creating tokens!",
@@ -320,7 +381,6 @@ const login = (req, res) => {
 	}
 };
 
-
 const refresh = async (req, res) => {
 	const refreshToken = req.body.refreshToken;
 	const username = req.body.username;
@@ -331,7 +391,6 @@ const refresh = async (req, res) => {
 	await authMiddleware.verifyRefreshToken(refreshToken, username, res);
 };
 
-
 module.exports = {
 	signup,
 	login,
@@ -339,5 +398,5 @@ module.exports = {
 	changePassword,
 	updateAccountDetails,
 	enableAccount,
-	disableAccount
+	disableAccount,
 };
