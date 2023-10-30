@@ -160,6 +160,10 @@ function getDocumentFile(req, res) {
 	}
 }
 
+const getAllfilesForIdea_Zipped = (req, res) => {
+	// pending
+}
+
 function uploadIdeaDocument(req, res) {
 	if (!req.file) {
 		res.status(400).send({ status: false, message: "No file uploaded." });
