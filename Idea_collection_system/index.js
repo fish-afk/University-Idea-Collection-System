@@ -26,13 +26,14 @@ const commentsRouter = require('./routers/comments_router');
 const categoriesRouter = require('./routers/categories_router')
 const departmentsRouter = require('./routers/departments_router')
 
-server.use("/users", limiter, usersRouter);
-server.use("/ideas", limiter, ideasRouter);
-server.use('/comments', limiter, commentsRouter)
-server.use("/categories", limiter, categoriesRouter);
-server.use("/departments", limiter, departmentsRouter);
+server.use(express.static('static'))
+server.use("/api/users", limiter, usersRouter);
+server.use("/api/ideas", limiter, ideasRouter);
+server.use('/api/comments', limiter, commentsRouter)
+server.use("/api/categories", limiter, categoriesRouter);
+server.use("/api/departments", limiter, departmentsRouter);
 
-server.get("/apiversion", limiter, (req, res) => {
+server.get("/api/apiversion", limiter, (req, res) => {
 	return res.send({
 		status: "SUCCESS",
 		data: process.env.API_VERSION ? "v" + process.env.API_VERSION : "v1.0.0",

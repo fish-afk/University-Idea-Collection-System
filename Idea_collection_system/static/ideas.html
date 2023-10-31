@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas Page</title>
+
+    <!-- css file link  -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--========== Fontawesome cdn ==========-->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <!-- js file link  -->
+    <script src="./js/script.js"></script>
+    <script type="text/javascript">
+
+        //enable submit idea button when user agrees to terms and conditions
+        var check = document.getElementById("check");
+        var submit = document.getElementById("submit");
+
+        if (check.checked) {
+            submit.removeAttribute("disabled");
+        } else {
+            submit.disabled = "true";
+        }
+
+        // Dropdown menus
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const drop = dropdown.querySelector('.drop');
+            const arrow = dropdown.querySelector('.arrow');
+            const options = dropdown.querySelector('.options');
+            const optionList = dropdown.querySelectorAll('.options li');
+            const selected = dropdown.querySelector('.selected');
+
+            dropdown.addEventListener('click', () => {
+                drop.classList.toggle('drop-clicked');
+                arrow.classList.toggle('arrow-rotate');
+                options.classList.toggle('options-open');
+
+                // Set opacity to 1 when options are open
+                if (options.classList.contains('options-open')) {
+                    options.style.opacity = 1;
+                } else {
+                    options.style.opacity = 0;
+                }
+            });
+
+            optionList.forEach(option => {
+                option.addEventListener('click', () => {
+                    selected.innerText = option.innerText;
+                    drop.classList.remove('drop-clicked');
+                    arrow.classList.remove('arrow-rotate');
+                    options.classList.remove('options-open');
+                    options.style.opacity = 0; // Set opacity back to 0
+                    optionList.forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    option.classList.add('active');
+                });
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <!---------navbar------------------------------>
+
+
+        <nav class="navbar" id="nav">
+            <a class="icons" onclick="myFunction()">
+                <i class="fa fa-bars" id="menu-btn"></i>
+            </a>
+            <a href="profile.html">
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <p>Profile</p>
+                </div>
+            </a>
+            <a href="ideas.html">
+                <div class="nav-item active">
+                    <i class="far fa-lightbulb active"></i>
+                    <p>Ideas</p>
+                </div>
+            </a>
+            <a href="stats.html">
+                <div class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Stats</p>
+                </div>
+            </a>
+            <a href="chat.html">
+                <div class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <p>Messages</p>
+                </div>
+            </a>
+        </nav>
+
+        <div class="user-info">
+            <img src="profile.jpg" alt="">
+            <p>Chikondi Banda</p>
+
+        </div>
+
+        <!-------------navbar ends here--------------------->
+
+    </header>
+
+    <!-------------submit section--------------------->
+
+    <section class="submit">
+        <div class="container">
+            <div class="info">
+                <p>NEW IDEA</p>
+                <div class="tag">
+                    <p>Tag:</p>
+                    <ul>
+                        <li>Institutional</li>
+                        <li>Departmental</li>
+                        <li>Personal</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="content">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <label for="fileToUpload">
+                    <i class="fas fa-paperclip"></i>
+                </label>
+            </div>
+            <div class="agree">
+                <input type="checkbox" id="check" onclick="enable()">
+                <label for="check">
+                    I agree to the <a href="terms-and-Condition .html">terms and conditions</a>.
+                </label>
+
+            </div>
+
+            <button disabled class="button" id="submit">
+                <i class="fas fa-edit"></i> Submit
+            </button>
+        </div>
+    </section>
+    <!-------------submit section end--------------------->
+
+    <section class="ideas">
+        <div class="view-by">
+            <div class="dropdown">
+                <p>View By:</p>
+                <div class="drop">
+                    <span class="selected">Most Popular</span>
+                    <div class="arrow"></div>
+                </div>
+                <ul class="options">
+                    <li>Most Popular</li>
+                    <li>Most Viewed</li>
+                    <li>Latest</li>
+                </ul>
+            </div>
+
+            <p>VIEW BY:</p>
+        </div>
+
+        <div class="idea-list">
+            <div class="idea one">
+                <div class="info">
+                    <div class="user">
+                        <img src="profile.jpg" alt="">
+                        <p>Theresa Nyambe</p>
+                    </div>
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p>Departmental</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="line horizontal"></div>
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="far fa-thumbs-up"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="far fa-thumbs-down"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comments">
+                            <i class="far fa-comment"></i>
+                            <p>0</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <p>0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pagination">
+
+    </section>
+
+
+    <footer>
+        <h2>Contact us</h2>
+        <p>+2600000000</p>
+        <p>abcd@mail.com</p>
+        <br><br>
+        <p>&#169 2023 All Rights Reseved</p>
+
+    </footer>
+
+</body>
+
+</html>
+
+<!---------References
+    w3schools
+    Styling HTML tables with CSS - Web Design/UX Tutorial - https://youtu.be/biI9OFH6Nmg?feature=shared 
+    Custom Select Menu Using HTML, CSS & Javascript - https://youtu.be/NRxSb5hCS58?feature=shared
+    
+    ------------------------------>

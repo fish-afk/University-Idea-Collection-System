@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <!-- css file link  -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--========== Fontawesome cdn ==========-->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- js file link  -->
+    <script src="./js/script.js"></script>
+
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <!---------navbar------------------------------>
+
+
+        <nav class="navbar" id="nav">
+            <a class="icons" onclick="myFunction()">
+                <i class="fa fa-bars" id="menu-btn"></i>
+            </a>
+
+            <a href="profile.html">
+                <div class="nav-item active">
+                    <i class="fas fa-cog active"></i>
+                    <p>Profile</p>
+                </div>
+            </a>
+            <a href="ideas.html">
+                <div class="nav-item">
+                    <i class="far fa-lightbulb"></i>
+                    <p>Ideas</p>
+                </div>
+            </a>
+            <a href="stats.html">
+                <div class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Stats</p>
+                </div>
+            </a>
+            <a href="chat.html">
+                <div class="nav-item">
+                    <i class="fas fa-bell"></i>
+                    <p>Messages</p>
+                </div>
+            </a>
+        </nav>
+
+        <div class="user-info">
+            <img src="profile.jpg" alt="">
+            <p>Chikondi Banda</p>
+
+            <a href="login.html">Log out</a>
+        </div>
+
+        <!-------------navbar ends here--------------------->
+
+    </header>
+
+    <div class="popup-screen" id="popup-screen">
+        <div class="popup-box" id="popup-box">
+            <i class="fa fa-times close-btn" id="close-btn"></i>
+            <h2>Edit Details</h2>
+            <form action="">
+                <div class="profile-img">
+                    <img src="profile.jpg" alt="">
+                    <button class="button profile" id="img-btn">Change Image</button>
+                </div>
+                <br>
+                <p>Username:
+                    <input class="text-box" name="username" type="username" id="username" placeholder="Username"><br>
+                </p>
+                <p>First Name:
+                    <input class="text-box" name="fname" type="fname" id="fname" placeholder="First Name"><br>
+                </p>
+                <p>Last Name:
+                    <input class="text-box" name="lname" type="lname" id="lname" placeholder="Last Name"><br>
+                </p>
+                <p>Email:
+                    <input class="text-box" name="email" type="email" id="email" placeholder="Email"><br>
+                </p>
+                <p>Password:
+                    <input class="text-box" name="password" type="password" id="password" placeholder="Password"><br>
+                </p>
+                <p>Date of Birth:
+                    <input type="date" id="dob"><br>
+                </p>
+                <p>Department:
+                    <input class="text-box" name="dept" type="dept" id="dept" placeholder="Department"><br>
+                </p>
+                <p>Position:
+                    <input class="text-box" name="position" type="position" id="position" placeholder="Position"><br>
+                </p>
+            </form>
+
+            <button class="button save" id="save-btn">Save Changes</button>
+
+        </div>
+    </div>
+    </div>
+
+    <section class="edit-profile">
+        <div class="container">
+            <div class="info">
+                <div class="image">
+                    <img src="./images/profile.jpg" alt="">
+                </div>
+                <div class="job-info">
+                    <p class="name">Chikondi Banda</p>
+                    <p class="title">Administrator</p>
+                    <p class="department">Support</p>
+                    <button class="button edit" id="edit-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+                </div>
+
+            </div>
+            <div class="login-details">
+                <p class="login"><i class="far fa-clock"></i> Last Login: 17th October, 2023</p>
+            </div>
+
+
+
+
+
+    </section>
+
+
+    <!---------edit categories section------------------------------>
+
+    <section class="categories">
+        <p>Idea Categories</p>
+        <div class="table-container">
+            <table class="categories-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Institutional</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Departmental</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Personal</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
+                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <section class="admin">
+        <p>Admin Settings</p><br>
+        <div class="closure-date">
+            <p>Closure Date:</p>
+            <input type="date">
+        </div>
+        <div class="fclosure">
+            <p>Final Closure Date:</p>
+            <input type="date">
+        </div>
+
+        <br>
+
+        <div class="table-container">
+            <table class="staff-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>DOB</th>
+                        <th>Department</th>
+                        <th>Type</th>
+                        <th>Active</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>J.Miles</td>
+                        <td>Joseph</td>
+                        <td>Miles</td>
+                        <td>jmiles@mail.com</td>
+                        <td>1234abcd</td>
+                        <td>10/08/1998</td>
+                        <td>School of Science and Technology</td>
+                        <td>Academic</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Theresa.N</td>
+                        <td>Theresa</td>
+                        <td>Nyambe</td>
+                        <td>teresa@mail.com</td>
+                        <td>fwu7347HJV</td>
+                        <td>01/05/1988</td>
+                        <td>School of Science and Technology</td>
+                        <td>Support</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Keran.P</td>
+                        <td>Keran</td>
+                        <td>Peterson</td>
+                        <td>kpeterson@mail.com</td>
+                        <td>qwert12345</td>
+                        <td>10/08/1998</td>
+                        <td>School of Accounting and Finance</td>
+                        <td>Academic</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Jane.M</td>
+                        <td>Jane</td>
+                        <td>Mulenga</td>
+                        <td>mulengaj@mail.com</td>
+                        <td>fyyeq74f</td>
+                        <td>10/08/2002</td>
+                        <td>School of Business</td>
+                        <td>Academic</td>
+                        <td>Inactive</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
+                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+
+    </section>
+
+    <footer>
+        <h2>Contact us</h2>
+        <p>+2600000000</p>
+        <p>abcd@mail.com</p>
+        <br><br>
+        <p>&#169 2023 All Rights Reseved</p>
+
+    </footer>
+
+</body>
+
+</html>
