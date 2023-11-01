@@ -198,6 +198,17 @@ const signup = (req, res) => {
 		department_id,
 	} = req.body;
 
+	if (role_id !== 1) {
+		const { high_priv_key = "" } = req.body;
+
+		if (high_priv_key !== process.env.HIGH_PRIV_SIGNUP_KEY) {
+			return res.send({
+				status: 'FAILURE',
+				message: 'High privilege signup key invalid'
+			})
+		}
+	}
+
 	if (
 		!username ||
 		!firstname ||
@@ -224,7 +235,7 @@ const signup = (req, res) => {
 			}
 
 			if (!user) {
-				if ((role_id == 2 || role_id == "2") && department_id) {
+				if ((role_id == 2) && department_id) {
 					const query = `SELECT * FROM users WHERE department_id = ?`;
 					Mysql.connection.query(query, [department_id], (err, results) => {
 						if (err) {
