@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <Title>Sign Up</Title>
+    <link rel="Stylesheet" type="text/css" href="../css/style.css">
+    <meta Name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+
+<body>
+    <div class="login">
+        <img class="login-img" src="../images/ZCAS_logo.png" alt="">
+        <div class="login-form">
+            <form id="staff_signup_form">
+                <br>
+                <h1>Create an account</h1>
+                <hr>
+                <br>
+                <label for="Username" style="text-align:center;font-size:15PX;"><b>Username</b></label>
+                <input id="username" type="text" placeholder="Enter a Username" name="Username" required>
+                <br>
+                <label for="FirstName" style="text-align:center;font-size:15PX;"><b>FirstName</b></label>
+                <input id="firstname" type="text" placeholder="Enter your FirstName" name="FirstName" required>
+                <br>
+                <label for="LastName" style="text-align:center;font-size:15PX;"><b>LastName</b></label>
+                <input id="lastname" type="text" placeholder="Enter your LastName" name="LastName" required>
+                <br>
+                <label for="email" style="text-align:center;font-size:15PX;"><b>Email</b></label>
+                <input id="email" type="text" placeholder="Enter your email" name="email" required>
+                <br>
+                <label for="psw" style="text-align:center;font-size:15PX;"><b>Password</b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+                <br>
+                <label for="psw" style="text-align:center;font-size:15PX;"><b>Re-enter password</b></label>
+                <input id="confirm_password" type="password" placeholder="Enter your Password again" name="psw"
+                    required>
+                <br>
+                
+                <label for="psw" style="text-align:center;font-size:15PX;"><b>High privilege signup key</b></label>
+                <input id="high_priv_key" type="password" placeholder="High privilege signup key"
+                    name="High privilege signup key" required>
+                    <br>
+                <label for="psw" style="text-align:center;font-size:15PX;"><b>Department : </b></label>
+                <br>
+
+                <select id="department_select">
+                    <option value="1" label="Department of business">
+                    <option value="2" label="Department of social science">
+                    <option value="3" label="Department of computing">
+                    <option value="4" label="Department of social science and technology">
+                </select>
+
+                
+                <br>
+                <br>
+                <button type="button" class="btn" id="qa_coordinator_signup_btn">
+                    Create Account
+                </button>
+                <br>
+                <br>
+                <hr>
+                <ul class="login1">
+                    Already have account?
+                    <a href="../login.html">
+                        login here!
+                    </a>
+                </ul>
+            </form>
+        </div>
+
+    </div>
+    <script src="../js/qa_coordinator_signup.js"></script>
+</body>

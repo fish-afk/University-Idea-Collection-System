@@ -198,6 +198,8 @@ const signup = (req, res) => {
 		department_id,
 	} = req.body;
 
+	console.log(username)
+
 	if (role_id !== 1) {
 		const { high_priv_key = "" } = req.body;
 
@@ -209,19 +211,37 @@ const signup = (req, res) => {
 		}
 	}
 
+	if (role_id == 1) {
+		if (!staff_type_id) {
+			return res.send({
+				status: "FAILURE",
+				message: "One or more mandatory fields missing",
+			});
+		}
+	}
+
+	if (role_id == 1 || role_id == 2) {
+		if (!department_id) {
+			return res.send({
+				status: "FAILURE",
+				message: "One or more mandatory fields missing",
+			});
+		}
+	}
+
+	
+
 	if (
 		!username ||
 		!firstname ||
 		!lastname ||
 		!email ||
 		!password ||
-		!role_id ||
-		!staff_type_id ||
-		!department_id
+		!role_id 
 	) {
 		return res.send({
 			status: "FAILURE",
-			message: "One or more fields missing",
+			message: "One or more mandatory fields missing",
 		});
 	} else {
 		getUserByUsername(username.toLowerCase(), (err, user) => {
@@ -374,11 +394,18 @@ const login = (req, res) => {
 								auth: false,
 							});
 						} else {
+							const query = `UPDATE users SET last_log_in = ? WHERE username = ?`
+							Mysql.connection.query(query, [formatDate(Date.now()), username], (err, result) => {
+								if (err) {
+									console.log(err)
+								}
+							})
 							return res.send({
 								auth: true,
 								jwtToken,
 								refreshToken,
 							});
+							
 						}
 					} else {
 						return res.send({
@@ -391,6 +418,26 @@ const login = (req, res) => {
 		});
 	}
 };
+
+const getUserData = (req, res) => {
+	const username = req.decoded['username']
+
+	const query = `SELECT username, firstname, lastname, email, role_id, staff_type_id, department_id, last_log_in FROM users WHERE username = ?`;
+
+	Mysql.connection.query(query, [username], (err, results) => {
+		if(err || !results || results.length < 1){
+			return res.status(500).send({
+				status: "FAILURE",
+				message: "Unknown error",
+			});
+		} else {
+			return res.send({
+				status: "SUCCESS",
+				data: results[0]
+			});
+		}
+	})
+}
 
 const refresh = async (req, res) => {
 	const refreshToken = req.body.refreshToken;
@@ -410,4 +457,5 @@ module.exports = {
 	updateAccountDetails,
 	enableAccount,
 	disableAccount,
+	getUserData
 };

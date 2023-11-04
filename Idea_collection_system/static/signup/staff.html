@@ -8,48 +8,55 @@
 </head>
 
 
+<body>
 <div class="login">
-      <img class="login-img" src="../images/staff.jpg" alt="">
+      <img class="login-img" src="../images/ZCAS_logo.png" alt="">
       <div class="login-form">
-            <form>
+            <form id="staff_signup_form">
                   <br>
                   <h1>Create an account</h1>
                   <hr>
                   <br>
-                  <label for="Username" style="text-align:center;font-size:20PX;"><b>Username</b></label>
-                  <input type="text" placeholder="Enter a Username" name="Username" required>
+                  <label for="Username" style="text-align:center;font-size:15PX;"><b>Username</b></label>
+                  <input id="username" type="text" placeholder="Enter a Username" name="Username" required>
                   <br>
-                  <label for="FirstName" style="text-align:center;font-size:20PX;"><b>FirstName</b></label>
-                  <input type="text" placeholder="Enter your FirstName" name="FirstName" required>
+                  <label for="FirstName" style="text-align:center;font-size:15PX;"><b>FirstName</b></label>
+                  <input id="firstname" type="text" placeholder="Enter your FirstName" name="FirstName" required>
                   <br>
-                  <label for="LastName" style="text-align:center;font-size:20PX;"><b>LastName</b></label>
-                  <input type="text" placeholder="Enter your LastName" name="LastName" required>
+                  <label for="LastName" style="text-align:center;font-size:15PX;"><b>LastName</b></label>
+                  <input id="lastname" type="text" placeholder="Enter your LastName" name="LastName" required>
                   <br>
-                  <label for="email" style="text-align:center;font-size:20PX;"><b>Email</b></label>
-                  <input type="text" placeholder="Enter your email" name="email" required>
+                  <label for="email" style="text-align:center;font-size:15PX;"><b>Email</b></label>
+                  <input id="email" type="text" placeholder="Enter your email" name="email" required>
                   <br>
-                  <label for="psw" style="text-align:center;font-size:20PX;"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
+                  <label for="psw" style="text-align:center;font-size:15PX;"><b>Password</b></label>
+                  <input id="password" type="password" placeholder="Enter Password" name="psw" required>
                   <br>
-                  <label for="psw" style="text-align:center;font-size:20PX;"><b>Re-enter password</b></label>
-                  <input type="password" placeholder="Enter your Password again" name="psw" required>
+                  <label for="psw" style="text-align:center;font-size:15PX;"><b>Re-enter password</b></label>
+                  <input id="confirm_password" type="password" placeholder="Enter your Password again" name="psw" required>
                   <br>
-                  <label for="psw" style="text-align:center;font-size:20PX;"><b>Department: </b></label>
+                  <label for="psw" style="text-align:center;font-size:15PX;"><b>Department : </b></label>
                   <br>
-                  <input class="dropdown" placeholder="pick the items" list="browsers" name="browser" id="browser"
-                        required>
-                  <datalist id="browsers">
-                        <option value="School of business">
-                        <option value="School of social science">
-                        <option value="School of computing">
-                        <option value="Technology and applied science ">
-                  </datalist>
+                 
+                  <select id="department_select">
+                        <option value="1" label="Department of business">
+                        <option value="2" label="Department of social science">
+                        <option value="3" label="Department of computing">
+                        <option value="4" label="Department of social science and technology">
+                  </select>
+
+                  <br>
+                  <label for="psw" style="text-align:center;font-size:15PX;"><b>Staff type : </b></label>
+                  <br>
+                  
+                  <select id="staff_type_select">
+                        <option value="1" label="Academic">
+                        <option value='2' label="Support">
+                  </select>
                   <br>
                   <br>
-                  <button type="submit" class="btn">
-                        <a href="../profile.html">
-                              Create Accout
-                        </a>
+                  <button type="button" class="btn" id="staff_signup_btn">
+                        Create Account
                   </button>
                   <br>
                   <br>
@@ -64,3 +71,5 @@
       </div>
 
 </div>
+      <script src="../js/staff_signup.js"></script>
+</body>

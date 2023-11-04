@@ -168,9 +168,23 @@ CONSTRAINT `FK_12_1` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`userna
 );
 
 
+-- important inserts
 
+-- staff types
 
+INSERT INTO staff_type (type, description) VALUES ('academic', 'academic staff type');
+INSERT INTO staff_type (type, description) VALUES ('support', 'support staff type');
 
+-- departments
 
+INSERT INTO departments (name, description) VALUES ('Department of business', "Offers programs in business administration and management education, preparing students for various professional roles in the business world.");
+INSERT INTO departments (name, description) VALUES ('Department of social science and technology', " Explores the intersection of society and technology, examining the impact of technological advancements on social structures and behaviors.");
+INSERT INTO departments (name, description) VALUES ('Department of computing', "Focuses on computer science and related fields, providing education in programming, algorithms, and computer technology.");
+INSERT INTO departments (name, description) VALUES ('Department of business', "Offers business administration and management education, preparing students for various professional roles in the business world.");
 
+-- roles
 
+INSERT INTO user_roles (role_name) VALUES ("staff");
+INSERT INTO user_roles (role_name) VALUES ("qa_coordinator");
+INSERT INTO user_roles (role_name) VALUES ("qa_manager");
+INSERT INTO user_roles (role_name) VALUES ("admin");
