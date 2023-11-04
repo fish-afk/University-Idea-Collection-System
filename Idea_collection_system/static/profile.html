@@ -83,14 +83,14 @@
                 <img src="images/profile.jpg" alt="">
             </div>
             <div class="job-info">
-                <p class="name">Chikondi Banda</p>
-                <p class="title">Administrator</p>
-                <p class="department">Support</p>
+                <p class="name" id="fullname">Chikondi Banda</p>
+                <p class="title" id="role">Administrator</p>
+                <p class="department" id="staff_type">Support</p>
             </div>
             
         </div>
         <div class="login-details">
-            <p class="login"><i class="far fa-clock"></i> Last Login: 17th October, 2023</p>
+            <p class="login" id="last_log_in"><i class="far fa-clock"></i> Last Login: 17th October, 2023</p>
         </div>
 
         
@@ -123,26 +123,33 @@
                 <p>Email: 
                     <input class="textbox1" name="email" type="email" id="email" placeholder="Email"><br>
                 </p>
+            
                 <br>
-                <p>Password: 
-                    <input class="textbox" name="password" type="password" id="password" placeholder="Password"><br>
-                </p>
-                <br>
-                <p>Date of Birth: 
-                    <input class="textbox2" type="date" id="dob"><br>
-                </p>
-                <br>
-                <p>Department: 
-                    <input class="textbox2" name="dept" type="dept" id="dept" placeholder="Department"><br>
-                </p>
-                <br>
-                <p>Position: 
-                    <input class="textbox" name="position" type="position" id="position" placeholder="Position"><br>
-                </p>
-                <br>
+               
             <button class="button save" id="save-btn">Save Changes</button>
         </form>
+
+       
     </div>
+
+    <div class="change-password-form">
+    <form class="form">
+        <h2>Change password</h2>
+        <br>
+    
+        <br>
+        <p>New password:
+            <input class="textbox" name="fname" type="fname" id="fname" placeholder="First Name"><br>
+        </p>
+        <br>
+        <p>Confirm new password:
+            <input class="textbox" name="lname" type="lname" id="lname" placeholder="Last Name"><br>
+        </p>
+    
+        <br>
+    
+        <button class="button save" id="save-btn">Save Changes</button>
+    </form></div>
 </section>
 
     <!-------------edit profile ends here--------------------->

@@ -1234,7 +1234,15 @@ font-size: 1.6rem;
   
   
   
-  
+.change-password-form{
+    margin-top: 5rem;
+    position: relative;
+        background-color: #fff;
+        padding: 30px 50px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
+        border-style: hidden;
+}
   
   
   

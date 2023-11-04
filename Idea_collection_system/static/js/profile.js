@@ -32,3 +32,32 @@ const getUserData = () => {
 }
 
 getUserData()
+
+
+const setDetails = () => {
+
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    const role_id = userData?.role_id;
+    
+    let role = ''
+    if (role_id == 1) {
+        role = 'Staff'
+    }
+    if (role_id == 2) {
+        role = "QA Coordinator"
+    }
+    if (role_id == 3) {
+        role = "QA Manager"
+    }
+    if (role_id == 4) {
+        role = "Administrator"
+    }
+
+   
+    document.getElementById('fullname').innerText = userData?.firstname + " " + userData?.lastname;
+    document.getElementById('role').innerText = role;
+    document.getElementById('last_log_in').innerText = "Last Login: " + userData?.last_log_in;
+
+}
+
+setDetails()
