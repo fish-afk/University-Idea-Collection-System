@@ -1,59 +1,61 @@
-// edit details popup in profile section 
-document.addEventListener("DOMContentLoaded", function() {
-    const showPopupButton = document.getElementById("edit-btn");
-    const popupScreen = document.getElementById("popup-screen");
-    const closeBtn = document.getElementById("close-btn");
-    const saveBtn = document.getElementById("save-btn");
+//enable submit idea button when user agrees to terms and conditions
+function enable() {
+            var check = document.getElementById("check");
+            var submit = document.getElementById("submit");
 
-    showPopupButton.addEventListener("click", () => {
-        popupScreen.classList.add("active");
-    });
+            if (check.checked) {
+                submit.removeAttribute("disabled");
+            } else {
+                submit.setAttribute("disabled", "true");
+            }
+}
 
-    closeBtn.addEventListener("click", () => {
-        popupScreen.classList.remove("active");
-    });
+//like animations
+function like() {
+    const like = document.getElementById('like');
 
-    saveBtn.addEventListener("click", () => {
-        popupScreen.classList.remove("active");
-    });
-});
-
-
-
-// Dropdown menus
-const dropdowns = document.querySelectorAll('.dropdown');
-
-dropdowns.forEach(dropdown => {
-    const drop = dropdown.querySelector('.drop');
-    const arrow = dropdown.querySelector('.arrow');
-    const options = dropdown.querySelector('.options');
-    const optionList = dropdown.querySelectorAll('.options li');
-    const selected = dropdown.querySelector('.selected');
-
-    dropdown.addEventListener('click', () => {
-        drop.classList.toggle('drop-clicked');
-        arrow.classList.toggle('arrow-rotate');
-        options.classList.toggle('options-open');
-
-        // Set opacity to 1 when options are open
-        if (options.classList.contains('options-open')) {
-            options.style.opacity = 1;
+    like.addEventListener('click', () => {
+        if (like.classList.contains('far')) {
+          // If not solid, switch it to solid
+          like.classList.remove('far');
+          like.classList.add('fas');
         } else {
-            options.style.opacity = 0;
+          // If solid, switch it to not solid
+          like.classList.remove('fas');
+          like.classList.add('far');
         }
-    });
+      });
+    
+}
 
-    optionList.forEach(option => {
-        option.addEventListener('click', () => {
-            selected.innerText = option.innerText;
-            drop.classList.remove('drop-clicked');
-            arrow.classList.remove('arrow-rotate');
-            options.classList.remove('options-open');
-            options.style.opacity = 0; // Set opacity back to 0
-            optionList.forEach(opt => {
-                opt.classList.remove('active');
-            });
-            option.classList.add('active');
-        });
+function dislike() {
+    const dislike = document.getElementById('dislike');
+
+    dislike.addEventListener('click', () => {
+        if (dislike.classList.contains('far')) {
+          // If not solid, switch it to solid
+          dislike.classList.remove('far');
+          dislike.classList.add('fas');
+        } else {
+          // If solid, switch it to not solid
+          dislike.classList.remove('fas');
+          dislike.classList.add('far');
+        }
+      });
+    
+}
+
+function comments() {
+    const icon = document.getElementById('commenticon');
+
+    const comments = document.getElementById('comments');
+
+    icon.addEventListener('click', () => {
+    // Toggle the visibility of the div
+    if (comments.style.display === 'none') {
+        comments.style.display = 'block';
+    } else {
+        comments.style.display = 'none';
+    }
     });
-});
+}

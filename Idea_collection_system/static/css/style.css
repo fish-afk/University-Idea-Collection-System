@@ -20,7 +20,7 @@
 
 
 html{
-    font-size: 62.5%;
+    font-size: 80%;
     overflow-x: hidden;
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
@@ -41,7 +41,7 @@ body{
     border: none;
     padding: 4px 15px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 17px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     bottom: 10px;
@@ -74,13 +74,6 @@ td{
 
 .row:hover{
     background-color: #f2f2f2;
-}
-
-.dropdown{
-    min-width: 15em;
-    width: 50px;
-    margin: 2em;
-    position: relative;
 }
 
 .drop{
@@ -174,14 +167,14 @@ td{
 }
 
 .navbar p{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
 .navbar a{
     display: inline-block;
     margin: 15px 10px;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color:#000;
     transition: 0.3s;
 }
@@ -226,10 +219,23 @@ td{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
-    font-size: 1.2rem;
+    padding: 10px;
+    font-size: 1.1rem;
+    margin-right: 5px;
 }
 
+.user-info i{
+    color: #000;
+font-size: 1.6rem;
+}
+
+.user-info a{
+    color: #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .fa{
     color: #000;
 }
@@ -245,28 +251,48 @@ td{
 
 .submit {
     width: 100%;
-    padding: 30px 100px;
+    padding: 30px 130px;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+
+.submit h1{
+    text-transform: uppercase;
+    font-size: 2rem;
 }
 
 .submit .container{
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
-    padding: 20px;
+    padding: 10px 20px;
+    margin-top: 10px;
 }
 
 .submit .container .info{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 8px;
+    padding: 10px 0;
 }
 
 .submit .container .info .tag{
     display: flex;
-    background-color: var(--main-color);
+    align-items: center;
     border-radius: 10px;
-    padding: 4px;
+}
+
+.submit .container .info .tag label{
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.submit .container .info .tag input{
+    background-color: #0184d5c3;
+    border-radius: 1px;
+    color: #fff;
+    padding: 0;
+    margin: 0;
 }
 
 .submit .container .info .tag p{
@@ -286,25 +312,25 @@ td{
 }
 
 .submit .line {
-    border-top: 2px solid var(--border);
-    border-radius: 5px;
+    border-top: 4px solid var(--border);
+    border-radius: 4px;
     width: 100%;
     margin-top: -1px;
-    opacity: 0.8;
+    opacity: 0.2;
 }
 
 
 .submit textarea{
-    margin-top: 10px;
+    margin-top: 15px;
     border: none;
-    width: 90%;
+    width: 95%;
     font-size: 15px;
-    min-height: 150px;
+    min-height: 575px;
     padding: 10px 20px;
     max-height: 400px;
     resize: vertical;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   .submit .content{
@@ -317,9 +343,11 @@ td{
     padding: 10px;
     font-size: 1.7rem;
     cursor: pointer;
+    border-radius: 2px;
   }
 
   .submit .content i:hover{
+    background: #0184d5;
     color: #373737;
     font-size: 2rem;
   }
@@ -363,11 +391,22 @@ td{
     flex-direction: column;
 }
 
+.ideas .dropdown{
+    display: flex;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.ideas input{
+    margin-left: 5px;
+}
+
 .ideas .idea{
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
     padding: 20px;
+    margin: 25px 0;
 }
 
 .ideas .idea .info{
@@ -400,6 +439,21 @@ td{
     padding: 5px;
     font-size: 1.2rem;
 }
+
+.ideas .idea .info .tag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ideas .idea .info .tag .category{
+    margin-left: 5px;
+    background-color: #0275b1;
+    color: #fff;
+    border-radius: 50px;
+    padding: 5px;
+}
+
 
 .ideas .idea .content{
     padding: 10px 0;
@@ -437,10 +491,11 @@ td{
 
 .ideas .idea .content .docs i{
     font-size: 2.3rem;
+    color: #f3f3f3;
 }
 
 .ideas .line {
-    border-top: 1px solid var(--border);
+    border-top: 3px solid var(--border);
     width: 100%;
     margin-top: -1px;
 }
@@ -466,15 +521,61 @@ td{
     padding: 5px;
 }
 
-.ideas .idea .reactions i:hover{
-    font-size: 1.6rem;
-}
-
 .ideas .idea .reactions p{
     text-align: center;
     color: #0275b1;
     font-size: 1.4rem;
 }
+
+.idea .comments{
+    display: none;
+}
+
+.idea .comment{
+    display: flex;
+    margin: 5px 0;
+}
+
+.idea .comments img{
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    object-position: center;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        border-radius: 50%;
+}
+
+.idea .comments .comment .content{
+    padding: 0;
+    margin-right: 15px;
+}
+
+.ideas .comments .line {
+    border-top: 1px solid var(--border);
+    width: 100%;
+    margin-top: -1px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.pagination .box{
+    padding: 4px 7px;
+    border: 2px solid #0275b1;
+    background-color: #fff;
+    margin: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+
   /*end of css for ideas section*/
 
     /*END OF CSS FOR IDEAS PAGE*/
@@ -493,12 +594,12 @@ td{
 
  /*end of edit profile section*/
 
-.edit-profile {
+.profile-info {
     width: 100%;
     padding: 30px 100px;
 }
 
-.edit-profile .container{
+.profile-info .container{
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
@@ -507,11 +608,11 @@ td{
     justify-content: space-between;
 }
 
-.edit-profile .container .info{
+.profile-info .container .info{
     display: flex;
 }
 
-.edit-profile .container img{
+.profile-info .container img{
     height: 135px;
     width: 135px;
     object-fit: cover;
@@ -523,28 +624,28 @@ td{
         border-radius: 50%;
 }
 
-.edit-profile .container .info .job-info{
+.profile-info .container .info .job-info{
     padding-left: 25px;
     
 }
 
-.edit-profile .container .info .job-info .name{
+.profile-info .container .info .job-info .name{
     font-size: 1.7rem;
     font-weight: 700;
 }
 
-.edit-profile .container .info .job-info .title{
+.profile-info .container .info .job-info .title{
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-.edit-profile .container .info .job-info .department{
+.profile-info .container .info .job-info .department{
     font-size: 1.1rem;
     color: #373737;
 }
 
 
-.edit-profile .container .login-details i{
+.profile-info .container .login-details i{
     font-size: 1.2rem;
     color: #373737;
     padding-right: 5px;
@@ -554,49 +655,16 @@ td{
 }
 
 
-/***** css for popup *****/
+/***** css for form profile  *****/
 
-.popup-screen{
-    z-index: 999999;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
+.edit-details{
+    
     width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    transition: 0.5s ease;
-    transition-property: visiblity;
+    padding: 30px 100px;
+    margin-bottom: 40px;
 }
 
-.popup-screen.active{
-    visibility: visible;
-}
-
-.popup-box{
-    position: relative;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    width: 350px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 20px;
-    padding: 30px 5px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
-    transform: scale(0);
-    transition: 0.5s ease;
-    transition-property: transform;
-}
-
-.popup-screen.active .popup-box{
-transform: scale(1);
-}
-
-.popup-screen .popup-box img{
+.edit-details  img{
     height: 95px;
     width: 95px;
     object-fit: cover;
@@ -610,42 +678,55 @@ transform: scale(1);
     border: 3px solid #ffffff;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.148);
 }
-.popup-box h2{
-    font-size: 2em;
-    font-weight: 600;
-    margin-bottom: 30px;
-    margin-top: 10px;
-    color: var(--main-color);
+
+.edit-form{
+    position:relative;
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
+    border-style:hidden;
 }
 
-.popup-screen .popup-box p{
-    font-size: 1.2rem;
-}
-.popup-screen .popup-box input{
-    padding-left: 5px;
-    margin: 10px 5px;
-    border-radius: 3px;
-    box-shadow: 0px 1px 5px rgba(2, 2, 2, 0.148);
+.form{
+    align-items: center;
+    font-size: 16px;
 }
 
-.close-btn{
-    position: absolute;
-    font-size: 2em;
-    color: #000;
-    top: 0;
-    right: 0;
-    margin: 15px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: 0.3s ease;
-    transition-property: opacity;
+
+
+.textbox{
+    box-sizing: 5%;
+    font-size: 19px;
+    font-weight: 16px;
+    width: 70%;
+    box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
+    border-style: hidden;
+    margin-left: 4%;
 }
 
-.close-btn:hover{
-    opacity: 1;
+.textbox1{
+    box-sizing: 5%;
+    font-size: 19px;
+    font-weight: 16px;
+    width: 70%;
+    box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
+    border-style: hidden;
+    margin-left: 9%;
 }
 
-/** end of css for popup screen **/
+.textbox2{
+    box-sizing: 5%;
+    font-size: 19px;
+    font-weight: 16px;
+    width: 70%;
+    box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
+    border-style: hidden;
+    margin-left: 2%;
+}
+
+
+/***** end of css for profile info section *****/
 
  /*end of edit profile section*/
 
@@ -707,6 +788,8 @@ transform: scale(1);
  .admin {
     width: 100%;
     padding: 30px 100px;
+    display: flex;
+    flex-direction: column;
 }
 
 .admin p{
@@ -745,6 +828,7 @@ transform: scale(1);
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
+    width: 100%;
 }
 
 .admin .table-container .staff-table{
@@ -797,32 +881,46 @@ transform: scale(1);
 
   
 /* CSS FOR STATISTICS PAGE */
+
+.statistics{
+    display: flex;
+}
+
+.statistics .charts{
+    padding: 0 30px;
+}
+
     .ideas-numbers{
         margin-top: 30px;
         display: flex;
         justify-content: center;
-        width: 1500px;
+        width: 100%;
     }
 
     
 
     .piechart{
-        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .contributor-numbers{
         display: flex;
         justify-content: center;
         width: 1500px;
     }
     
     .exception-reports{
-        padding: 50px;
-        margin-bottom: 40px;
+        width: 100%;
+        padding: 30px 50px;
     }
 
     .exception-reports .reports{
         background-color: #fff;
         border-radius: 5px;
         padding: 15px;
-        width: 40%;
+        width: 80%;
         box-shadow: 0 0 15px rgba(2, 2, 2, 0.45);
     }
 
@@ -841,7 +939,6 @@ transform: scale(1);
 
   
   .login {
-    /* The image used */
     display: flex;
   }
 
@@ -849,6 +946,7 @@ transform: scale(1);
     min-height: 100%;
     width: 50%;
     opacity: 0.9;
+    background-color: #fff;
   }
 
   .login img{
@@ -1020,129 +1118,136 @@ transform: scale(1);
   /* END OF CSS FOR TERMS AND CONDITIONS PAGE */
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-    /* CSS FOR CHAT PAGE */
 
-    
-    .chatbody{
-        display: flex;
-        justify-content: space-between;
-    }
 
-    .chatbody .chats{
-        padding: 10px;
-    margin: 50px;
-    height: 50%;
-        background: #fff;
-        border-radius: 4px;
-        box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
-    }
 
-    .chatbody .chats .user .user-info{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
 
-    .chatbody .chats .user .title{
-        font-size: 1.1rem;
-        color: #ccc;
-    }
-    .chatbody .chats .user{
-        border-radius: 4px;
-    display: flex;
-    cursor: pointer;
-}
 
-.chatbody .chats .user:hover{
-    background: #ccc;
-}
 
-.chatbody .chats .user img{
-    height: 35px;
-    width: 35px;
-    margin-right: 5px;
-    object-fit: cover;
-    object-position: center;
-    display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 50%;
-}
 
-.chatbody .message-box{
-    
-    margin: 50px;
-    padding: 15px;
-    background: #fff;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  /* CSS FOR APPLICATION MANAGEMENT PAGE */
+  
+.reports{
+    padding: 30px 100px;
+}  
+.reports .table-container{
+    background-color: #fff;
+    padding: 10px;
     border-radius: 3px;
-    box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+    width: 100%;
 }
 
-.chatbody .message-box h1{
-    display: flex;
+.reports .table-container .reports-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(2, 2, 2, 0.1);
 }
 
-.chatbody .message-box .messager{
-    padding-left: 8px;
+.reports .table-container .reports-table .table-head tr{
+    background-color: #0275b1;
+    color: #fff;
+    text-align: left;
+}
+
+
+.reports-table tbody tr {
+    border-bottom: 1px solid #a19f9f;
+}
+
+.reports-table tbody tr:last-of-type{
+    border-bottom: 2px solid #0275b1;
+}
+
+.reports-table tbody tr i:hover{
+    font-size: 1.3rem;
     color: #0275b1;
 }
 
-.chatbody .message-box .content{
-    margin: 10px 0;
-    border-radius: 4px;
+
+/*Ban Table*/
+
+.ban-users{
+    padding: 30px 100px;
+}  
+.ban-users .table-container{
+    background-color: #fff;
     padding: 10px;
-    width: 60%;
-    background: #0184d5;
-    color: white;
+    border-radius: 3px;
+    width: 100%;
 }
 
-.chatbody .message-box .content  .time{
-    float: right;
-    margin-bottom: 15px;
-    color: #e1e1e1;
-    font-weight: 500;
+.ban-users .table-container .ban-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(2, 2, 2, 0.1);
 }
 
-.chatbody .chats .user p{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    font-size: 1.2rem;
+.ban-users .table-container .ban-table .table-head tr{
+    background-color: #0275b1;
+    color: #fff;
+    text-align: left;
 }
 
 
-  /*END OF CSS FOR CHAT PAGE */
+.ban-table tbody tr {
+    border-bottom: 1px solid #a19f9f;
+}
 
+.ban-table tbody tr:last-of-type{
+    border-bottom: 2px solid #0275b1;
+}
 
+.ban-table tbody tr i:hover{
+    font-size: 1.3rem;
+    color: #0275b1;
+}
 
+/*END OF CSS FOR APPLICATION MANAGEMENT PAGE*/
 
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 
@@ -1151,17 +1256,65 @@ transform: scale(1);
   /*footer section*/
 
 footer {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     padding: 30px 100px;
-    background-color: #a19f9f;
+    background-color: #0b0458;
+    color: #fff;
     padding-bottom: 30px;
+}
+
+footer .info{
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .copyright{
+    font-weight: lighter;
+    margin-top: 45px;
 }
 
 footer p{
     font-size: 1.3rem;
+    font-weight: 300;
+}
+footer h2{
+    font-weight: 500;
 }
 
+.footer-email form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
 
+.footer-email .contact{
+    display: flex;
+}
+
+.footer-email input{
+    padding: 4px;
+    margin: 3px;
+    border-radius: 3px;
+}
+
+.footer-email .content{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-email textarea{
+    margin: 3px;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.footer-email .button{
+    margin-top: 10px;
+    width: 50%;
+    padding: 15px 0;
+}
   /*end of css for footer section*/
 
 /** media queries **/
