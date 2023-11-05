@@ -100,16 +100,17 @@ const changePassword = (req, res) => {
 };
 
 const updateAccountDetails = (req, res) => {
-	const { firstname, lastname, email, staff_type_id, department_id } = req.body;
+	const { firstname, lastname, email } = req.body;
 	const username = req.decoded["username"];
 
-	const query = `UPDATE users SET firstname = ?, lastname = ?, email = ?, staff_type_id = ?, department_id = ? WHERE username = ?`;
+	const query = `UPDATE users SET firstname = ?, lastname = ?, email = ? WHERE username = ?`;
 
 	Mysql.connection.query(
 		query,
-		[firstname, lastname, email, staff_type_id, department_id, username],
+		[firstname, lastname, email, username],
 		(err, results) => {
 			if (err) {
+				console.log(err)
 				return res.status(500).send({
 					status: "FAILURE",
 					message: "Unknown error",
@@ -427,7 +428,8 @@ const getUserData = (req, res) => {
 	const query = `SELECT username, firstname, lastname, email, role_id, staff_type_id, department_id, last_log_in FROM users WHERE username = ?`;
 
 	Mysql.connection.query(query, [username], (err, results) => {
-		if(err || !results || results.length < 1){
+		if (err || !results || results.length < 1) {
+			console.log(err)
 			return res.status(500).send({
 				status: "FAILURE",
 				message: "Unknown error",

@@ -129,8 +129,37 @@ const changePassword = () => {
 	}
 };
 
+const editProfile = async () => {
+	const firstname = document.getElementById("fname-edit").value;
+	const lastname = document.getElementById("lname-edit").value;
+    const email = document.getElementById("email-edit").value;
+
+	
+    fetch("/api/users/updatedetails", {
+			method: "PATCH",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, firstname, lastname, jwt_key, username }),
+		})
+			.then(async (res) => {
+				const response = await res.json();
+				alert(response?.message);
+			})
+			.catch((err) => {
+				console.error(err);
+				alert("Unknown error occured");
+			});
+	
+};
+
 document.getElementById("change-pass-btn").addEventListener("click", () => {
 	changePassword();
+});
+
+document.getElementById("edit-save-btn").addEventListener('click', async () => {
+	await editProfile();
 });
 
 confirmJwt();
