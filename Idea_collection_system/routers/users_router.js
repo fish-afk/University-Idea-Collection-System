@@ -11,6 +11,7 @@ router.post('/getuserdata', authMiddleware.verifyJWT, userController.getUserData
 router.patch('/changepassword', authMiddleware.verifyJWT, userController.changePassword)
 router.patch('/updatedetails', authMiddleware.verifyJWT, userController.updateAccountDetails)
 router.patch('/enableaccount', authMiddleware.verifyJWT, userController.enableAccount)
-router.patch('/disableaccount',authMiddleware.verifyJWT,userController.disableAccount);
+router.patch('/disableaccount', authMiddleware.verifyJWT, userController.disableAccount);
+router.post('/confirmjwt', authMiddleware.confirmJWT)
 
 module.exports = router;

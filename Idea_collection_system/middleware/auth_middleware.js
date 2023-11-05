@@ -103,11 +103,39 @@ function verifyJWT(req, res, next) {
 }
 
 
+function confirmJWT(req, res) {
+	// Get the user's username from the decoded token
+	const username = req.body["username"];
+	const token = req.body["jwt_key"];
+
+	if (!token) {
+		return res.status(401).send({ auth: false, message: "No token provided." });
+	}
+	// Verify the JWT and check that it is valid
+	jwt.verify(token, JWT_SECRET, (err, decoded) => {
+		if (err) {
+			return res.status(404).send({ auth: false, message: err.message });
+		}
+		if (decoded.exp < Date.now() / 1000) {
+			return res.status(401).send({ auth: false, message: "JWT has expired" });
+		}
+		// If the JWT is valid, save the decoded user information in the request object
+		// so that it is available for the next middleware function
+		if (decoded.username != username) {
+			return res.status(404).send({ auth: false, message: "Token mismatch" }); // Token is not this users, but another users
+		}
+
+		return res.send({ auth: true, message: "jwt valid and working" });
+	});
+}
+
+
 
 module.exports = {
 	generateJwtToken,
 	generateRefreshToken,
 	verifyJWT,
-	verifyRefreshToken
+	verifyRefreshToken,
+	confirmJWT
 };
 

@@ -6,8 +6,8 @@ qa_manager_signup_btn.addEventListener("click", () => {
 	let lastname = document.getElementById("lastname").value;
 	let email = document.getElementById("email").value;
 	let password = document.getElementById("password").value;
-    let confirm_password = document.getElementById("confirm_password").value;
-    let high_priv_key = document.getElementById("high_priv_key").value;
+	let confirm_password = document.getElementById("confirm_password").value;
+	let high_priv_key = document.getElementById("high_priv_key").value;
 
 	if (password != confirm_password) {
 		alert("Passwords dont match");
@@ -17,8 +17,8 @@ qa_manager_signup_btn.addEventListener("click", () => {
 			firstname,
 			lastname,
 			email,
-            password,
-            high_priv_key
+			password,
+			high_priv_key,
 		};
 
 		console.log(post_body);

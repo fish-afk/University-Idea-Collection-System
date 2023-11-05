@@ -71,6 +71,7 @@ const changePassword = (req, res) => {
 
 	bcrypt.hash(newPassword, SALT_ROUNDS, (err, hashedPassword) => {
 		if (err) {
+			console.log(err);
 			return res.status(500).send({
 				status: "FAILURE",
 				message: "Unknown error",
@@ -81,6 +82,7 @@ const changePassword = (req, res) => {
 				[hashedPassword, username],
 				(err, results) => {
 					if (err) {
+						console.log(err)
 						return res.status(500).send({
 							status: "FAILURE",
 							message: "Unknown error",
