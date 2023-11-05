@@ -1,147 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 
-     <!-- css file link  -->
-     <link rel="stylesheet" href="../css/style.css">
+    <!-- css file link  -->
+    <link rel="stylesheet" href="../css/style.css">
 
-     <!--========== Fontawesome cdn ==========-->
-     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
- 
-     <!-- js file link  -->
+    <!--========== Fontawesome cdn ==========-->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- js file link  -->
     <script src="../js/script.js"></script>
-    
+
 
 </head>
+
 <body>
-        
-<header class="header">
-        
-    <!---------navbar------------------------------>
-    
 
-    <nav class="navbar" id="nav">
-        <a class="icons" onclick="myFunction()">
-            <i class="fa fa-bars" id="menu-btn"></i>
-        </a>
-        
-        <a href="profile.html">
-            <div class="nav-item active">
-                <i class="fas fa-cog active"></i>
-                <p>Profile</p>
-            </div>
-        </a>
-        <a href="ideas.html">
-            <div class="nav-item">
-                <i class="far fa-lightbulb"></i>
-                <p>Ideas</p>
-            </div>
-        </a>
-        <a href="stats.html">
-            <div class="nav-item">
-                <i class="fas fa-chart-pie"></i>
-                <p>Stats</p>
-            </div>
-        </a>
-        
-        <a href="app_management.html">
-            <div class="nav-item">
-                <i class="fas fa-cog"></i>
-                <p>Application Management</p>
-            </div>
-        </a>
-    </nav>
+    <header class="header">
 
-    <div class="user-info">
-        <img src="images/profile.jpg" alt="">
-        <p>C.Banda</p>
-        
-        <a href="login.html" title="Log Out">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-    </div>
+        <!---------navbar------------------------------>
+        <div>
+            <a class="icons" onclick="myFunction()">
+                <i class="fa fa-bars" id="menu-btn"></i>
+            </a>
+        </div>
 
-    <!-------------navbar ends here--------------------->
 
-</header>
-    
+        <nav class="navbar" id="nav">
+
+
+            <a href="profile.html">
+                <div class="nav-item active">
+                    <p>Profile</p>
+                </div>
+            </a>
+            <a href="ideas.html">
+                <div class="nav-item">
+                    <p>Ideas</p>
+                </div>
+            </a>
+            <a href="stats.html">
+                <div class="nav-item">
+                    <p>Stats</p>
+                </div>
+            </a>
+            <a href="app_management.html">
+                <div class="nav-item">
+                    <p>Manage</p>
+                </div>
+            </a>
+            <a href="submit.html">
+                <div class="nav-item">
+                    <p>Submit</p>
+                </div>
+            </a>
+            <a href="contact.html">
+                <div class="nav-item">
+                    <p>Contact</p>
+                </div>
+            </a>
+        </nav>
+
+
+        <div class="user-info">
+
+            <div class="vertical-line"></div>
+            <div class="content">
+                <img src="images/profile.jpg" alt="">
+                <p>Chikondi Banda</p>
+
+                <a href="login.html" title="Log Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <!-------------navbar ends here--------------------->
+
+    </header>
+
 
     <!-------------EDIT PROFILE SECTION--------------------->
-<section class="profile-info">
-    <div class="container">
-        <div class="info">
-            <div class="image">
-                <img src="images/profile.jpg" alt="">
-            </div>
-            <div class="job-info">
-                <p class="name" id="fullname">Chikondi Banda</p>
-                <p class="title" id="role">Administrator</p>
-                <p class="department" id="staff_type">Support</p>
-            </div>
-            
-        </div>
-        <div class="login-details">
-            <p class="login" id="last_log_in"><i class="far fa-clock"></i> Last Login: 17th October, 2023</p>
-        </div>
+    <section class="profile-info">
+        <div class="container">
+            <div class="info">
+                <div class="image">
+                    <img src="images/profile.jpg" alt="">
+                </div>
+                <div class="job-info">
+                    <p class="name" id="fullname">Chikondi Banda</p>
+                    <p class="title" id="role">Administrator</p>
+                    <p class="department" id="staff_type">Support</p>
+                </div>
 
-        
-</section>
+            </div>
+            <div class="login-details">
+                <p class="login" id="last_log_in"><i class="far fa-clock"></i> Last Login: 17th October, 2023</p>
+            </div>
 
-<section class="edit-details">
-    
-    <!---------edit form section------------------------------>
-  <br>
-  <br>
-  
-    <div class="edit-form">
-        <form class="form">
-            <h2>Edit Details</h2>
-            <br>
-        
+
+    </section>
+
+    <section class="edit-details">
+
+        <!---------edit form section------------------------------>
+        <br>
+        <br>
+
+        <div class="edit-form">
+            <form class="form">
+                <h2>Edit Details</h2>
                 <br>
-                <p>First Name: 
+
+                <br>
+                <p>First Name:
                     <input class="textbox" name="fname" type="fname" id="fname-edit" placeholder="First Name"><br>
                 </p>
                 <br>
-                <p>Last Name: 
+                <p>Last Name:
                     <input class="textbox" name="lname" type="lname" id="lname-edit" placeholder="Last Name"><br>
                 </p>
                 <br>
-                <p>Email: 
+                <p>Email:
                     <input class="textbox1" name="email" type="email" id="email-edit" placeholder="Email"><br>
                 </p>
-            
+
                 <br>
-               
-            <button class="button save" type="button" id="edit-save-btn">Save Changes</button>
-        </form>
 
-       
-    </div>
+                <button class="button save" type="button" id="edit-save-btn">Save Changes</button>
+            </form>
 
-    <div class="change-password-form">
-    <form class="form">
-        <h2>Change password</h2>
-        <br>
-    
-        <br>
-        <p>New password:
-            <input class="textbox" name="fname" type="fname" id="newpass" placeholder="Enter New password"><br>
-        </p>
-        <br>
-        <p>Confirm new password:
-            <input class="textbox" name="lname" type="lname" id="confirm-newpass" placeholder="Re-enter new password"><br>
-        </p>
-    
-        <br>
-    
-        <button class="button save" type="button" id="change-pass-btn">Save Changes</button>
-    </form></div>
-</section>
+
+        </div>
+
+        <div class="change-password-form">
+            <form class="form">
+                <h2>Change password</h2>
+                <br>
+
+                <br>
+                <p>New password:
+                    <input class="textbox" name="fname" type="fname" id="newpass" placeholder="Enter New password"><br>
+                </p>
+                <br>
+                <p>Confirm new password:
+                    <input class="textbox" name="lname" type="lname" id="confirm-newpass"
+                        placeholder="Re-enter new password"><br>
+                </p>
+
+                <br>
+
+                <button class="button save" type="button" id="change-pass-btn">Save Changes</button>
+            </form>
+        </div>
+    </section>
 
     <!-------------edit profile ends here--------------------->
 
@@ -154,31 +172,34 @@
                 <p>abcd@mail.com</p>
                 <br><br>
             </div>
-        
+
             <div class="footer-email">
                 <h2>Leave an email</h2>
                 <form id="contact-form" class="contact" action="" method="post ">
                     <div class="content">
                         <div class="contact">
                             <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
-                            <input class="text-box" name="email" type="email" id="email" placeholder="Email Address" required><br>
-                            
+                            <input class="text-box" name="email" type="email" id="email" placeholder="Email Address"
+                                required><br>
+
                         </div>
-                        
-                        <textarea name="message" type="message" id="message" rows="5" placeholder="Message" required></textarea>
-                        <button type="submit" class="button send-btn" >Send</button>
+
+                        <textarea name="message" type="message" id="message" rows="5" placeholder="Message"
+                            required></textarea>
+                        <button type="submit" class="button send-btn">Send</button>
                     </div>
                     <br>
                 </form>
             </div>
         </div>
-        
+
         <p class="copyright">&#169 2023 All Rights Reseved</p>
-        
+
     </footer>
-    
+
     <script src="./js/profile.js"> </script>
 
 
 </body>
+
 </html>

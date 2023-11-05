@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit</title>
-
+    <title>Contact</title>
 
     <!-- css file link  -->
     <link rel="stylesheet" href="../css/style.css">
@@ -13,6 +12,7 @@
     <!--========== Fontawesome cdn ==========-->
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <!-- js file link  -->
     <script src="../js/script.js"></script>
@@ -55,12 +55,12 @@
                 </div>
             </a>
             <a href="submit.html">
-                <div class="nav-item active">
+                <div class="nav-item">
                     <p>Submit</p>
                 </div>
             </a>
             <a href="contact.html">
-                <div class="nav-item">
+                <div class="nav-item active">
                     <p>Contact</p>
                 </div>
             </a>
@@ -87,49 +87,23 @@
 
 
 
-    <!-------------submit section--------------------->
+    <section class="contact">
+        <h2>Leave an email</h2>
+        <form class="contact-form" class="contact" action="" method="post ">
+            <div class="content">
+                <div class="input">
+                    <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
+                    <input class="text-box" name="email" type="email" id="email" placeholder="Email Address"
+                        required><br>
 
-    <section class="submit">
-        <h1>Submit a new Idea</h1>
-        <div class="container">
-            <div class="info">
-                <p></p>
-                <div class="tag">
-                    <label for="tag"><b>Category: </b></label>
-                    <br>
-                   
-                    <select id="tags">
-                        <option value="1" label="Institutional">
-                        <option value="2" label="Departmental">
-                        <option value="3" label="Personal">
-                    </select>
-                    <br>
                 </div>
 
-
-
+                <textarea name="message" type="message" id="message" rows="5" placeholder="Message" required></textarea>
+                <button type="submit" class="button send-btn">Send</button>
             </div>
-            <div class="line"></div>
-            <div class="content">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <label for="fileToUpload">
-                    <i class="fas fa-paperclip" title="Attach File"></i>
-                </label>
-            </div>
-            <div class="agree">
-                <input class="check" type="checkbox" id="check" onclick="enable()">
-                <label for="check">
-                    I agree to the <a href="terms-and-Condition .html">terms and conditions</a>.
-                </label>
-
-            </div>
-
-            <button disabled class="button" id="submit">
-                <i class="fas fa-edit"></i> Submit
-            </button>
-        </div>
+            <br>
+        </form>
     </section>
-    <!-------------submit section end--------------------->
 
 
     <footer>
@@ -147,8 +121,6 @@
         <p class="copyright">&#169 2023 All Rights Reseved</p>
 
     </footer>
-
-
 
 </body>
 

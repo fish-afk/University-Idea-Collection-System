@@ -1,166 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistics</title>
 
-     <!-- css file link  -->
-     <link rel="stylesheet" href="../css/style.css">
+    <!-- css file link  -->
+    <link rel="stylesheet" href="../css/style.css">
 
-     <!--========== Fontawesome cdn ==========-->
-     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
- 
+    <!--========== Fontawesome cdn ==========-->
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-     
+
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-     <script type="text/javascript">
-        google.charts.load("current", {packages:['corechart']});
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ['corechart'] });
         google.charts.setOnLoadCallback(drawCharts);
         function drawCharts() {
             //ideas per dept chart
-          var data = google.visualization.arrayToDataTable([
-            ["Department", "Ideas", { role: "style" } ],
-            ["School of \nBusiness", 8.94, "#0275b1"],
-            ["School of \nComputing", 10.49, "#0275b1"],
-            ["School of \nFinance", 19.30, "#0275b1"],
-            ["Accounting", 21.45, "#0275b1"]
-          ]);
-    
-          var view = new google.visualization.DataView(data);
-          view.setColumns([0, 1,
-                           { calc: "stringify",
-                             sourceColumn: 1,
-                             type: "string",
-                             role: "annotation" },
-                           2]);
-    
-          var options = {
-            title: "Ideas per Department",
-            width: 600,
-            height: 200,
-            bar: {groupWidth: "90%"},
-            legend: { position: "none" },
-          };
-          var chart = new google.visualization.BarChart(document.getElementById("ideas-numbers"));
-          chart.draw(view, options);
+            var data = google.visualization.arrayToDataTable([
+                ["Department", "Ideas", { role: "style" }],
+                ["School of \nBusiness", 8.94, "#0275b1"],
+                ["School of \nComputing", 10.49, "#0275b1"],
+                ["School of \nFinance", 19.30, "#0275b1"],
+                ["Accounting", 21.45, "#0275b1"]
+            ]);
 
-          //draw pie chart
-          var pieData = google.visualization.arrayToDataTable([
-          ['School', 'Ideas per Department'],
-          ['School of business and finance',     11],
-          ['School of Computing',      2],
-          ['School of Accounting',  2],
-          ['School of Social Science', 2],
-          ['School of Finance',    7]
-        ]);
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                },
+                2]);
 
-        var pieOptions = {
-          title: 'Ideas per Department (Percentage)',
-          width: 600,
-            height: 200
-        };
+            var options = {
+                title: "Ideas per Department",
+                width: 600,
+                height: 200,
+                bar: { groupWidth: "90%" },
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("ideas-numbers"));
+            chart.draw(view, options);
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            //draw pie chart
+            var pieData = google.visualization.arrayToDataTable([
+                ['School', 'Ideas per Department'],
+                ['School of business and finance', 11],
+                ['School of Computing', 2],
+                ['School of Accounting', 2],
+                ['School of Social Science', 2],
+                ['School of Finance', 7]
+            ]);
 
-        chart.draw(pieData, pieOptions);
+            var pieOptions = {
+                title: 'Ideas per Department (Percentage)',
+                width: 600,
+                height: 200
+            };
 
-        //Contributors per dept chart
-        var data = google.visualization.arrayToDataTable([
-            ["Department", "Ideas", { role: "style" } ],
-            ["School of \nBusiness", 8, "#0275b1"],
-            ["School of \nComputing", 10, "#0275b1"],
-            ["School of \nFinance", 19.30, "#0275b1"],
-            ["School of \nAccouting", 21.45, "#0275b1"]
-          ]);
-    
-          var view = new google.visualization.DataView(data);
-          view.setColumns([0, 1,
-                           { calc: "stringify",
-                             sourceColumn: 1,
-                             type: "string",
-                             role: "annotation" },
-                           2]);
-    
-          var options = {
-            title: "Contributors per Department",
-            width: 600,
-            height: 200,
-            bar: {groupWidth: "90%"},
-            legend: { position: "none" },
-          };
-          var chart = new google.visualization.BarChart(document.getElementById("contributor-numbers"));
-          chart.draw(view, options);
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-      }
-      </script>
+            chart.draw(pieData, pieOptions);
+
+            //Contributors per dept chart
+            var data = google.visualization.arrayToDataTable([
+                ["Department", "Ideas", { role: "style" }],
+                ["School of \nBusiness", 8, "#0275b1"],
+                ["School of \nComputing", 10, "#0275b1"],
+                ["School of \nFinance", 19.30, "#0275b1"],
+                ["School of \nAccouting", 21.45, "#0275b1"]
+            ]);
+
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                },
+                2]);
+
+            var options = {
+                title: "Contributors per Department",
+                width: 600,
+                height: 200,
+                bar: { groupWidth: "90%" },
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("contributor-numbers"));
+            chart.draw(view, options);
+
+        }
+    </script>
 </head>
+
 <body>
 
     <header class="header">
-        
+
         <!---------navbar------------------------------>
-        
-    
-        <nav class="navbar" id="nav">
+        <div>
             <a class="icons" onclick="myFunction()">
                 <i class="fa fa-bars" id="menu-btn"></i>
             </a>
-            
+        </div>
+
+
+        <nav class="navbar" id="nav">
+
+
             <a href="profile.html">
                 <div class="nav-item">
-                    <i class="fas fa-cog"></i>
                     <p>Profile</p>
                 </div>
             </a>
             <a href="ideas.html">
                 <div class="nav-item">
-                    <i class="far fa-lightbulb"></i>
                     <p>Ideas</p>
                 </div>
             </a>
             <a href="stats.html">
                 <div class="nav-item active">
-                    <i class="fas fa-chart-pie active"></i>
-                    <p>Stats</p>
-                </div>
-            </a>
-            <a href="stats.html">
-                <div class="nav-item">
-                    <i class="fas fa-briefcase"></i>
                     <p>Stats</p>
                 </div>
             </a>
             <a href="app_management.html">
                 <div class="nav-item">
-                    <i class="fas fa-pen-alt"></i>
-                    <p>Application Management</p>
+                    <p>Manage</p>
+                </div>
+            </a>
+            <a href="submit.html">
+                <div class="nav-item">
+                    <p>Submit</p>
+                </div>
+            </a>
+            <a href="contact.html">
+                <div class="nav-item">
+                    <p>Contact</p>
                 </div>
             </a>
         </nav>
-    
+
+
         <div class="user-info">
-            <img src="images/profile.jpg" alt="">
-            <p>Chikondi Banda</p>
-            
-            <a href="login.html" title="Log Out">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
+
+            <div class="vertical-line"></div>
+            <div class="content">
+                <img src="images/profile.jpg" alt="">
+                <p>Chikondi Banda</p>
+
+                <a href="login.html" title="Log Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+
+            </div>
         </div>
+
         <!-------------navbar ends here--------------------->
-    
+
     </header>
 
     <div class="statistics">
         <!-------------visual charts--------------------->
         <div class="charts">
             <div class="ideas-numbers" id="ideas-numbers" style="width: 100%; height: 300px;"></div>
-        <br>
-        <div class="piechart" id="piechart" style="width: 100%; height: 300px;"></div>
-        <br>
-        
-    <div class="contributor-numbers" id="contributor-numbers" style="width: 100%; height: 300px;"></div>
+            <br>
+            <div class="piechart" id="piechart" style="width: 100%; height: 300px;"></div>
+            <br>
+
+            <div class="contributor-numbers" id="contributor-numbers" style="width: 100%; height: 300px;"></div>
 
         </div>
 
@@ -169,30 +185,31 @@
         <div class="exception-reports">
             <div class="reports">
                 <h2>Exception Reports</h2>
-    <br>
-            <p class="number-comment">30</p>
-            <p>Ideas without commentss</p>
-            <br>
-            <p class="number-comment">15</p>
-            <p>Anonymous Posts</p>
-    <br>
-            <p class="number-comment">5</p>
-            <p>Anonymous comments</p>
+                <br>
+                <p class="number-comment">30</p>
+                <p>Ideas without commentss</p>
+                <br>
+                <p class="number-comment">15</p>
+                <p>Anonymous Posts</p>
+                <br>
+                <p class="number-comment">5</p>
+                <p>Anonymous comments</p>
             </div>
-            
+
         </div>
     </div>
-    
-    
-    
+
+
+
     <footer>
         <h2>Contact us</h2>
-            <p>+2600000000</p>
-            <p>abcd@mail.com</p>
-            <br><br>
-            <p>&#169 2023 All Rights Reseved</p>
-        
+        <p>+2600000000</p>
+        <p>abcd@mail.com</p>
+        <br><br>
+        <p>&#169 2023 All Rights Reseved</p>
+
     </footer>
-        
+
 </body>
+
 </html>

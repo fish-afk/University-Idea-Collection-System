@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,501 +13,547 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    
-     <!-- js file link  -->
-     <script src="../js/script.js"></script>
-    
+
+    <!-- js file link  -->
+    <script src="../js/script.js"></script>
+
 </head>
+
 <body>
-    
-<header class="header">
-        
-    <!---------navbar------------------------------>
-    
 
-    
-    <nav class="navbar" id="nav">
-        <a class="icons" onclick="myFunction()">
-            <i class="fa fa-bars" id="menu-btn"></i>
-        </a>
-        
-        <a href="profile.html">
-            <div class="nav-item">
-                <i class="fas fa-cog"></i>
-                <p>Profile</p>
+    <header class="header">
+
+        <!---------navbar------------------------------>
+        <div>
+            <a class="icons" onclick="myFunction()">
+                <i class="fa fa-bars" id="menu-btn"></i>
+            </a>
+        </div>
+
+
+        <nav class="navbar" id="nav">
+
+
+            <a href="profile.html">
+                <div class="nav-item">
+                    <p>Profile</p>
+                </div>
+            </a>
+            <a href="ideas.html">
+                <div class="nav-item active">
+                    <p>Ideas</p>
+                </div>
+            </a>
+            <a href="stats.html">
+                <div class="nav-item">
+                    <p>Stats</p>
+                </div>
+            </a>
+            <a href="app_management.html">
+                <div class="nav-item">
+                    <p>Manage</p>
+                </div>
+            </a>
+            <a href="submit.html">
+                <div class="nav-item">
+                    <p>Submit</p>
+                </div>
+            </a>
+            <a href="contact.html">
+                <div class="nav-item">
+                    <p>Contact</p>
+                </div>
+            </a>
+        </nav>
+
+
+        <div class="user-info">
+
+            <div class="vertical-line"></div>
+            <div class="content">
+                <img src="images/profile.jpg" alt="">
+                <p>Chikondi Banda</p>
+
+                <a href="login.html" title="Log Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+
             </div>
-        </a>
-        <a href="ideas.html">
-            <div class="nav-item active">
-                <i class="far fa-lightbulb active"></i>
-                <p>Ideas</p>
-            </div>
-        </a>
-        <a href="stats.html">
-            <div class="nav-item">
-                <i class="fas fa-briefcase"></i>
-                <p>Stats</p>
-            </div>
-        </a>
-        <a href="app_management.html">
-            <div class="nav-item">
-                <i class="fas fa-pen-alt"></i>
-                <p>Application Management</p>
-            </div>
-        </a>
-        <a href="submit.html">
-            <div class="nav-item">
-                <i class="fas fa-chart-pie"></i>
-                <p>Submit</p>
-            </div>
-        </a>
-    </nav>
+        </div>
 
-    <div class="user-info">
-        <img src="images/profile.jpg" alt="">
-        <p>Chikondi Banda</p>
-        
-        <a href="login.html" title="Log Out">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-    </div>
+        <!-------------navbar ends here--------------------->
 
-    <!-------------navbar ends here--------------------->
-
-</header>
+    </header>
 
 
-<section class="ideas">
-    <div class="view-by">
-        <div class="dropdown">
-            <label for="filter"><b>View By: </b></label>
+    <section class="ideas">
+        <div class="view-by">
+            <div class="dropdown">
+                <label for="filter"><b>View By: </b></label>
                 <br>
-                <input class="dropdown" placeholder="Select a tag" list="tags" name="fiter" id="browser"  required>
+                <input class="dropdown" placeholder="Select a tag" list="tags" name="fiter" id="browser" required>
                 <datalist id="tags">
                     <option value="Most Popular">
                     <option value="Most Viewed">
                     <option value="Latest">
                 </datalist>
                 <br>
-        </div>
-        
-    </div>
-    
-    <div class="idea-list">
-        <div class="idea one">
-            <div class="info">
-                <div class="user">
-                    <img src="images/profile.jpg" alt="">
-                    <p>Jonathan Prior</p>
-                </div>
-                <div class="tag">
-                    <p>Tag:</p>
-                    <p class="category">Departmental</p>
-                </div>
-            </div>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure placeat quibusdam voluptatum dolore distinctio ea animi!</p>
-                <div class="docs">
-                    <div class="name">
-                        <i class="fas fa-file"></i>
-                        <p>Document name-1</p>
-                    </div>
-                    <a href=""><i class="fas fa-cloud-download-alt"></i></a>
-                </div>
-            </div>
-            
-
-            <div class="reactions">
-                <div class="react">
-                    <div class="feedback likes">
-                        <i class="far fa-thumbs-up" id="like" onclick="like()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback dislikes">
-                        <i class="far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback comments">
-                        <i class="far fa-comment" id="commenticon" onclick="comments()"></i>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="report">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
             </div>
 
-            <div class="line horizontal"></div>
-            
-            <div class="comments" id="comments">
-                <h1>Comments</h1>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">anonymous</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">John Doe</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="idea two">
-            <div class="info">
-                <div class="user">
-                    <img src="images/profile.jpg" alt="">
-                    <p>Muyanda Nyambe</p>
-                </div>
-                <div class="tag">
-                    <p>Tag:</p>
-                    <p class="category">Departmental</p>
-                </div>
-            </div>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure placeat quibusdam voluptatum dolore distinctio ea animi!</p>
-                <div class="docs">
-                    <div class="name">
-                        <i class="fas fa-file"></i>
-                        <p>Document name-1</p>
-                    </div>
-                    <a href=""><i class="fas fa-cloud-download-alt"></i></a>
-                </div>
-            </div>
-            
-
-            <div class="reactions">
-                <div class="react">
-                    <div class="feedback likes">
-                        <i class="far fa-thumbs-up" id="like" onclick="like()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback dislikes">
-                        <i class="far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback comments">
-                        <i class="far fa-comment" id="commenticon" onclick="comments()"></i>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="report">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
-            </div>
-
-            <div class="line horizontal"></div>
-            
-            <div class="comments" id="comments">
-                <h1>Comments</h1>
-                <div class="comment">
-                    <div class="img">
+        <div class="idea-list">
+            <div class="idea one">
+                <div class="info">
+                    <div class="user">
                         <img src="images/profile.jpg" alt="">
+                        <p>Jonathan Prior</p>
                     </div>
-                    <div class="content">
-                        <h3 class="user-name">anonymous</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">John Doe</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p class="category">Departmental</p>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="idea three">
-            <div class="info">
-                <div class="user">
-                    <img src="images/profile.jpg" alt="">
-                    <p>Theresa Lion</p>
-                </div>
-                <div class="tag">
-                    <p>Tag:</p>
-                    <p class="category">Departmental</p>
-                </div>
-            </div>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure placeat quibusdam voluptatum dolore distinctio ea animi!</p>
-                <div class="docs">
-                    <div class="name">
-                        <i class="fas fa-file"></i>
-                        <p>Document name-1</p>
-                    </div>
-                    <a href=""><i class="fas fa-cloud-download-alt"></i></a>
-                </div>
-            </div>
-            
-
-            <div class="reactions">
-                <div class="react">
-                    <div class="feedback likes">
-                        <i class="far fa-thumbs-up" id="like" onclick="like()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback dislikes">
-                        <i class="far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback comments">
-                        <i class="far fa-comment" id="commenticon" onclick="comments()"></i>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="report">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
-            </div>
-
-            <div class="line horizontal"></div>
-            
-            <div class="comments" id="comments">
-                <h1>Comments</h1>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">anonymous</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">John Doe</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="idea four">
-            <div class="info">
-                <div class="user">
-                    <img src="images/profile.jpg" alt="">
-                    <p>Jane White</p>
-                </div>
-                <div class="tag">
-                    <p>Tag:</p>
-                    <p class="category">Departmental</p>
-                </div>
-            </div>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure placeat quibusdam voluptatum dolore distinctio ea animi!</p>
-                <div class="docs">
-                    <div class="name">
-                        <i class="fas fa-file"></i>
-                        <p>Document name-1</p>
-                    </div>
-                    <a href=""><i class="fas fa-cloud-download-alt"></i></a>
-                </div>
-            </div>
-            
-
-            <div class="reactions">
-                <div class="react">
-                    <div class="feedback likes">
-                        <i class="far fa-thumbs-up" id="like" onclick="like()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback dislikes">
-                        <i class="far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback comments">
-                        <i class="far fa-comment" id="commenticon" onclick="comments()"></i>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="report">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
-            </div>
-
-            <div class="line horizontal"></div>
-            
-            <div class="comments" id="comments">
-                <h1>Comments</h1>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">anonymous</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">John Doe</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="idea five">
-            <div class="info">
-                <div class="user">
-                    <img src="images/profile.jpg" alt="">
-                    <p>Kevin Nyambe</p>
-                </div>
-                <div class="tag">
-                    <p>Tag:</p>
-                    <p class="category">Departmental</p>
-                </div>
-            </div>
-            <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure placeat quibusdam voluptatum dolore distinctio ea animi!</p>
-                <div class="docs">
-                    <div class="name">
-                        <i class="fas fa-file"></i>
-                        <p>Document name-1</p>
-                    </div>
-                    <a href=""><i class="fas fa-cloud-download-alt"></i></a>
-                </div>
-            </div>
-            
-
-            <div class="reactions">
-                <div class="react">
-                    <div class="feedback likes">
-                        <i class="far fa-thumbs-up" id="like" onclick="like()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback dislikes">
-                        <i class="far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                        <p>0</p>
-                    </div>
-                    <div class="feedback comments">
-                        <i class="far fa-comment" id="commenticon" onclick="comments()"></i>
-                        <p>2</p>
-                    </div>
-                </div>
-                <div class="report">
-                    <i class="fas fa-ellipsis-h"></i>
-                </div>
-            </div>
-
-            <div class="line horizontal"></div>
-            
-            <div class="comments" id="comments">
-                <h1>Comments</h1>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">anonymous</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="comment">
-                    <div class="img">
-                        <img src="images/profile.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3 class="user-name">John Doe</h3>
-                        
-                        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi provident, nostrum saepe ad quis, minus veniam.</p>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="pagination">
-    <div class="box previous">
-        <i class="fas fa-chevron-left"></i>
-    </div>
-    <div class="box one">1</div>
-    <div class="box two">2</div>
-    <div class="box three">3</div>
-    <div class="box dots">...</div>
-    <div class="box last">11</div>
-    <div class="box next">
-        <i class="fas fa-chevron-right"></i>
-    </div>
-</section>
-
-
-<footer>
-    <div class="info">
-        <div class="contact-details">
-            <h2>Contact us</h2>
-            <p>+2600000000</p>
-            <p>abcd@mail.com</p>
-            <br><br>
-        </div>
-    
-        <div class="footer-email">
-            <h2>Leave an email</h2>
-            <form id="contact-form" class="contact" action="" method="post ">
                 <div class="content">
-                    <div class="contact">
-                        <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
-                        <input class="text-box" name="email" type="email" id="email" placeholder="Email Address" required><br>
-                        
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
                     </div>
-                    
-                    <textarea name="message" type="message" id="message" rows="5" placeholder="Message" required></textarea>
-                    <button type="submit" class="button send-btn" >Send</button>
                 </div>
-                <br>
-            </form>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <i class="comment far fa-comment" id="commenticon" onclick="comments()"></i>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+
+
+                <div class="comments" id="comments">
+
+                    <div class="horizontal-line"></div>
+                    <h1>Comments</h1>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">anonymous</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">John Doe</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Leave a comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="idea two">
+                <div class="info">
+                    <div class="user">
+                        <img src="images/profile.jpg" alt="">
+                        <p>Muyanda Nyambe</p>
+                    </div>
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p class="category">Departmental</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <i class="comment far fa-comment" id="commenticon" onclick="comments()"></i>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+
+                <div class="comments" id="comments">
+
+                    <div class="horizontal-line"></div>
+                    <h1>Comments</h1>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">anonymous</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">John Doe</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Leave a comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="idea three">
+                <div class="info">
+                    <div class="user">
+                        <img src="images/profile.jpg" alt="">
+                        <p>Theresa Lion</p>
+                    </div>
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p class="category">Departmental</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <i class="comment far fa-comment" id="commenticon" onclick="comments()"></i>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+
+
+                <div class="comments" id="comments">
+                    <div class="horizontal-line"></div>
+                    <h1>Comments</h1>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">anonymous</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">John Doe</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Leave a comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="idea four">
+                <div class="info">
+                    <div class="user">
+                        <img src="images/profile.jpg" alt="">
+                        <p>Jane White</p>
+                    </div>
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p class="category">Departmental</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <i class="comment far fa-comment" id="commenticon" onclick="comments()"></i>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+
+
+                <div class="comments" id="comments">
+                    <div class="horizontal-line"></div>
+                    <h1>Comments</h1>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">anonymous</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">John Doe</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Leave a comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="idea five">
+                <div class="info">
+                    <div class="user">
+                        <img src="images/profile.jpg" alt="">
+                        <p>Kevin Nyambe</p>
+                    </div>
+                    <div class="tag">
+                        <p>Tag:</p>
+                        <p class="category">Departmental</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, cumque dolorum! Recusandae
+                        alias debitis perferendis ad officiis, officia nostrum necessitatibus temporibus laboriosam iure
+                        placeat quibusdam voluptatum dolore distinctio ea animi!</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <i class="comment far fa-comment" id="commenticon" onclick="comments()"></i>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+
+
+                <div class="comments" id="comments">
+                    <div class="horizontal-line"></div>
+                    <h1>Comments</h1>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">anonymous</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="comment">
+                        <div class="img">
+                            <img src="images/profile.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3 class="user-name">John Doe</h3>
+
+                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                                provident, nostrum saepe ad quis, minus veniam.</p>
+
+                        </div>
+                    </div>
+                    <div class="add-comment">
+                        <input type="text" placeholder="Leave a comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <p class="copyright">&#169 2023 All Rights Reseved</p>
-    
-</footer>
-   
+    </section>
+
+    <section class="pagination">
+        <div class="box previous">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="box one">1</div>
+        <div class="box two">2</div>
+        <div class="box three">3</div>
+        <div class="box dots">...</div>
+        <div class="box last">11</div>
+        <div class="box next">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="info">
+            <div class="contact-details">
+                <h2>Contact us</h2>
+                <p>+2600000000</p>
+                <p>abcd@mail.com</p>
+                <br><br>
+            </div>
+
+
+        </div>
+
+        <p class="copyright">&#169 2023 All Rights Reseved</p>
+
+    </footer>
+
 </body>
+
 </html>
 
 <!---------References

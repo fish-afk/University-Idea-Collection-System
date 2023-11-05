@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application Management</title>
-    
+
     <!-- css file link  -->
     <link rel="stylesheet" href="../css/style.css">
 
@@ -12,306 +13,331 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    
+
 </head>
+
 <body>
-    
-<header class="header">
-    <!---------navbar------------------------------>
-    
 
-    <nav class="navbar" id="nav">
-        <a class="icons" onclick="myFunction()">
-            <i class="fa fa-bars" id="menu-btn"></i>
-        </a>
-        
-        <a href="profile.html">
-            <div class="nav-item">
-                <i class="fas fa-cog"></i>
-                <p>Profile</p>
-            </div>
-        </a>
-        <a href="ideas.html">
-            <div class="nav-item">
-                <i class="far fa-lightbulb"></i>
-                <p>Ideas</p>
-            </div>
-        </a>
-        <a href="stats.html">
-            <div class="nav-item">
-                <i class="fas fa-chart-pie"></i>
-                <p>Stats</p>
-            </div>
-        </a>
-        <a href="app_management.html">
-            <div class="nav-item active">
-                <i class="fas fa-briefcase"></i>
-                <p>Application Management</p>
-            </div>
-        </a>
-        <a href="#">
-            <div class="nav-item">
-                <i class="fas fa-pen-alt"></i>
-                <p>Submit</p>
-            </div>
-        </a>
-    </nav>
+    <header class="header">
 
-    
-</header>
-    
-     
+        <!---------navbar------------------------------>
+        <div>
+            <a class="icons" onclick="myFunction()">
+                <i class="fa fa-bars" id="menu-btn"></i>
+            </a>
+        </div>
+
+
+        <nav class="navbar" id="nav">
+
+
+            <a href="profile.html">
+                <div class="nav-item">
+                    <p>Profile</p>
+                </div>
+            </a>
+            <a href="ideas.html">
+                <div class="nav-item">
+                    <p>Ideas</p>
+                </div>
+            </a>
+            <a href="stats.html">
+                <div class="nav-item">
+                    <p>Stats</p>
+                </div>
+            </a>
+            <a href="app_management.html">
+                <div class="nav-item active">
+                    <p>Manage</p>
+                </div>
+            </a>
+            <a href="submit.html">
+                <div class="nav-item">
+                    <p>Submit</p>
+                </div>
+            </a>
+            <a href="contact.html">
+                <div class="nav-item">
+                    <p>Contact</p>
+                </div>
+            </a>
+        </nav>
+
+
+        <div class="user-info">
+
+            <div class="vertical-line"></div>
+            <div class="content">
+                <img src="images/profile.jpg" alt="">
+                <p>Chikondi Banda</p>
+
+                <a href="login.html" title="Log Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <!-------------navbar ends here--------------------->
+
+    </header>
+
+
     <!---------edit categories section------------------------------>
 
-<section class="categories">
-    <p>Idea Categories</p>
-    <div class="table-container">
-        <table class="categories-table">
-            <thead class="table-head">
-                <tr>
-                    <th>Name</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Institutional</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-                <tr>
-                    <td>Departmental</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr><tr>
-                    <td>Personal</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="buttons">
-            <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
-            <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+    <section class="categories">
+        <p>Idea Categories</p>
+        <div class="table-container">
+            <table class="categories-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Institutional</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Departmental</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Personal</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
+                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+            </div>
         </div>
-    </div>
-    
 
-</section>
+
+    </section>
 
 
     <!---------admin categories section------------------------------>
-<section class="admin">
-    <p>Admin Settings</p><br>
-    <div class="closure-date">
-        <p>Closure Date:</p>
-        <input type="date">
-    </div>
-    <div class="fclosure">
-        <p>Final Closure Date:</p>
-        <input type="date">
-    </div>
-
-    <br>
-
-    
-    <!---------Staff details table------------>
-    <div class="table-container">
-        <table class="staff-table">
-            <thead class="table-head">
-                <tr>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>DOB</th>
-                    <th>Department</th>
-                    <th>Type</th>
-                    <th>Active</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="row">
-                    <td>J.Miles</td>
-                    <td>Joseph</td>
-                    <td>Miles</td>
-                    <td>jmiles@mail.com</td>
-                    <td>1234abcd</td>
-                    <td>10/08/1998</td>
-                    <td>School of Science and Technology</td>
-                    <td>Academic</td>
-                    <td>Active</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Theresa.N</td>
-                    <td>Theresa</td>
-                    <td>Nyambe</td>
-                    <td>teresa@mail.com</td>
-                    <td>fwu7347HJV</td>
-                    <td>01/05/1988</td>
-                    <td>School of Science and Technology</td>
-                    <td>Support</td>
-                    <td>Active</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Keran.P</td>
-                    <td>Keran</td>
-                    <td>Peterson</td>
-                    <td>kpeterson@mail.com</td>
-                    <td>qwert12345</td>
-                    <td>10/08/1998</td>
-                    <td>School of Accounting and Finance</td>
-                    <td>Academic</td>
-                    <td>Active</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Jane.M</td>
-                    <td>Jane</td>
-                    <td>Mulenga</td>
-                    <td>mulengaj@mail.com</td>
-                    <td>fyyeq74f</td>
-                    <td>10/08/2002</td>
-                    <td>School of Business</td>
-                    <td>Academic</td>
-                    <td>Inactive</td>
-                    <td><i class="fas fa-marker"></i></td>
-                    <td><i class="fas fa-trash"></i></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="buttons">
-            <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
-            <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+    <section class="admin">
+        <p>Admin Settings</p><br>
+        <div class="closure-date">
+            <p>Closure Date:</p>
+            <input type="date">
+        </div>
+        <div class="fclosure">
+            <p>Final Closure Date:</p>
+            <input type="date">
         </div>
 
-    </div>
-    
-</section>
+        <br>
+
+
+        <!---------Staff details table------------>
+        <div class="table-container">
+            <table class="staff-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>DOB</th>
+                        <th>Department</th>
+                        <th>Type</th>
+                        <th>Active</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>J.Miles</td>
+                        <td>Joseph</td>
+                        <td>Miles</td>
+                        <td>jmiles@mail.com</td>
+                        <td>1234abcd</td>
+                        <td>10/08/1998</td>
+                        <td>School of Science and Technology</td>
+                        <td>Academic</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Theresa.N</td>
+                        <td>Theresa</td>
+                        <td>Nyambe</td>
+                        <td>teresa@mail.com</td>
+                        <td>fwu7347HJV</td>
+                        <td>01/05/1988</td>
+                        <td>School of Science and Technology</td>
+                        <td>Support</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Keran.P</td>
+                        <td>Keran</td>
+                        <td>Peterson</td>
+                        <td>kpeterson@mail.com</td>
+                        <td>qwert12345</td>
+                        <td>10/08/1998</td>
+                        <td>School of Accounting and Finance</td>
+                        <td>Academic</td>
+                        <td>Active</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Jane.M</td>
+                        <td>Jane</td>
+                        <td>Mulenga</td>
+                        <td>mulengaj@mail.com</td>
+                        <td>fyyeq74f</td>
+                        <td>10/08/2002</td>
+                        <td>School of Business</td>
+                        <td>Academic</td>
+                        <td>Inactive</td>
+                        <td><i class="fas fa-marker"></i></td>
+                        <td><i class="fas fa-trash"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
+                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+
+        </div>
+
+    </section>
     <!---------reported posts table------------>
 
 
-<div class="reports">
-    <h1>Reported Posts</h1>
-<div class="table-container">
-    <table class="reports-table">
-        <thead class="table-head">
-            <tr>
-                <th>Username</th>
-                <th>Idea</th>
-                <th>Reported By</th>
-                <th>Report Time</th>
-                <th>Disable Post</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="row">
-                <td>J.Miles</td>
-                <td>Idea 1</td>
-                <td>Theresa.N</td>
-                <td>3rd October, 2023 15:12</td>
-                <td><i class="fas fa-times-circle"></i></td>
-            </tr>
-            <tr class="row">
-                <td>Keran.P</td>
-                <td>Idea 1</td>
-                <td>Theresa.N</td>
-                <td>3rd November, 2023 22:12</td>
-                <td><i class="fas fa-times-circle"></i></td>
-            </tr>
-            <tr class="row">
-                <td>Keran.P</td>
-                <td>Idea 1</td>
-                <td>Jane.M</td>
-                <td>23rd October, 2023 12:32</td>
-                <td><i class="fas fa-times-circle"></i></td>
-            </tr>
-        </tbody>
-    </table>
-
-    
-</div>
-</div>
+    <div class="reports">
+        <h1>Reported Posts</h1>
+        <div class="table-container">
+            <table class="reports-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Username</th>
+                        <th>Idea</th>
+                        <th>Reported By</th>
+                        <th>Report Time</th>
+                        <th>Disable Post</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>J.Miles</td>
+                        <td>Idea 1</td>
+                        <td>Theresa.N</td>
+                        <td>3rd October, 2023 15:12</td>
+                        <td><i class="fas fa-times-circle"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Keran.P</td>
+                        <td>Idea 1</td>
+                        <td>Theresa.N</td>
+                        <td>3rd November, 2023 22:12</td>
+                        <td><i class="fas fa-times-circle"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Keran.P</td>
+                        <td>Idea 1</td>
+                        <td>Jane.M</td>
+                        <td>23rd October, 2023 12:32</td>
+                        <td><i class="fas fa-times-circle"></i></td>
+                    </tr>
+                </tbody>
+            </table>
 
 
-<section class="ban-users">
-    
-    <h1>Ban Users</h1>
-    <!---------Ban users table------------>
-    <div class="table-container">
-        <table class="ban-table">
-            <thead class="table-head">
-                <tr>
-                    <th>Username</th>
-                    <th>Account Type</th>
-                    <th>Ban</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="row">
-                    <td>J.Miles</td>
-                    <td>Academic</td>
-                    <td><i class="fas fa-ban"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Theresa.N</td>
-                    <td>Academic</td>
-                    <td><i class="fas fa-ban"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Keran.P</td>
-                    <td>Support</td>
-                    <td><i class="fas fa-ban"></i></td>
-                </tr>
-                <tr class="row">
-                    <td>Jane.M</td>
-                    <td>Academic</td>
-                    <td><i class="fas fa-ban"></i></td>
-                </tr>
-            </tbody>
-        </table>
-
-        
-</div>
-</section>
-<footer>
-    <div class="info">
-        <div class="contact-details">
-            <h2>Contact us</h2>
-            <p>+2600000000</p>
-            <p>abcd@mail.com</p>
-            <br><br>
-        </div>
-    
-        <div class="footer-email">
-            <h2>Leave an email</h2>
-            <form id="contact-form" class="contact" action="" method="post ">
-                <div class="content">
-                    <div class="contact">
-                        <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
-                        <input class="text-box" name="email" type="email" id="email" placeholder="Email Address" required><br>
-                        
-                    </div>
-                    
-                    <textarea name="message" type="message" id="message" rows="5" placeholder="Message" required></textarea>
-                    <button type="submit" class="button send-btn" >Send</button>
-                </div>
-                <br>
-            </form>
         </div>
     </div>
-    
-    <p class="copyright">&#169 2023 All Rights Reseved</p>
-    
-</footer>
+
+
+    <section class="ban-users">
+
+        <h1>Ban Users</h1>
+        <!---------Ban users table------------>
+        <div class="table-container">
+            <table class="ban-table">
+                <thead class="table-head">
+                    <tr>
+                        <th>Username</th>
+                        <th>Account Type</th>
+                        <th>Ban</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>J.Miles</td>
+                        <td>Academic</td>
+                        <td><i class="fas fa-ban"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Theresa.N</td>
+                        <td>Academic</td>
+                        <td><i class="fas fa-ban"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Keran.P</td>
+                        <td>Support</td>
+                        <td><i class="fas fa-ban"></i></td>
+                    </tr>
+                    <tr class="row">
+                        <td>Jane.M</td>
+                        <td>Academic</td>
+                        <td><i class="fas fa-ban"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </section>
+    <footer>
+        <div class="info">
+            <div class="contact-details">
+                <h2>Contact us</h2>
+                <p>+2600000000</p>
+                <p>abcd@mail.com</p>
+                <br><br>
+            </div>
+
+            <div class="footer-email">
+                <h2>Leave an email</h2>
+                <form id="contact-form" class="contact" action="" method="post ">
+                    <div class="content">
+                        <div class="contact">
+                            <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
+                            <input class="text-box" name="email" type="email" id="email" placeholder="Email Address"
+                                required><br>
+
+                        </div>
+
+                        <textarea name="message" type="message" id="message" rows="5" placeholder="Message"
+                            required></textarea>
+                        <button type="submit" class="button send-btn">Send</button>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+
+        <p class="copyright">&#169 2023 All Rights Reseved</p>
+
+    </footer>
 </body>
+
 </html>

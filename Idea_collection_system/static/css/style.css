@@ -1,32 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
 
-:root{
-    --main-color:#0275b1;
-    --black:#13131a;
-    --bg:#bedfff;
-    --border:#a19f9f;
+:root {
+    --main-color: #0275b1;
+    --black: #13131a;
+    --bg: #bedfff;
+    --border: #a19f9f;
 }
-*{
+
+* {
     font-family: 'Poppins', sans-serif;
-    margin:0; 
-    padding:0;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    outline: none; 
-    border:none;
+    outline: none;
+    border: none;
     text-decoration: none;
     transition: .2s linear;
 }
 
 
-html{
+html {
     font-size: 80%;
     overflow-x: hidden;
     scroll-padding-top: 9rem;
     scroll-behavior: smooth;
 }
 
-body{
+body {
     min-height: 100vh;
     overflow-x: hidden;
     background: var(--bg);
@@ -49,11 +50,11 @@ body{
     transition: 0.3s;
 }
 
-.button:hover{
+.button:hover {
     background: #1099ee;
 }
 
-th{
+th {
     font-family: 'Roboto', sans-serif;
     padding: 10px 10px;
     text-align: left;
@@ -64,7 +65,7 @@ th{
     font-size: 1.1rem;
 }
 
-td{
+td {
     font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
     padding: 10px 10px;
@@ -72,11 +73,11 @@ td{
 
 }
 
-.row:hover{
+.row:hover {
     background-color: #f2f2f2;
 }
 
-.drop{
+.drop {
     background: #0184d5;
     color: #fff;
     display: flex;
@@ -88,12 +89,12 @@ td{
     cursor: pointer;
 }
 
-.drop-clicked{
+.drop-clicked {
     box-shadow: 0 0 5px #373737a8;
 }
 
 
-.arrow{
+.arrow {
     color: #fff;
     width: 0;
     height: 0;
@@ -103,11 +104,11 @@ td{
     transition: 0.3s;
 }
 
-.arrow-rotate{
+.arrow-rotate {
     transform: rotate(180deg);
 }
 
-.options{
+.options {
     list-style: none;
     padding: 3px 5px;
     background-color: #ffffff;
@@ -122,100 +123,123 @@ td{
     z-index: 1;*/
 }
 
-.options li{
+.options li {
     padding: 5px 4px;
     margin: 2px 0;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.options li:hover{
+.options li:hover {
     background: hsl(203, 89%, 79%);
 }
 
-.options li .active{
+.options li .active {
     background-color: #ccc;
 }
 
-.options-open{
+.options-open {
     display: block;
     opacity: 1;
 }
 
 
 
-  /*CSS FOR IDEAS PAGE*/
+/*CSS FOR IDEAS PAGE*/
 
-  /*css for header section*/
-.header{
+/*css for header section*/
+.header {
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     z-index: 1000;
-     padding:0 50px;
-     
-  box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.3);
+    padding: 0 50px;
+
+    box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.3);
 }
 
-  /*css for navigation bar*/
-.nav-item{
+/*css for navigation bar*/
+.nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.navbar p{
+.navbar {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar p {
     font-size: 1.1rem;
     font-weight: 500;
 }
 
-.navbar a{
+.navbar a {
     display: inline-block;
     margin: 15px 10px;
     font-size: 1.8rem;
-    color:#000;
+    color: #000;
     transition: 0.3s;
 }
-.navbar a .active{
+
+.navbar a .active {
     color: var(--main-color);
 }
 
 
-.navbar a:hover{
+.navbar a:hover {
     color: var(--main-color);
 }
 
 
-.navbar i{
-    color:#000;
+.navbar i {
+    color: #000;
     cursor: pointer;
     font-size: 2.5rem;
 }
-.navbar i .active{
-    color: var(--main-color);
-}
-.navbar i:hover{
+
+.navbar i .active {
     color: var(--main-color);
 }
 
-.user-info{
+.navbar i:hover {
+    color: var(--main-color);
+}
+
+.user-info .vertical-line {
+    border-left: 4px solid var(--border);
+    border-radius: 4px;
+    width: 100%;
+    margin-left: -1px;
+    opacity: 0.2;
+}
+
+.user-info {
     display: flex;
 }
-.user-info img{
+
+.user-info .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info img {
     height: 35px;
     width: 35px;
     object-fit: cover;
     object-position: center;
     display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.user-info p{
+.user-info p {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,30 +248,32 @@ td{
     margin-right: 5px;
 }
 
-.user-info i{
+.user-info i {
     color: #000;
-font-size: 1.6rem;
+    font-size: 1.6rem;
 }
 
-.user-info a{
+.user-info a {
     color: #000;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.fa{
+
+.fa {
     color: #000;
 }
-#menu-btn{
+
+#menu-btn {
     display: none;
 }
 
 
-  /*end of css for header section*/
+/*end of css for header section*/
 
-    
-  /*submit section*/
+
+/*submit section*/
 
 .submit {
     width: 100%;
@@ -256,12 +282,12 @@ font-size: 1.6rem;
     margin-top: 50px;
 }
 
-.submit h1{
+.submit h1 {
     text-transform: uppercase;
     font-size: 2rem;
 }
 
-.submit .container{
+.submit .container {
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
@@ -269,25 +295,25 @@ font-size: 1.6rem;
     margin-top: 10px;
 }
 
-.submit .container .info{
+.submit .container .info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
 }
 
-.submit .container .info .tag{
+.submit .container .info .tag {
     display: flex;
     align-items: center;
     border-radius: 10px;
 }
 
-.submit .container .info .tag label{
+.submit .container .info .tag label {
     font-size: 15px;
     margin-right: 5px;
 }
 
-.submit .container .info .tag input{
+.submit .container .info .tag input {
     background-color: #0184d5c3;
     border-radius: 1px;
     color: #fff;
@@ -295,18 +321,18 @@ font-size: 1.6rem;
     margin: 0;
 }
 
-.submit .container .info .tag p{
+.submit .container .info .tag p {
     color: #fff;
     font-size: 1.1rem;
 }
 
-.submit .container .info .tag ul{
+.submit .container .info .tag ul {
     width: 100%;
     list-style: none;
     padding-left: 5px;
 }
 
-.submit .container .info .tag li{
+.submit .container .info .tag li {
     position: relative;
     color: #fff;
 }
@@ -320,7 +346,7 @@ font-size: 1.6rem;
 }
 
 
-.submit textarea{
+.submit textarea {
     margin-top: 15px;
     border: none;
     width: 95%;
@@ -331,39 +357,39 @@ font-size: 1.6rem;
     resize: vertical;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+}
 
-  .submit .content{
+.submit .content {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
-  }
+}
 
-  .submit .content i{
+.submit .content i {
     padding: 10px;
     font-size: 1.7rem;
     cursor: pointer;
     border-radius: 2px;
-  }
+}
 
-  .submit .content i:hover{
+.submit .content i:hover {
     background: #0184d5;
     color: #373737;
     font-size: 2rem;
-  }
+}
 
-  .submit .agree{
+.submit .agree {
     margin-top: 10px;
     display: flex;
     align-items: center;
-  }
+}
 
-  .submit label{
+.submit label {
     padding-left: 5px;
-  }
+}
 
 
-.submit .button{
+.submit .button {
     background-color: #0184d5;
     margin-top: 15px;
     padding: 10px 20px;
@@ -371,18 +397,19 @@ font-size: 1.6rem;
 }
 
 .submit .button:disabled {
-    background-color: #ccc; 
-    color: #999; 
+    background-color: #ccc;
+    color: #999;
     cursor: not-allowed;
 }
 
 .my-button:disabled:hover {
-    background-color: #ccc; 
+    background-color: #ccc;
 }
-  /*end of css for submit section*/
+
+/*end of css for submit section*/
 
 
-  /*ideas section*/
+/*ideas section*/
 
 .ideas {
     width: 100%;
@@ -391,17 +418,17 @@ font-size: 1.6rem;
     flex-direction: column;
 }
 
-.ideas .dropdown{
+.ideas .dropdown {
     display: flex;
     float: right;
     margin-bottom: 10px;
 }
 
-.ideas input{
+.ideas input {
     margin-left: 5px;
 }
 
-.ideas .idea{
+.ideas .idea {
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
@@ -409,30 +436,30 @@ font-size: 1.6rem;
     margin: 25px 0;
 }
 
-.ideas .idea .info{
+.ideas .idea .info {
     display: flex;
     justify-content: space-between;
 }
 
 
-.ideas .idea .info .user{
+.ideas .idea .info .user {
     display: flex;
     justify-content: space-between;
 }
 
-.ideas .idea .info .user img{
+.ideas .idea .info .user img {
     height: 35px;
     width: 35px;
     object-fit: cover;
     object-position: center;
     display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.ideas .idea .info .user p{
+.ideas .idea .info .user p {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -440,13 +467,13 @@ font-size: 1.6rem;
     font-size: 1.2rem;
 }
 
-.ideas .idea .info .tag{
+.ideas .idea .info .tag {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.ideas .idea .info .tag .category{
+.ideas .idea .info .tag .category {
     margin-left: 5px;
     background-color: #0275b1;
     color: #fff;
@@ -455,11 +482,11 @@ font-size: 1.6rem;
 }
 
 
-.ideas .idea .content{
+.ideas .idea .content {
     padding: 10px 0;
 }
 
-.ideas .idea .content .docs{
+.ideas .idea .content .docs {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
@@ -469,88 +496,93 @@ font-size: 1.6rem;
     margin-top: 10px;
 }
 
-.ideas .idea .content .docs .name{
+.ideas .idea .content .docs .name {
     display: flex;
     justify-content: center;
 }
 
-.ideas .idea .content .docs .name i{
+.ideas .idea .content .docs .name i {
     padding-right: 10px;
     color: #f3f3f3;
     text-decoration: none;
 }
 
-.ideas .idea .content .docs .name a{
+.ideas .idea .content .docs .name a {
     text-decoration: none;
 }
 
-.ideas .idea .content .docs p{
+.ideas .idea .content .docs p {
     font-size: 1.3rem;
     font-weight: 400;
 }
 
-.ideas .idea .content .docs i{
+.ideas .idea .content .docs i {
     font-size: 2.3rem;
     color: #f3f3f3;
 }
 
-.ideas .line {
-    border-top: 3px solid var(--border);
-    width: 100%;
-    margin-top: -1px;
-}
 
-.ideas .idea .reactions{
+.ideas .idea .reactions {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.ideas .idea .reactions .react{
+.ideas .idea .reactions .react {
     display: flex;
 }
 
-.ideas .idea .reactions .react .feedback{
+.ideas .idea .reactions .react .feedback {
     display: flex;
+    align-items: center;
 }
 
 
-.ideas .idea .reactions i{
+.ideas .idea .reactions i {
     color: #0275b1;
     font-size: 1.4rem;
     padding: 5px;
 }
 
-.ideas .idea .reactions p{
+.ideas .idea .reactions p {
     text-align: center;
     color: #0275b1;
     font-size: 1.4rem;
 }
 
-.idea .comments{
+.idea .comments {
+    margin-top: 10px;
     display: none;
 }
 
-.idea .comment{
+.idea .comment {
     display: flex;
     margin: 5px 0;
 }
 
-.idea .comments img{
+.idea .comments img {
     height: 35px;
     width: 35px;
     object-fit: cover;
     object-position: center;
     display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.idea .comments .comment .content{
+.idea .comments .comment .content {
     padding: 0;
     margin-right: 15px;
+}
+
+.ideas .horizontal-line {
+    border-top: 3px solid var(--border);
+    width: 100%;
+    margin-top: -1px;
+    border-radius: 5px;
+    opacity: 0.1;
 }
 
 .ideas .comments .line {
@@ -559,14 +591,37 @@ font-size: 1.6rem;
     margin-top: -1px;
 }
 
-.pagination{
+.ideas .comments .add-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    box-shadow: 0px 0 8px rgba(2, 2, 2, 0.1);
+    padding: 5px;
+}
+
+.ideas .comments .add-comment input {
+    width: 90%;
+}
+
+.ideas .comments .add-comment i {
+    font-size: 1.3rem;
+    padding-right: 10px;
+}
+
+.ideas .comments .add-comment i:hover {
+    color: #0275b1;
+    font-size: 1.4rem;
+}
+
+.pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
 }
 
-.pagination .box{
+.pagination .box {
     padding: 4px 7px;
     border: 2px solid #0275b1;
     background-color: #fff;
@@ -576,10 +631,10 @@ font-size: 1.6rem;
 }
 
 
-  /*end of css for ideas section*/
+/*end of css for ideas section*/
 
-    /*END OF CSS FOR IDEAS PAGE*/
-  
+/*END OF CSS FOR IDEAS PAGE*/
+
 
 
 
@@ -592,14 +647,14 @@ font-size: 1.6rem;
 
 /*CSS FOR PROFILE PAGE*/
 
- /*end of edit profile section*/
+/*end of edit profile section*/
 
 .profile-info {
     width: 100%;
     padding: 30px 100px;
 }
 
-.profile-info .container{
+.profile-info .container {
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.1);
@@ -608,44 +663,44 @@ font-size: 1.6rem;
     justify-content: space-between;
 }
 
-.profile-info .container .info{
+.profile-info .container .info {
     display: flex;
 }
 
-.profile-info .container img{
+.profile-info .container img {
     height: 135px;
     width: 135px;
     object-fit: cover;
     object-position: center;
     display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
-.profile-info .container .info .job-info{
+.profile-info .container .info .job-info {
     padding-left: 25px;
-    
+
 }
 
-.profile-info .container .info .job-info .name{
+.profile-info .container .info .job-info .name {
     font-size: 1.7rem;
     font-weight: 700;
 }
 
-.profile-info .container .info .job-info .title{
+.profile-info .container .info .job-info .title {
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-.profile-info .container .info .job-info .department{
+.profile-info .container .info .job-info .department {
     font-size: 1.1rem;
     color: #373737;
 }
 
 
-.profile-info .container .login-details i{
+.profile-info .container .login-details i {
     font-size: 1.2rem;
     color: #373737;
     padding-right: 5px;
@@ -657,14 +712,14 @@ font-size: 1.6rem;
 
 /***** css for form profile  *****/
 
-.edit-details{
-    
+.edit-details {
+
     width: 100%;
     padding: 30px 100px;
     margin-bottom: 40px;
 }
 
-.edit-details  img{
+.edit-details img {
     height: 95px;
     width: 95px;
     object-fit: cover;
@@ -679,23 +734,23 @@ font-size: 1.6rem;
     box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.148);
 }
 
-.edit-form{
-    position:relative;
+.edit-form {
+    position: relative;
     background-color: #fff;
     padding: 30px 50px;
     border-radius: 10px;
     box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
-    border-style:hidden;
+    border-style: hidden;
 }
 
-.form{
+.form {
     align-items: center;
     font-size: 16px;
 }
 
 
 
-.textbox{
+.textbox {
     box-sizing: 5%;
     font-size: 19px;
     font-weight: 16px;
@@ -705,7 +760,7 @@ font-size: 1.6rem;
     margin-left: 4%;
 }
 
-.textbox1{
+.textbox1 {
     box-sizing: 5%;
     font-size: 19px;
     font-weight: 16px;
@@ -715,7 +770,7 @@ font-size: 1.6rem;
     margin-left: 9%;
 }
 
-.textbox2{
+.textbox2 {
     box-sizing: 5%;
     font-size: 19px;
     font-weight: 16px;
@@ -728,10 +783,10 @@ font-size: 1.6rem;
 
 /***** end of css for profile info section *****/
 
- /*end of edit profile section*/
+/*end of edit profile section*/
 
 
- /*categories section*/
+/*categories section*/
 .categories {
     width: 100%;
     padding: 30px 100px;
@@ -739,18 +794,18 @@ font-size: 1.6rem;
     flex-direction: column;
 }
 
-.categories p{
+.categories p {
     font-size: 1.8rem;
     font-weight: 500;
 }
 
-.categories .table-container{
+.categories .table-container {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
 }
 
-.categories .table-container .categories-table{
+.categories .table-container .categories-table {
     border-collapse: collapse;
     margin: 25px 0;
     width: 100%;
@@ -764,57 +819,57 @@ font-size: 1.6rem;
     border-bottom: 1px solid #a19f9f;
 }
 
-.categories-table tbody tr:last-of-type{
+.categories-table tbody tr:last-of-type {
     border-bottom: 2px solid #0275b1;
 }
 
-.categories-table tbody tr i:hover{
+.categories-table tbody tr i:hover {
     font-size: 1.3rem;
     color: #0275b1;
 }
 
-.categories .buttons{
+.categories .buttons {
     display: flex;
     flex-direction: column;
     width: 180px;
 }
 
-.categories .button{
- margin-bottom: 10px;
+.categories .button {
+    margin-bottom: 10px;
 }
 
 
- /*end of categories section*/
- .admin {
+/*end of categories section*/
+.admin {
     width: 100%;
     padding: 30px 100px;
     display: flex;
     flex-direction: column;
 }
 
-.admin p{
-    
+.admin p {
+
     font-size: 1.8rem;
     font-weight: 500;
 }
 
-.admin .closure-date{
+.admin .closure-date {
     display: flex;
     margin-bottom: 10px;
 }
 
-.admin .fclosure{
+.admin .fclosure {
     display: flex;
 }
 
 .admin .closure-date p,
-.admin .fclosure p{
+.admin .fclosure p {
     font-size: 1.4rem;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
-.admin input{
+.admin input {
     margin-left: 15px;
     background-color: #f2f2f2;
     border-radius: 5px;
@@ -824,14 +879,14 @@ font-size: 1.6rem;
 }
 
 
-.admin .table-container{
+.admin .table-container {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
     width: 100%;
 }
 
-.admin .table-container .staff-table{
+.admin .table-container .staff-table {
     border-collapse: collapse;
     margin: 25px 0;
     width: 100%;
@@ -840,7 +895,7 @@ font-size: 1.6rem;
     box-shadow: 0 0 20px rgba(2, 2, 2, 0.1);
 }
 
-.admin .table-container .staff-table .table-head tr{
+.admin .table-container .staff-table .table-head tr {
     background-color: #0275b1;
     color: #fff;
     text-align: left;
@@ -851,151 +906,154 @@ font-size: 1.6rem;
     border-bottom: 1px solid #a19f9f;
 }
 
-.staff-table tbody tr:last-of-type{
+.staff-table tbody tr:last-of-type {
     border-bottom: 2px solid #0275b1;
 }
 
-.staff-table tbody tr i:hover{
+.staff-table tbody tr i:hover {
     font-size: 1.3rem;
     color: #0275b1;
 }
 
-.admin .buttons{
+.admin .buttons {
     display: flex;
     flex-direction: column;
     width: 180px;
 }
 
-.admin .button{
- margin-bottom: 10px;
+.admin .button {
+    margin-bottom: 10px;
 }
 
- 
- /*admin settings section*/
+
+/*admin settings section*/
 
 
- 
- /*end of admin settings section*/
 
-  /*END OF CSS FOR PROFILE PAGE*/
+/*end of admin settings section*/
 
-  
+/*END OF CSS FOR PROFILE PAGE*/
+
+
 /* CSS FOR STATISTICS PAGE */
 
-.statistics{
+.statistics {
     display: flex;
 }
 
-.statistics .charts{
+.statistics .charts {
     padding: 0 30px;
 }
 
-    .ideas-numbers{
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
+.ideas-numbers {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
-    
 
-    .piechart{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
 
-    .contributor-numbers{
-        display: flex;
-        justify-content: center;
-        width: 1500px;
-    }
-    
-    .exception-reports{
-        width: 100%;
-        padding: 30px 50px;
-    }
+.piechart {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
-    .exception-reports .reports{
-        background-color: #fff;
-        border-radius: 5px;
-        padding: 15px;
-        width: 80%;
-        box-shadow: 0 0 15px rgba(2, 2, 2, 0.45);
-    }
+.contributor-numbers {
+    display: flex;
+    justify-content: center;
+    width: 1500px;
+}
 
-    .exception-reports .number-comment{
-        font-size: 5rem;
-        color: #0184d5;
-    }
+.exception-reports {
+    width: 100%;
+    padding: 30px 50px;
+}
 
-    .exception-reports p{
-        font-size: 1.5rem;
-    }
+.exception-reports .reports {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    width: 80%;
+    box-shadow: 0 0 15px rgba(2, 2, 2, 0.45);
+}
+
+.exception-reports .number-comment {
+    font-size: 5rem;
+    color: #0184d5;
+}
+
+.exception-reports p {
+    font-size: 1.5rem;
+}
 
 /* END OF CSS FOR STATISTICS PAGE */
 
 /* CSS FOR CREATE ACCOUNT PAGE */
 
-  
-  .login {
-    display: flex;
-  }
 
-  .login-img{
+.login {
+    display: flex;
+}
+
+.login-img {
+    min-height: 100%;
     width: 50%;
     opacity: 0.9;
     background-color: #fff;
-  }
+}
 
-  .login img{
+.login img {
     object-fit: cover;
     object-position: center;
     display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        
-  box-shadow: 0px 10px 15px rgba(2, 2, 2, 0.7);
-  }
-  
-  .login-form {
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    box-shadow: 0px 10px 15px rgba(2, 2, 2, 0.7);
+}
+
+.login-form {
     min-height: 100%;
     width: 50%;
     padding: 20px 50px;
     background-color: rgb(255, 255, 255);
     height: 100%;
-    
-  }
-  
-  .login-form h1{
+
+}
+
+.login-form h1 {
     font-weight: 10000;
     font-size: 2.9rem;
-  }
+}
 
-  .login-form label{
-    
+.login-form label {
+
     font-size: 1.4rem;
-  }
+}
 
 
-  /* Full-width input fields */
-  .login input[type=text],.login input[type=password] {
+/* Full-width input fields */
+.login input[type=text],
+.login input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: #f1eeee;
     font-size: 1.4rem;
-  }
-  
-  .login input[type=text]:focus, input[type=password]:focus {
+}
+
+.login input[type=text]:focus,
+input[type=password]:focus {
     background-color: #ddd;
     outline: none;
-  }
-  
-  /* Set a style for the submit button */
-  .login .btn {
+}
+
+/* Set a style for the submit button */
+.login .btn {
     background-color: #2a2931;
     color: white;
     padding: 16px 20px;
@@ -1003,69 +1061,71 @@ font-size: 1.6rem;
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
-  }
-  
-  .login .btn:hover {
-    opacity: 1;
-  }
+}
 
-  .login .btn a{
+.login .btn:hover {
+    opacity: 1;
+}
+
+.login .btn a {
     text-decoration: none;
     color: white;
-  }
-  
-  /* ....drop down code.... */
-  .login .dropdown {
+}
+
+/* ....drop down code.... */
+.login .dropdown {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: #eee9e9;
-    
-  }
-  /*******************check box login code start here ***********/
-  .login .login1{
-  margin-left: 50%;
-  }
-  /* END OF CSS FOR CREATE ACCOUNT PAGE */
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /* CSS FOR TERMS AND CONDITIONS PAGE */
-  .tc-background {
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(34,34,200,1) 0%, rgba(93,223,249,1) 100%);
-    padding: 50px;
-  }
 
-  #scroll {
+}
+
+/*******************check box login code start here ***********/
+.login .login1 {
+    margin-left: 50%;
+}
+
+/* END OF CSS FOR CREATE ACCOUNT PAGE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CSS FOR TERMS AND CONDITIONS PAGE */
+.tc-background {
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(34, 34, 200, 1) 0%, rgba(93, 223, 249, 1) 100%);
+    padding: 50px;
+}
+
+#scroll {
     aspect-ratio: 2/1;
     padding: 40px;
     margin: auto;
@@ -1074,13 +1134,17 @@ font-size: 1.6rem;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     background-color: rgb(255, 255, 255);
-  }
-  table, th, td {
-    border:1px solid black;
-  }
-  /*************check box codes (terms $ condition) start here *****/
-  
-  .close1 {
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+/*************check box codes (terms $ condition) start here *****/
+
+.close1 {
     background-color: rgb(224, 234, 248);
     color: rgb(0, 0, 0);
     padding: 8px 8px;
@@ -1090,33 +1154,31 @@ font-size: 1.6rem;
     border: inset;
     border-color: #e7ebf1;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.479);
-   
-  }
 
-  .close1 a{
+}
+
+.close1 a {
     color: #000;
-  }
-  
-  /* Darker background on mouse-over */
-  .close1:hover {
+}
+
+/* Darker background on mouse-over */
+.close1:hover {
     background-color: rgb(189, 189, 196);
-  }
-  
-  /*************login codes start here *****/
-  
-  
+}
 
-  
-  /*****check box code *****/
-  .check1{
+/*************login codes start here *****/
+
+
+
+
+/*****check box code *****/
+.check1 {
     margin-left: 50%;
-    }
-  
-  
-  
-  /* END OF CSS FOR TERMS AND CONDITIONS PAGE */
-  
-  
+}
+
+
+
+/* END OF CSS FOR TERMS AND CONDITIONS PAGE */
 
 
 
@@ -1141,23 +1203,26 @@ font-size: 1.6rem;
 
 
 
-  
-  
-  
-  
-  /* CSS FOR APPLICATION MANAGEMENT PAGE */
-  
-.reports{
+
+
+
+
+
+
+/* CSS FOR APPLICATION MANAGEMENT PAGE */
+
+.reports {
     padding: 30px 100px;
-}  
-.reports .table-container{
+}
+
+.reports .table-container {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
     width: 100%;
 }
 
-.reports .table-container .reports-table{
+.reports .table-container .reports-table {
     border-collapse: collapse;
     margin: 25px 0;
     width: 100%;
@@ -1166,7 +1231,7 @@ font-size: 1.6rem;
     box-shadow: 0 0 20px rgba(2, 2, 2, 0.1);
 }
 
-.reports .table-container .reports-table .table-head tr{
+.reports .table-container .reports-table .table-head tr {
     background-color: #0275b1;
     color: #fff;
     text-align: left;
@@ -1177,11 +1242,11 @@ font-size: 1.6rem;
     border-bottom: 1px solid #a19f9f;
 }
 
-.reports-table tbody tr:last-of-type{
+.reports-table tbody tr:last-of-type {
     border-bottom: 2px solid #0275b1;
 }
 
-.reports-table tbody tr i:hover{
+.reports-table tbody tr i:hover {
     font-size: 1.3rem;
     color: #0275b1;
 }
@@ -1189,17 +1254,18 @@ font-size: 1.6rem;
 
 /*Ban Table*/
 
-.ban-users{
+.ban-users {
     padding: 30px 100px;
-}  
-.ban-users .table-container{
+}
+
+.ban-users .table-container {
     background-color: #fff;
     padding: 10px;
     border-radius: 3px;
     width: 100%;
 }
 
-.ban-users .table-container .ban-table{
+.ban-users .table-container .ban-table {
     border-collapse: collapse;
     margin: 25px 0;
     width: 100%;
@@ -1208,7 +1274,7 @@ font-size: 1.6rem;
     box-shadow: 0 0 20px rgba(2, 2, 2, 0.1);
 }
 
-.ban-users .table-container .ban-table .table-head tr{
+.ban-users .table-container .ban-table .table-head tr {
     background-color: #0275b1;
     color: #fff;
     text-align: left;
@@ -1219,48 +1285,90 @@ font-size: 1.6rem;
     border-bottom: 1px solid #a19f9f;
 }
 
-.ban-table tbody tr:last-of-type{
+.ban-table tbody tr:last-of-type {
     border-bottom: 2px solid #0275b1;
 }
 
-.ban-table tbody tr i:hover{
+.ban-table tbody tr i:hover {
     font-size: 1.3rem;
     color: #0275b1;
 }
 
 /*END OF CSS FOR APPLICATION MANAGEMENT PAGE*/
 
-  
-  
-  
-  
-.change-password-form{
-    margin-top: 5rem;
-    position: relative;
-        background-color: #fff;
-        padding: 30px 50px;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
-        border-style: hidden;
+
+
+/* CSS FOR CONTACT PAGE */
+
+.contact {
+    width: 100%;
+    padding: 30px 130px;
+    margin-bottom: 100px;
+    margin-top: 50px;
 }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 3px;
+
+    box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+}
+
+.contact .input {
+    display: flex;
+}
+
+.contact input {
+    padding: 4px;
+    margin: 3px;
+    border-radius: 3px;
+    box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+}
+
+.contact .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact textarea {
+    margin: 3px;
+    padding: 4px;
+    border-radius: 3px;
+    box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+}
+
+.contact .button {
+    margin-top: 10px;
+    width: 50%;
+    padding: 15px 0;
+}
+
+/*CSS FOR CONTACT PAGE*/
 
 
 
 
 
-  /*footer section*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*footer section*/
 
 footer {
     display: flex;
@@ -1272,87 +1380,83 @@ footer {
     padding-bottom: 30px;
 }
 
-footer .info{
+footer .info {
     display: flex;
     justify-content: space-between;
 }
 
-footer .copyright{
+footer .copyright {
     font-weight: lighter;
     margin-top: 45px;
 }
 
-footer p{
+footer p {
     font-size: 1.3rem;
     font-weight: 300;
 }
-footer h2{
+
+footer h2 {
     font-weight: 500;
 }
 
-.footer-email form{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-}
-
-.footer-email .contact{
-    display: flex;
-}
-
-.footer-email input{
-    padding: 4px;
-    margin: 3px;
-    border-radius: 3px;
-}
-
-.footer-email .content{
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-email textarea{
-    margin: 3px;
-    padding: 4px;
-    border-radius: 3px;
-}
-
-.footer-email .button{
-    margin-top: 10px;
-    width: 50%;
-    padding: 15px 0;
-}
-  /*end of css for footer section*/
+/*end of css for footer section*/
 
 /** media queries **/
-@media (max-width:768px){
 
-    #menu-btn{
+/* media queries  */
+@media (max-width:991px) {
+
+    html {
+        font-size: 55%;
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+    }
+
+}
+
+
+@media (max-width:768px) {
+
+    #menu-btn {
         display: inline-block;
     }
 
-    .navbar{
+    .navbar {
+        display: flex;
+        flex-direction: column;
         position: fixed;
-        top: 70px;
-        gap: 0; 
+        top: 60px;
+        gap: 0;
         right: -100%;
         background: #fff;
         width: 100%;
         text-align: center;
         transition: 0.2s;
-        
-  box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+
+        box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
     }
 
-.navbar.responsive{
-        right:0;
+    .navbar.responsive {
+        right: 0;
     }
 
-    .navbar a{
-        color:var(--black);
+    .navbar a {
+        color: var(--black);
         display: block;
-        margin:1.5rem;
-        padding:.5rem;
+        margin: 1.5rem;
+        padding: .5rem;
         font-size: 2rem;
     }
+}
+
+.change-password-form{
+    position: relative;
+        background-color: #fff;
+        padding: 30px 50px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
+        border-style: hidden;
+        margin-top: 4rem;
 }
