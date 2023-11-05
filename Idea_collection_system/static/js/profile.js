@@ -98,8 +98,8 @@ const setDetails = () => {
 	document.getElementById("fullname").innerText =
 		userData?.firstname + " " + userData?.lastname;
 	document.getElementById("role").innerText = role;
-	document.getElementById("last_log_in").innerText =
-		"Last Login: " + userData?.last_log_in;
+	document.getElementById("last_log_in").innerText = userData?.last_log_in == null ? "" :
+		"Last Login: " + new Date(userData?.last_log_in);
 	document.getElementById("staff_type").innerText = staff_type;
 };
 
