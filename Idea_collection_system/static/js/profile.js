@@ -11,10 +11,10 @@ const confirmJwt = () => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(post_body),
-    }).then(async (res) => {
-        
-            const response = await res.json();
-        
+	})
+		.then(async (res) => {
+			const response = await res.json();
+
 			if (response?.auth == false) {
 				fetch("/api/users/refresh", {
 					method: "POST",
@@ -24,22 +24,25 @@ const confirmJwt = () => {
 					},
 					body: JSON.stringify({ refreshToken, username }),
 				})
-                .then(async (res) => {
-                    const response = await res.json();
+					.then(async (res) => {
+						const response = await res.json();
 
-                    if (response?.status == true) {
-                        localStorage.setItem("jwtToken", response?.jwt);
-
-                    } else {
-                        alert('Your Session has expired and you will need to log in again')
-                        window.location.href = "/login.html"
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            }
-        
+						if (response?.status == true) {
+							localStorage.setItem("jwtToken", response?.jwt);
+						} else {
+							Swal.fire({
+								title: "Error!",
+								text: "Your Session has expired and you will need to log in again",
+								icon: "error",
+								confirmButtonText: "Cool",
+							});
+							window.location.href = "/login.html";
+						}
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+			}
 		})
 		.catch((err) => {
 			console.error(err);
@@ -63,13 +66,23 @@ const getUserData = () => {
 			.then(async (res) => {
 				const data = await res.json();
 				if (data?.status == "FAILURE") {
-					alert(data?.message);
+					Swal.fire({
+						title: "Info",
+						text: data?.message,
+						icon: "info",
+						confirmButtonText: "Cool",
+					});
 				} else {
 					localStorage.setItem("userData", JSON.stringify(data?.data));
 				}
 			})
 			.catch((err) => {
-				alert("Unknown error occured");
+				Swal.fire({
+					title: "Error!",
+					text: "Unknown error occured",
+					icon: "error",
+					confirmButtonText: "Cool",
+				});
 				console.error(err);
 			});
 	}
@@ -98,10 +111,11 @@ const setDetails = () => {
 	document.getElementById("fullname").innerText =
 		userData?.firstname + " " + userData?.lastname;
 	document.getElementById("role").innerText = role;
-	document.getElementById("last_log_in").innerText = userData?.last_log_in == null ? "" :
-		"Last Login: " + new Date(userData?.last_log_in);
+	document.getElementById("last_log_in").innerText =
+		userData?.last_log_in == null
+			? ""
+			: "Last Login: " + new Date(userData?.last_log_in);
 	document.getElementById("staff_type").innerText = staff_type;
-
 };
 
 const changePassword = () => {
@@ -109,7 +123,12 @@ const changePassword = () => {
 	const confirmnewPassword = document.getElementById("confirm-newpass").value;
 
 	if (newPassword !== confirmnewPassword) {
-		alert("Passwords dont match!");
+		Swal.fire({
+			title: "Error!",
+			text: "Passwords dont match!",
+			icon: "error",
+			confirmButtonText: "Cool",
+		});
 	} else {
 		fetch("/api/users/changepassword", {
 			method: "PATCH",
@@ -121,11 +140,21 @@ const changePassword = () => {
 		})
 			.then(async (res) => {
 				const response = await res.json();
-				alert(response?.message);
+				Swal.fire({
+					title: "Info",
+					text: response?.message,
+					icon: "info",
+					confirmButtonText: "Cool",
+				});
 			})
 			.catch((err) => {
 				console.error(err);
-				alert("Unknown error occured");
+				Swal.fire({
+					title: "Error!",
+					text: "Unknown error occured",
+					icon: "error",
+					confirmButtonText: "Cool",
+				});
 			});
 	}
 };
@@ -133,33 +162,41 @@ const changePassword = () => {
 const editProfile = async () => {
 	const firstname = document.getElementById("fname-edit").value;
 	const lastname = document.getElementById("lname-edit").value;
-    const email = document.getElementById("email-edit").value;
+	const email = document.getElementById("email-edit").value;
 
-	
-    fetch("/api/users/updatedetails", {
-			method: "PATCH",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, firstname, lastname, jwt_key, username }),
-		})
-			.then(async (res) => {
-				const response = await res.json();
-				alert(response?.message);
-			})
-			.catch((err) => {
-				console.error(err);
-				alert("Unknown error occured");
+	fetch("/api/users/updatedetails", {
+		method: "PATCH",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ email, firstname, lastname, jwt_key, username }),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			Swal.fire({
+				title: "Info",
+				text: response?.message,
+				icon: "info",
+				confirmButtonText: "Cool",
 			});
-	
+		})
+		.catch((err) => {
+			console.error(err);
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Cool",
+			});
+		});
 };
 
 document.getElementById("change-pass-btn").addEventListener("click", () => {
 	changePassword();
 });
 
-document.getElementById("edit-save-btn").addEventListener('click', async () => {
+document.getElementById("edit-save-btn").addEventListener("click", async () => {
 	await editProfile();
 });
 

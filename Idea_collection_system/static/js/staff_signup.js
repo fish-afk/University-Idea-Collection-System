@@ -11,7 +11,12 @@ staff_signup_btn.addEventListener("click", () => {
 	let staff_type_id = document.getElementById("staff_type_select").value;
 
 	if (password != confirm_password) {
-		alert("Passwords dont match");
+		Swal.fire({
+			title: "Error!",
+			text: "Passwords dont match!",
+			icon: "error",
+			confirmButtonText: "Cool",
+		});
 	} else {
 		let post_body = {
 			username,
@@ -35,7 +40,12 @@ staff_signup_btn.addEventListener("click", () => {
 		})
 			.then(async (res) => {
 				const data = await res.json();
-				alert(data?.message);
+				Swal.fire({
+					title: "Info",
+					text: data?.message,
+					icon: "info",
+					confirmButtonText: "Cool",
+				});
 
 				if (data?.status == "SUCCESS") {
 					window.location.href = "/login.html";
@@ -43,7 +53,12 @@ staff_signup_btn.addEventListener("click", () => {
 			})
 			.catch((err) => {
 				console.log(err);
-				alert("unknown error occured!");
+				Swal.fire({
+					title: "Error!",
+					text: "unknown error occured!",
+					icon: "error",
+					confirmButtonText: "Cool",
+				});
 			})
 			.finally(() => {
 				// window.location.reload()

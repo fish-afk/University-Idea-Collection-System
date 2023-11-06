@@ -30,9 +30,12 @@ const confirmJwt = () => {
 						if (response?.status == true) {
 							localStorage.setItem("jwtToken", response?.jwt);
 						} else {
-							alert(
-								"Your Session has expired and you will need to log in again",
-							);
+							Swal.fire({
+								title: "Error!",
+								text: "Your Session has expired and you will need to log in again",
+								icon: "error",
+								confirmButtonText: "Cool",
+							});
 							window.location.href = "/login.html";
 						}
 					})
@@ -52,7 +55,14 @@ const submitIdea = () => {
 	const post_is_anonymous = document.getElementById("anonymous").value;
 	const category_id = document.getElementById("categories").value;
 
-	let post_body = { idea_title, idea_body, post_is_anonymous, category_id, username, jwt_key };
+	let post_body = {
+		idea_title,
+		idea_body,
+		post_is_anonymous,
+		category_id,
+		username,
+		jwt_key,
+	};
 
 	fetch("/api/ideas/newidea", {
 		method: "POST",
@@ -64,15 +74,25 @@ const submitIdea = () => {
 	})
 		.then(async (res) => {
 			const response = await res.json();
-			alert(response?.message);
+			Swal.fire({
+				title: "Info",
+				text: response?.message,
+				icon: "info",
+				confirmButtonText: "Cool",
+			});
 		})
 		.catch((err) => {
-			alert("Unknown error occured");
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Cool",
+			});
 			console.error(err);
 		});
 };
 
-document.getElementById('submit-idea-btn').addEventListener('click', () => {
-    confirmJwt();
-    submitIdea();
-})
+document.getElementById("submit-idea-btn").addEventListener("click", () => {
+	confirmJwt();
+	submitIdea();
+});

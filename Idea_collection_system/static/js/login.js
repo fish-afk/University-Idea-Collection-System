@@ -17,7 +17,12 @@ login_btn.addEventListener("click", () => {
 		.then(async (res) => {
 			const data = await res.json();
 			if (data?.status == "FAILURE") {
-				alert(data?.message);
+				Swal.fire({
+					title: "Error!",
+					text: data?.message,
+					icon: "error",
+					confirmButtonText: "Cool",
+				});
 			} else {
 				localStorage.setItem("jwtToken", data?.jwtToken);
 				localStorage.setItem("refreshToken", data?.refreshToken);
@@ -28,7 +33,12 @@ login_btn.addEventListener("click", () => {
 			console.log(data);
 		})
 		.catch((err) => {
-			alert("Unknown error occured");
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Cool",
+			});
 			console.error(err);
 		});
 });

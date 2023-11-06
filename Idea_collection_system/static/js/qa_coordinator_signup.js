@@ -12,9 +12,13 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 	let department_id = document.getElementById("department_select").value;
 	let high_priv_key = document.getElementById("high_priv_key").value;
 
-
 	if (password != confirm_password) {
-		alert("Passwords dont match");
+		Swal.fire({
+			title: "Error!",
+			text: "Passwords dont match!",
+			icon: "error",
+			confirmButtonText: "Cool",
+		});
 	} else {
 		let post_body = {
 			username,
@@ -24,7 +28,7 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 			password,
 			department_id,
 			high_priv_key,
-			role_id: 2
+			role_id: 2,
 		};
 
 		console.log(post_body);
@@ -39,7 +43,12 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 		})
 			.then(async (res) => {
 				const data = await res.json();
-				alert(data?.message);
+				Swal.fire({
+					title: "Info",
+					text: response?.message,
+					icon: "info",
+					confirmButtonText: "Cool",
+				});
 
 				if (data?.status == "SUCCESS") {
 					window.location.href = "/login.html";
@@ -47,7 +56,12 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 			})
 			.catch((err) => {
 				console.log(err);
-				alert("unknown error occured!");
+				Swal.fire({
+					title: "Error!",
+					text: "unknown error occured!",
+					icon: "error",
+					confirmButtonText: "Cool",
+				});
 			})
 			.finally(() => {
 				// window.location.reload()
