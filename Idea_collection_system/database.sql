@@ -168,7 +168,7 @@ CONSTRAINT `FK_12_1` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`userna
 );
 
 
--- important inserts
+-- important inserts ------------------------------------------------------------------------------
 
 -- staff types
 
@@ -188,3 +188,9 @@ INSERT INTO user_roles (role_name) VALUES ("staff");
 INSERT INTO user_roles (role_name) VALUES ("qa_coordinator");
 INSERT INTO user_roles (role_name) VALUES ("qa_manager");
 INSERT INTO user_roles (role_name) VALUES ("admin");
+
+-- idea categories
+
+INSERT INTO idea_categories (name, description) VALUES ("Institutional", "Institutional ideas");
+INSERT INTO idea_categories (name, description) VALUES ("Departmental", "Departmental ideas");
+INSERT INTO idea_categories (name, description) VALUES ("Personal", "Personal ideas");
