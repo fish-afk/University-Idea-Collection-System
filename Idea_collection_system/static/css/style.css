@@ -349,20 +349,31 @@ td {
 .submit textarea {
     margin-top: 15px;
     border: none;
-    width: 95%;
+    width: 97%;
     font-size: 15px;
     min-height: 575px;
     padding: 10px 20px;
     max-height: 400px;
     resize: vertical;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .submit .content {
-    display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.submit .content input {
+    margin-top: 15px;
+    border: none;
+    width: 97%;
+    font-size: 15px;
+    padding: 10px 20px;
+    max-height: 400px;
+    resize: vertical;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .submit .content i {
