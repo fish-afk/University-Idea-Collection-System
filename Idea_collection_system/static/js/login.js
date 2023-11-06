@@ -27,7 +27,7 @@ login_btn.addEventListener("click", () => {
 				localStorage.setItem("jwtToken", data?.jwtToken);
 				localStorage.setItem("refreshToken", data?.refreshToken);
 				localStorage.setItem("username", username);
-				//window.location.href = "/profile.html";
+				window.location.href = "/profile.html";
 			}
 
 			console.log(data);
