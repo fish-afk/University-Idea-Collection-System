@@ -363,7 +363,10 @@ const login = (req, res) => {
 				return res.send({ message: "Error getting user", auth: false });
 			}
 			if (!user) {
-				return res.send({ auth: false, message: "Incorrect credentials!" });
+				return res.send({
+					status: "FAILURE",
+					message: "Incorrect credentials!",
+				});
 			}
 			if (user) {
 				bcrypt.compare(password, user.password, async (error, result) => {
@@ -412,7 +415,7 @@ const login = (req, res) => {
 						}
 					} else {
 						return res.send({
-							auth: false,
+							status: "FAILURE",
 							message: "Incorrect credentials!",
 						});
 					}

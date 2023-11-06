@@ -34,7 +34,7 @@ const confirmJwt = () => {
 								title: "Error!",
 								text: "Your Session has expired and you will need to log in again",
 								icon: "error",
-								confirmButtonText: "Cool",
+								confirmButtonText: "Ok",
 							});
 							window.location.href = "/login.html";
 						}
@@ -70,7 +70,7 @@ const getUserData = () => {
 						title: "Info",
 						text: data?.message,
 						icon: "info",
-						confirmButtonText: "Cool",
+						confirmButtonText: "Ok",
 					});
 				} else {
 					localStorage.setItem("userData", JSON.stringify(data?.data));
@@ -81,7 +81,7 @@ const getUserData = () => {
 					title: "Error!",
 					text: "Unknown error occured",
 					icon: "error",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 				console.error(err);
 			});
@@ -127,7 +127,7 @@ const changePassword = () => {
 			title: "Error!",
 			text: "Passwords dont match!",
 			icon: "error",
-			confirmButtonText: "Cool",
+			confirmButtonText: "Ok",
 		});
 	} else {
 		fetch("/api/users/changepassword", {
@@ -144,7 +144,7 @@ const changePassword = () => {
 					title: "Info",
 					text: response?.message,
 					icon: "info",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 			})
 			.catch((err) => {
@@ -153,7 +153,7 @@ const changePassword = () => {
 					title: "Error!",
 					text: "Unknown error occured",
 					icon: "error",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 			});
 	}
@@ -178,7 +178,7 @@ const editProfile = async () => {
 				title: "Info",
 				text: response?.message,
 				icon: "info",
-				confirmButtonText: "Cool",
+				confirmButtonText: "Ok",
 			});
 		})
 		.catch((err) => {
@@ -187,7 +187,7 @@ const editProfile = async () => {
 				title: "Error!",
 				text: "Unknown error occured",
 				icon: "error",
-				confirmButtonText: "Cool",
+				confirmButtonText: "Ok",
 			});
 		});
 };

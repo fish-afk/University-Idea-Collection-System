@@ -21,13 +21,13 @@ login_btn.addEventListener("click", () => {
 					title: "Error!",
 					text: data?.message,
 					icon: "error",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 			} else {
 				localStorage.setItem("jwtToken", data?.jwtToken);
 				localStorage.setItem("refreshToken", data?.refreshToken);
 				localStorage.setItem("username", username);
-				window.location.href = "/profile.html";
+				//window.location.href = "/profile.html";
 			}
 
 			console.log(data);
@@ -37,7 +37,7 @@ login_btn.addEventListener("click", () => {
 				title: "Error!",
 				text: "Unknown error occured",
 				icon: "error",
-				confirmButtonText: "Cool",
+				confirmButtonText: "Ok",
 			});
 			console.error(err);
 		});

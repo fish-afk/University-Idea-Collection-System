@@ -34,7 +34,7 @@ const confirmJwt = () => {
 								title: "Error!",
 								text: "Your Session has expired and you will need to log in again",
 								icon: "error",
-								confirmButtonText: "Cool",
+								confirmButtonText: "Ok",
 							});
 							window.location.href = "/login.html";
 						}
@@ -78,7 +78,7 @@ const submitIdea = () => {
 				title: "Info",
 				text: response?.message,
 				icon: "info",
-				confirmButtonText: "Cool",
+				confirmButtonText: "Ok",
 			});
 		})
 		.catch((err) => {
@@ -86,7 +86,7 @@ const submitIdea = () => {
 				title: "Error!",
 				text: "Unknown error occured",
 				icon: "error",
-				confirmButtonText: "Cool",
+				confirmButtonText: "Ok",
 			});
 			console.error(err);
 		});

@@ -14,7 +14,7 @@ qa_manager_signup_btn.addEventListener("click", () => {
 			title: "Error!",
 			text: "Passwords dont match!",
 			icon: "error",
-			confirmButtonText: "Cool",
+			confirmButtonText: "Ok",
 		});
 	} else {
 		let post_body = {
@@ -43,7 +43,7 @@ qa_manager_signup_btn.addEventListener("click", () => {
 					title: "Info",
 					text: data?.message,
 					icon: "info",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 
 				if (data?.status == "SUCCESS") {
@@ -56,7 +56,7 @@ qa_manager_signup_btn.addEventListener("click", () => {
 					title: "Error!",
 					text: "unknown error occured!",
 					icon: "error",
-					confirmButtonText: "Cool",
+					confirmButtonText: "Ok",
 				});
 			})
 			.finally(() => {
