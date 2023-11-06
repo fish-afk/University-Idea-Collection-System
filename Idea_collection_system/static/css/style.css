@@ -351,7 +351,7 @@ td {
     border: none;
     width: 97%;
     font-size: 15px;
-    min-height: 575px;
+    min-height: 200px;
     padding: 10px 20px;
     max-height: 400px;
     resize: vertical;

@@ -2,6 +2,20 @@ let jwt_key = localStorage.getItem("jwtToken");
 let refreshToken = localStorage.getItem("refreshToken");
 let username = localStorage.getItem("username");
 
+//Hamburger menu on mobile devices
+
+//enable submit idea button when user agrees to terms and conditions
+function enable() {
+	var check = document.getElementById("check");
+	var submit = document.getElementById("submit-idea-btn");
+
+	if (check.checked) {
+		submit.removeAttribute("disabled");
+	} else {
+		submit.setAttribute("disabled", "true");
+	}
+}
+
 const confirmJwt = () => {
 	let post_body = { username, jwt_key };
 	fetch("/api/users/confirmjwt", {

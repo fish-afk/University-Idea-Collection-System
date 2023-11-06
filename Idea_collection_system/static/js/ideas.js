@@ -1,26 +1,3 @@
-//Hamburger menu on mobile devices
-
-function myFunction() {
-	var x = document.getElementById("nav");
-	if (x.className === "navbar") {
-		x.className += " responsive";
-	} else {
-		x.className = "navbar";
-	}
-}
-
-//enable submit idea button when user agrees to terms and conditions
-function enable() {
-	var check = document.getElementById("check");
-	var submit = document.getElementById("submit-idea-btn");
-
-	if (check.checked) {
-		submit.removeAttribute("disabled");
-	} else {
-		submit.setAttribute("disabled", "true");
-	}
-}
-
 //like animations
 function like() {
 	const like = document.querySelectorAll(".like");
