@@ -12,6 +12,7 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 	let department_id = document.getElementById("department_select").value;
 	let high_priv_key = document.getElementById("high_priv_key").value;
 
+
 	if (password != confirm_password) {
 		alert("Passwords dont match");
 	} else {
@@ -23,6 +24,7 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 			password,
 			department_id,
 			high_priv_key,
+			role_id: 2
 		};
 
 		console.log(post_body);

@@ -101,6 +101,7 @@ const setDetails = () => {
 	document.getElementById("last_log_in").innerText = userData?.last_log_in == null ? "" :
 		"Last Login: " + new Date(userData?.last_log_in);
 	document.getElementById("staff_type").innerText = staff_type;
+
 };
 
 const changePassword = () => {

@@ -12,7 +12,7 @@ function myFunction() {
 //enable submit idea button when user agrees to terms and conditions
 function enable() {
 	var check = document.getElementById("check");
-	var submit = document.getElementById("submit");
+	var submit = document.getElementById("submit-idea-btn");
 
 	if (check.checked) {
 		submit.removeAttribute("disabled");

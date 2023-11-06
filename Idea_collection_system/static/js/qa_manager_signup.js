@@ -19,6 +19,7 @@ qa_manager_signup_btn.addEventListener("click", () => {
 			email,
 			password,
 			high_priv_key,
+			role_id: 3
 		};
 
 		console.log(post_body);

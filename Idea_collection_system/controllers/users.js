@@ -259,7 +259,7 @@ const signup = (req, res) => {
 
 			if (!user) {
 				if ((role_id == 2) && department_id) {
-					const query = `SELECT * FROM users WHERE department_id = ?`;
+					const query = `SELECT * FROM users WHERE department_id = ? AND role_id = 2`;
 					Mysql.connection.query(query, [department_id], (err, results) => {
 						if (err) {
 							console.log(err);

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- js file link  -->
-    <script src="../js/script.js"></script>
+    
 
 </head>
 
@@ -91,7 +91,7 @@
 
     <!-------------submit section--------------------->
 
-    <section class="submit">
+    <form class="submit">
         <h1>Submit a new Idea</h1>
         <div class="container">
             <div class="info">
@@ -100,22 +100,33 @@
                     <label for="tag"><b>Category: </b></label>
                     <br>
 
-                    <select id="tags">
+                    <select id="categories">
                         <option value="1" label="Institutional">
                         <option value="2" label="Departmental">
                         <option value="3" label="Personal">
+                            
                     </select>
                     <br>
                 </div>
-
+                <div class="tag">
+                    <label for="tag"><b>Anonymous Post: </b></label>
+                    <br>
+                
+                    <select id="anonymous">
+                        <option value="1" label="Yes">
+                        <option value="0" label="No">
+                       
+                    </select>
+                    <br>
+                </div>
 
 
             </div>
             <div class="line"></div>
 
             <div class="content">
-                <input name="" id="" placeholder="idea title"></input>
-                <textarea name="" id="" placeholder="idea content" cols="30" rows="5"></textarea>
+                <input id="idea-title" placeholder="idea title" required></input>
+                <textarea id="idea-content" placeholder="idea content" required cols="30" rows="5"></textarea>
 
             </div>
             <div class="agree">
@@ -126,11 +137,11 @@
 
             </div>
 
-            <button disabled class="button" id="submit">
+            <button disabled class="button" id="submit-idea-btn" type="button">
                 <i class="fas fa-edit"></i> Submit
             </button>
         </div>
-    </section>
+    </form>
     <!-------------submit section end--------------------->
 
 
@@ -151,8 +162,9 @@
 
     </footer>
 
-
-    <script src="../js/navbar.js"></script>
+    <script src="./js/submit_idea.js"></script>
+    <script src="./js/navbar.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

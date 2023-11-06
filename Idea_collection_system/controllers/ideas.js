@@ -6,6 +6,7 @@ const {
 	hasClosurePassed,
 	setEnvValue,
 } = require("../common/common_utils");
+const moment = require('moment')
 
 require("dotenv").config();
 
@@ -19,6 +20,12 @@ const transport = nodemailer.createTransport({
 	},
 });
 
+
+function formatDate(date) {
+	return moment(date).format("YYYY-MM-DD HH:mm:ss");
+}
+
+
 // Create an idea
 const newIdeaPost = async (req, res) => {
 	const todaysDate = getCurrentDate();
@@ -26,6 +33,7 @@ const newIdeaPost = async (req, res) => {
 		todaysDate,
 		process.env.CLOSURE_DATE,
 	);
+	const username = req.decoded['username']
 
 	if (hasClosurePassed_ == true) {
 		return res.send({
@@ -38,14 +46,13 @@ const newIdeaPost = async (req, res) => {
 	const {
 		idea_title,
 		idea_body,
-		date_and_time_posted_on,
+		date_and_time_posted_on = formatDate(Date.now()),
 		category_id,
-		post_is_anonymous,
-		username,
+		post_is_anonymous
 	} = req.body;
 
 	const query =
-		"INSERT INTO ideas (idea_title, idea_body, date_and_time_posted_on, category_id, post_is_anonymous, username) VALUES (?, ?, ?, ?, ?)";
+		"INSERT INTO ideas (idea_title, idea_body, date_and_time_posted_on, category_id, post_is_anonymous, username) VALUES (?, ?, ?, ?, ?, ?)";
 	Mysql.connection.query(
 		query,
 		[
