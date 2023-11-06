@@ -11,9 +11,10 @@
 
 
     <!--========== Fontawesome cdn ==========-->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 
     <!-- js file link  -->
@@ -95,14 +96,14 @@
         <form class="contact-form" class="contact" action="" method="post ">
             <div class="content">
                 <div class="input">
-                    <input class="text-box" name="name" type="name" id="name" placeholder="Name" required><br>
-                    <input class="text-box" name="email" type="email" id="email" placeholder="Email Address"
+                    <input class="text-box" name="name" type="name" id="contact-name" placeholder="Name" required><br>
+                    <input class="text-box" name="email" type="email" id="contact-email" placeholder="Email Address"
                         required><br>
 
                 </div>
 
-                <textarea name="message" type="message" id="message" rows="5" placeholder="Message" required></textarea>
-                <button type="submit" class="button send-btn">Send</button>
+                <textarea name="message" type="message" id="contact-message" rows="5" placeholder="Message" required></textarea>
+                <button type="button" id='send-email-btn' class="button send-btn">Send</button>
             </div>
             <br>
         </form>
@@ -125,7 +126,8 @@
         <p class="copyright">&#169 2023 All Rights Reseved</p>
 
     </footer>
-    <script src="./js/navbar.js"></script>
+    <script defer src="./js/contact.js"></script>
+    <script defer src="./js/navbar.js"></script>
 
 </body>
 

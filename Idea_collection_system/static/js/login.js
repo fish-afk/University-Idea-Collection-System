@@ -1,12 +1,12 @@
 const login_btn = document.getElementById("login_btn");
 
-login_btn.addEventListener("click", () => {
+login_btn.addEventListener("click", async () => {
 	let username = document.getElementById("username").value;
 	let password = document.getElementById("password").value;
 	const appkey = "Idea_Collection_System_APPKEY123"; // could be hidden in a better way
 
 	let post_body = { username, password, appkey };
-	fetch("/api/users/login", {
+	await fetch("/api/users/login", {
 		method: "POST",
 		body: JSON.stringify(post_body),
 		headers: {

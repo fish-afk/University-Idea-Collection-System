@@ -12,7 +12,6 @@ const setNavbarUsername = () => {
 	let navusernamelist = document.getElementsByClassName("nav-username");
 
 	for (let i = 0; i < navusernamelist.length; i++) {
-		console.log(1);
 		navusernamelist[i].innerHTML = `<p>${userData?.username}</p>`;
 	}
 };

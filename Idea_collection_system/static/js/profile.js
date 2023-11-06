@@ -2,9 +2,10 @@ let jwt_key = localStorage.getItem("jwtToken");
 let refreshToken = localStorage.getItem("refreshToken");
 let username = localStorage.getItem("username");
 
-const confirmJwt = () => {
+const confirmJwt = async () => {
+	
 	let post_body = { username, jwt_key };
-	fetch("/api/users/confirmjwt", {
+	await fetch("/api/users/confirmjwt", {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -49,13 +50,13 @@ const confirmJwt = () => {
 		});
 };
 
-const getUserData = () => {
+const getUserData = async () => {
 	let post_body = { jwt_key, username };
 
 	if (!jwt_key || !refreshToken || !username) {
 		window.location.href = "/login.html";
 	} else {
-		fetch("/api/users/getuserdata", {
+		await fetch("/api/users/getuserdata", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
@@ -109,12 +110,12 @@ const setDetails = () => {
 	}
 
 	document.getElementById("fullname").innerText =
-		userData?.firstname + " " + userData?.lastname;
+		userData.firstname + " " + userData.lastname;
 	document.getElementById("role").innerText = role;
 	document.getElementById("last_log_in").innerText =
-		userData?.last_log_in == null
+		userData.last_log_in == null
 			? ""
-			: "Last Login: " + new Date(userData?.last_log_in);
+			: "Last Login: " + new Date(userData.last_log_in);
 	document.getElementById("staff_type").innerText = staff_type;
 };
 
@@ -192,6 +193,14 @@ const editProfile = async () => {
 		});
 };
 
+const main = async () => {
+	confirmJwt()
+	await getUserData();
+	setDetails();
+};
+
+main()
+
 document.getElementById("change-pass-btn").addEventListener("click", () => {
 	changePassword();
 });
@@ -200,6 +209,3 @@ document.getElementById("edit-save-btn").addEventListener("click", async () => {
 	await editProfile();
 });
 
-confirmJwt();
-getUserData();
-setDetails();
