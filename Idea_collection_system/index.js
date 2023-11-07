@@ -25,6 +25,7 @@ const ideasRouter = require("./routers/ideas_router");
 const commentsRouter = require('./routers/comments_router');
 const categoriesRouter = require('./routers/categories_router')
 const departmentsRouter = require('./routers/departments_router')
+const reportsRouter = require('./routers/reported_posts_router')
 
 server.get('/', limiter, (req, res) => {
 	return res.redirect('/login.html')
@@ -36,6 +37,7 @@ server.use("/api/ideas", limiter, ideasRouter);
 server.use('/api/comments', limiter, commentsRouter)
 server.use("/api/categories", limiter, categoriesRouter);
 server.use("/api/departments", limiter, departmentsRouter);
+server.use('/api/reports', limiter, reportsRouter)
 
 server.get("/api/apiversion", limiter, (req, res) => {
 	return res.send({

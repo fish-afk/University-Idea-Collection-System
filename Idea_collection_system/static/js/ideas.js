@@ -128,6 +128,56 @@ const fetchAllIdeas = async () => {
 	return ideas;
 };
 
+const reportPost = (idea_id) => {
+	Swal.fire({
+		title: "Enter your report :",
+		input: "text",
+		inputAttributes: {
+			autocapitalize: "off",
+		},
+		showCancelButton: true,
+		confirmButtonText: "Submit",
+		showLoaderOnConfirm: true,
+		preConfirm: (value) => {
+			// You can access the entered value here
+			return value;
+		},
+		allowOutsideClick: () => !Swal.isLoading(),
+	}).then(async (result) => {
+		if (result.isConfirmed) {
+			// User has confirmed the input, now you can send it to the API
+			const inputValue = result.value;
+			let post_body = { jwt_key, username, report: inputValue, idea_id };
+			await fetch("/api/reports/newreport", {
+				method: "POST",
+				body: JSON.stringify(post_body),
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+				.then(async (res) => {
+					const response = await res.json();
+					Swal.fire({
+						title: "Info",
+						text: response?.message,
+						icon: "info",
+						confirmButtonText: "Ok",
+					});
+				})
+				.catch((err) => {
+					console.error(err);
+					Swal.fire({
+						title: "Error!",
+						text: "Unknown error occured",
+						icon: "error",
+						confirmButtonText: "Ok",
+					});
+				});
+		}
+	});
+};
+
 const populateDomWithIdeas = (ideas) => {
 	const idea_dom_part = document.getElementById("idea-list");
 	const pagination_part = document.getElementById("pagination");
@@ -154,8 +204,11 @@ const populateDomWithIdeas = (ideas) => {
 												}</p>
                     </div>
                     <div class="tag">
-                        <p>Category:</p>
+                        <h3>Category:</h3>
                         <p class="category">${ideas[i]?.category_name}</p>
+						<button class='report-btn' onClick={reportPost(${ideas[i]?.idea_id})} id="report-${
+							ideas[i]?.idea_id
+						}">Report Post</button>
                     </div>
                 </div>
 				<br>
@@ -195,7 +248,9 @@ const populateDomWithIdeas = (ideas) => {
                         </div>
                     </div>
                     <div class="report">
-                        Posted On: ${new Date(ideas[i]?.date_and_time_posted_on)}
+                        Posted On: ${new Date(
+													ideas[i]?.date_and_time_posted_on,
+												)}
                     </div>
                 </div>
                 `;

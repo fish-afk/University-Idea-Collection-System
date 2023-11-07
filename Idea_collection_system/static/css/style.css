@@ -488,8 +488,10 @@ td {
     margin-left: 5px;
     background-color: #0275b1;
     color: #fff;
-    border-radius: 50px;
-    padding: 5px;
+    border-radius: 5px;
+    padding: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 
@@ -678,7 +680,26 @@ td {
     cursor: pointer;
 }
 
+.report-btn{
+    margin-left: 4rem;
+        background-color: rgb(148, 85, 85);
+        color: white;
+        border-radius: 3px;
+        padding: 0.5rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        transition: all 300ms;
+}
 
+.report-btn:hover{
+    margin-left: 4rem;
+        background-color: red;
+        color: white;
+        border-radius: 3px;
+        padding: 0.5rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+}
 /*end of css for ideas section*/
 
 /*END OF CSS FOR IDEAS PAGE*/
