@@ -75,6 +75,37 @@ const confirmJwt = async () => {
 		});
 };
 
+const fetchAndPopulateCategoriesDom = async () => {
+	let categories_dom = document.getElementById("categories");
+
+	let post_body = { username, jwt_key };
+	await fetch("/api/categories/getallcategories", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+
+			let categories = response?.data;
+			for (let i = 0; i < categories?.length; i++) {
+				categories_dom.innerHTML +=
+					`<option value="${categories[i]?.category_id}" label="${categories[i]?.name}">`;
+			}
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+};
 const submitIdea = async () => {
 	const idea_title = document.getElementById("idea-title").value;
 	const idea_body = document.getElementById("idea-content").value;
@@ -118,7 +149,11 @@ const submitIdea = async () => {
 		});
 };
 
-document.getElementById("submit-idea-btn").addEventListener("click", async () => {
-	await confirmJwt();
-	await submitIdea();
-});
+fetchAndPopulateCategoriesDom()
+
+document
+	.getElementById("submit-idea-btn")
+	.addEventListener("click", async () => {
+		await confirmJwt();
+		await submitIdea();
+	});

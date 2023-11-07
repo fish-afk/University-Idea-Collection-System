@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post(
 	"/getalldepartments",
-	authMiddleware.verifyJWT,
 	departmentsController.getAllDepartments,
 );
 router.post(

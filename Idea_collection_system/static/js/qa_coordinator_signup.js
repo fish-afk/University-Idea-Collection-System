@@ -2,6 +2,39 @@ const qa_coordinator_signup_btn = document.getElementById(
 	"qa_coordinator_signup_btn",
 );
 
+const fetchAndPopulatedepartmentsDom = async () => {
+	let departments_dom = document.getElementById("department_select");
+
+	
+	await fetch("/api/departments/getalldepartments", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		
+	})
+		.then(async (res) => {
+			const response = await res.json();
+
+			let departments = response?.data;
+			for (let i = 0; i < departments?.length; i++) {
+				departments_dom.innerHTML += `<option value="${departments[i]?.department_id}" label="${departments[i]?.name}">`;
+			}
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+};
+
+fetchAndPopulatedepartmentsDom();
+
 qa_coordinator_signup_btn.addEventListener("click", () => {
 	let username = document.getElementById("username").value;
 	let firstname = document.getElementById("firstname").value;
@@ -68,3 +101,4 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 			});
 	}
 });
+
