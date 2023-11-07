@@ -16,9 +16,9 @@ function enable() {
 	}
 }
 
-const confirmJwt = () => {
+const confirmJwt = async () => {
 	let post_body = { username, jwt_key };
-	fetch("/api/users/confirmjwt", {
+	await fetch("/api/users/confirmjwt", {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -30,7 +30,7 @@ const confirmJwt = () => {
 			const response = await res.json();
 
 			if (response?.auth == false) {
-				fetch("/api/users/refresh", {
+				await fetch("/api/users/refresh", {
 					method: "POST",
 					headers: {
 						Accept: "application/json",
@@ -54,16 +54,28 @@ const confirmJwt = () => {
 						}
 					})
 					.catch((err) => {
+						Swal.fire({
+							title: "Error!",
+							text: "Unknown error occured whilst confirming jwt",
+							icon: "error",
+							confirmButtonText: "Ok",
+						});
 						console.error(err);
 					});
 			}
 		})
 		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst confirming jwt",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
 			console.error(err);
 		});
 };
 
-const submitIdea = () => {
+const submitIdea = async () => {
 	const idea_title = document.getElementById("idea-title").value;
 	const idea_body = document.getElementById("idea-content").value;
 	const post_is_anonymous = document.getElementById("anonymous").value;
@@ -78,7 +90,7 @@ const submitIdea = () => {
 		jwt_key,
 	};
 
-	fetch("/api/ideas/newidea", {
+	await fetch("/api/ideas/newidea", {
 		method: "POST",
 		headers: {
 			Accept: "application/json",
@@ -106,7 +118,7 @@ const submitIdea = () => {
 		});
 };
 
-document.getElementById("submit-idea-btn").addEventListener("click", () => {
-	confirmJwt();
-	submitIdea();
+document.getElementById("submit-idea-btn").addEventListener("click", async () => {
+	await confirmJwt();
+	await submitIdea();
 });

@@ -5,6 +5,7 @@ const {
 	hasClosurePassed,
 	setEnvValue,
 } = require("../common/common_utils");
+const moment = require('moment')
 
 require("dotenv").config();
 
@@ -17,6 +18,10 @@ const transport = nodemailer.createTransport({
 		pass: process.env.GMAIL_APP_PASSWORD,
 	},
 });
+
+function formatDate(date) {
+	return moment(date).format("YYYY-MM-DD HH:mm:ss");
+}
 
 // Create a comment
 const newCommentPost = (req, res) => {
@@ -34,12 +39,13 @@ const newCommentPost = (req, res) => {
 		});
 	}
 
+	const username = req.decoded['username']
+
 	const {
 		comment,
-		date_and_time_posted_on,
+		date_and_time_posted_on = formatDate(Date.now()),
 		post_is_anonymous,
 		idea_id,
-		username,
 	} = req.body;
 
 	const query =
@@ -93,7 +99,7 @@ const newCommentPost = (req, res) => {
 
 								return res.status(201).json({
 									status: "SUCCESS",
-									message: "Idea created successfully",
+									message: "Comment posted successfully",
 								});
 							}
 						});
@@ -129,7 +135,7 @@ function setClosureDateForComments(req, res) {
 
 // Read all comments for a specific idea
 const getCommentsByIdeaId = (req, res) => {
-	const idea_id = req.query.idea_id;
+	const idea_id = req.body['idea_id']
 	const query = "SELECT * FROM comments WHERE idea_id = ?";
 	Mysql.connection.query(query, [idea_id], (err, results) => {
 		if (err) {

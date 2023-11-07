@@ -17,7 +17,7 @@ const confirmJwt = async () => {
 			const response = await res.json();
 
 			if (response?.auth == false) {
-				fetch("/api/users/refresh", {
+				await fetch("/api/users/refresh", {
 					method: "POST",
 					headers: {
 						Accept: "application/json",
@@ -41,11 +41,23 @@ const confirmJwt = async () => {
 						}
 					})
 					.catch((err) => {
+						Swal.fire({
+							title: "Error!",
+							text: "Unknown error occured whilst confirming jwt",
+							icon: "error",
+							confirmButtonText: "Ok",
+						});
 						console.error(err);
 					});
 			}
 		})
 		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst confirming jwt",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
 			console.error(err);
 		});
 };
@@ -194,7 +206,7 @@ const editProfile = async () => {
 };
 
 const main = async () => {
-	confirmJwt()
+	await confirmJwt()
 	await getUserData();
 	setDetails();
 };

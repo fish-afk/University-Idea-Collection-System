@@ -562,7 +562,14 @@ td {
 }
 
 .comments {
-    margin-top: 10px;
+
+    margin: 10%;
+    margin-top: 2%;
+    background-color: white;
+    padding: 3rem;
+    border: 1px solid wheat;
+    border-radius: 10px;
+
 }
 
 .comment {
@@ -602,7 +609,7 @@ td {
 }
 
 .comments .add-comment {
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
@@ -610,8 +617,11 @@ td {
     padding: 5px;
 }
 
-.comments .add-comment input {
-    width: 90%;
+.comments .add-comment textarea {
+    width: 100%;
+    border: 2px solid wheat;
+    border-radius: 5px;
+    padding: 2rem;
 }
 
 .comments .add-comment i {
@@ -622,6 +632,27 @@ td {
 .comments .add-comment i:hover {
     color: #0275b1;
     font-size: 1.4rem;
+}
+
+.comments .anonymous-select {
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-top: 3rem;
+    display: flex;
+    width: 100%;
+}
+
+.comments .anonymous-select button{
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
+    background-color: #025785;
+    border-radius: 5px;
+    color: white;
+}
+#post-comment-btn{
+    margin-left: 70%;
 }
 
 .pagination {
@@ -1461,12 +1492,12 @@ footer h2 {
     }
 }
 
-.change-password-form{
+.change-password-form {
     position: relative;
-        background-color: #fff;
-        padding: 30px 50px;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
-        border-style: hidden;
-        margin-top: 4rem;
+    background-color: #fff;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgb(0 0 0 / 20%);
+    border-style: hidden;
+    margin-top: 4rem;
 }

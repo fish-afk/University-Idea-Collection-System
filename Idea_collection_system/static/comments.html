@@ -89,64 +89,61 @@
     </header>
 
 
-    <section class="ideas">
-        <div class="view-by" id="view-by">
-            <div class="dropdown">
-                <label for="filter"><b>View By: </b></label>
-                <br>
-                <input class="dropdown" placeholder="Select a tag" list="tags" name="fiter" id="browser" required>
-                <datalist id="tags">
-                    <option value="Most Popular">
-                    <option value="Most Viewed">
-                    <option value="Latest">
-                </datalist>
-                <br>
-            </div>
 
-        </div>
 
-        <div class="idea-list" id="idea-list">
+    <div class="comments" id="comments">
 
-                <div class="comments" id="comments">
+        <div id="comments-div">
+            <div class="horizontal-line"></div>
+            <h1>Comments</h1>
+            <br>
+            <div class="comment">
+                <div class="img">
+                    <img src="images/profile.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3 class="user-name">anonymous</h3>
 
-                    <div class="horizontal-line"></div>
-                    <h1>Comments</h1>
-                    <div class="comment">
-                        <div class="img">
-                            <img src="images/profile.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3 class="user-name">anonymous</h3>
+                    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                        assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                        provident, nostrum saepe ad quis, minus veniam.</p>
 
-                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
-                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
-                                provident, nostrum saepe ad quis, minus veniam.</p>
-
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="comment">
-                        <div class="img">
-                            <img src="images/profile.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3 class="user-name">John Doe</h3>
-
-                            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
-                                assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
-                                provident, nostrum saepe ad quis, minus veniam.</p>
-
-                        </div>
-                    </div>
-                    <div class="add-comment">
-                        <input type="text" placeholder="Leave a comment">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
                 </div>
             </div>
+            <div class="line"></div>
+            <div class="comment">
+                <div class="img">
+                    <img src="images/profile.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3 class="user-name">John Doe</h3>
 
+                    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, necessitatibus
+                        assumenda enim earum aut obcaecati iste dolores totam molestias sed hic ipsa commodi
+                        provident, nostrum saepe ad quis, minus veniam.</p>
 
-    </section>
+                </div>
+            </div>
+            <div class="line"></div>
+        </div>
+        <form class="add-comment">
+
+            <textarea cols="30" role="3" type="text" placeholder="Leave a comment" id="comment-post-body"
+                required></textarea>
+
+            <div class="anonymous-select">
+                <p>Anonymous-Post:</p>
+                <select name="anonymous" id="anonymous-comment">
+                    <option value="1" label="Yes">
+                    <option value="0" label="No">
+
+                </select>
+                <button type="button" id="post-comment-btn">Post comment</button>
+            </div>
+
+        </form>
+    </div>
+
 
 
     <footer>

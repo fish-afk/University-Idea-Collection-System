@@ -2,6 +2,65 @@ let jwt_key = localStorage.getItem("jwtToken");
 let refreshToken = localStorage.getItem("refreshToken");
 let username = localStorage.getItem("username");
 
+const confirmJwt = async () => {
+	let post_body = { username, jwt_key };
+	await fetch("/api/users/confirmjwt", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+
+			if (response?.auth == false) {
+				await fetch("/api/users/refresh", {
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ refreshToken, username }),
+				})
+					.then(async (res) => {
+						const response = await res.json();
+
+						if (response?.status == true) {
+							localStorage.setItem("jwtToken", response?.jwt);
+						} else {
+							Swal.fire({
+								title: "Error!",
+								text: "Your Session has expired and you will need to log in again",
+								icon: "error",
+								confirmButtonText: "Ok",
+							});
+							window.location.href = "/login.html";
+						}
+					})
+					.catch((err) => {
+						Swal.fire({
+							title: "Error!",
+							text: "Unknown error occured whilst confirming jwt",
+							icon: "error",
+							confirmButtonText: "Ok",
+						});
+						console.error(err);
+					});
+			}
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst confirming jwt",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+};
+
 //like animations
 function like() {
 	const like = document.querySelectorAll(".like");
@@ -88,7 +147,11 @@ const populateDomWithIdeas = (ideas) => {
                 <div class="info">
                     <div class="user">
                         <img src="images/profile.jpg" alt="">
-                        <p>${ideas[i]?.username}</p>
+                        <p>${
+													ideas[i]?.post_is_anoymous == 1
+														? "anonymous"
+														: ideas[i]?.username
+												}</p>
                     </div>
                     <div class="tag">
                         <p>Category:</p>
@@ -120,10 +183,12 @@ const populateDomWithIdeas = (ideas) => {
                             <p>0</p>
                         </div>
                         <div class="feedback comment-icon">
-                            <a href='/comments.html?idea_id=${ideas[i]?.idea_id}' target='_blank'>
+                            <a href='/comments.html?idea_id=${
+															ideas[i]?.idea_id
+														}' target='_blank'>
 								<i class="comment far fa-comment" id="commenticon"></i>
 							</a>
-                            <p>2</p>
+                            
                         </div>
                     </div>
                     <div class="report">
@@ -136,6 +201,7 @@ const populateDomWithIdeas = (ideas) => {
 };
 
 const main = async () => {
+	await confirmJwt();
 	let ideas = await fetchAllIdeas();
 	populateDomWithIdeas(ideas);
 };
