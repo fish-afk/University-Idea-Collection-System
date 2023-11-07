@@ -158,14 +158,17 @@ const populateDomWithIdeas = (ideas) => {
                         <p class="category">${ideas[i]?.category_name}</p>
                     </div>
                 </div>
+				<br>
                 <div class="content">
 					<h2>${ideas[i]?.idea_title}</h2>
 					<br>
                     <p>${ideas[i]?.idea_body}</p>
+					<br>
+					<br>
                     <div class="docs">
                         <div class="name">
                             <i class="fas fa-file"></i>
-                            <p>Document name-1</p>
+                            <p style="color:wheat;">Download Attached Documents</p>
                         </div>
                         <a href=""><i class="fas fa-cloud-download-alt"></i></a>
                     </div>
@@ -192,7 +195,7 @@ const populateDomWithIdeas = (ideas) => {
                         </div>
                     </div>
                     <div class="report">
-                        <i class="fas fa-ellipsis-h"></i>
+                        Posted On: ${new Date(ideas[i]?.date_and_time_posted_on)}
                     </div>
                 </div>
                 `;

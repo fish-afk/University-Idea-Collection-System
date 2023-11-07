@@ -650,6 +650,13 @@ td {
     background-color: #025785;
     border-radius: 5px;
     color: white;
+    transition: all 300ms;
+}
+
+.comments .anonymous-select button:hover {
+
+    background-color: #01131b;
+    color: #ffffff;
 }
 #post-comment-btn{
     margin-left: 70%;

@@ -114,7 +114,13 @@ const populateDomWithComments = (comments) => {
 																: comments[i]?.username
 														}</h3>
 
+                            
                             <p class="text">${comments[i]?.comment}</p>
+                           
+                            <br>
+                            <p class="text"><em>Posted On:${new Date(
+															comments[i]?.date_and_time_posted_on,
+														)}</em> </p>
 
                         </div>
                     </div><div class="line"></div>`;
