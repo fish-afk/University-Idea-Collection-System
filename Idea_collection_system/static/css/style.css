@@ -561,17 +561,16 @@ td {
     font-size: 1.4rem;
 }
 
-.idea .comments {
+.comments {
     margin-top: 10px;
-    display: none;
 }
 
-.idea .comment {
+.comment {
     display: flex;
     margin: 5px 0;
 }
 
-.idea .comments img {
+.comments img {
     height: 35px;
     width: 35px;
     object-fit: cover;
@@ -583,12 +582,12 @@ td {
     border-radius: 50%;
 }
 
-.idea .comments .comment .content {
+.comments .comment .content {
     padding: 0;
     margin-right: 15px;
 }
 
-.ideas .horizontal-line {
+.horizontal-line {
     border-top: 3px solid var(--border);
     width: 100%;
     margin-top: -1px;
@@ -596,13 +595,13 @@ td {
     opacity: 0.1;
 }
 
-.ideas .comments .line {
+.comments .line {
     border-top: 1px solid var(--border);
     width: 100%;
     margin-top: -1px;
 }
 
-.ideas .comments .add-comment {
+.comments .add-comment {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -611,16 +610,16 @@ td {
     padding: 5px;
 }
 
-.ideas .comments .add-comment input {
+.comments .add-comment input {
     width: 90%;
 }
 
-.ideas .comments .add-comment i {
+.comments .add-comment i {
     font-size: 1.3rem;
     padding-right: 10px;
 }
 
-.ideas .comments .add-comment i:hover {
+.comments .add-comment i:hover {
     color: #0275b1;
     font-size: 1.4rem;
 }

@@ -4,17 +4,21 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get(
+router.post(
 	"/getallcommentsforidea",
 	authMiddleware.verifyJWT,
 	commentsController.getCommentsByIdeaId,
 );
-router.get(
+router.post(
 	"/getcommentbyid",
 	authMiddleware.verifyJWT,
 	commentsController.getCommentById,
 );
-router.post("/newcomment", authMiddleware.verifyJWT, commentsController.newCommentPost);
+router.post(
+	"/newcomment",
+	authMiddleware.verifyJWT,
+	commentsController.newCommentPost,
+);
 router.post(
 	"/deletecomment",
 	authMiddleware.verifyJWT,
@@ -26,6 +30,10 @@ router.patch(
 	commentsController.updateCommentById,
 );
 
-router.patch('/setfinalclosuredate', authMiddleware.verifyJWT, commentsController.setClosureDateForComments);
+router.patch(
+	"/setfinalclosuredate",
+	authMiddleware.verifyJWT,
+	commentsController.setClosureDateForComments,
+);
 
 module.exports = router;

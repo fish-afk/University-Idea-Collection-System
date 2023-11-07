@@ -5,7 +5,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get(
+router.post(
 	"/getallideas",
 	authMiddleware.verifyJWT,
 	ideaController.getAllIdeas,
@@ -15,17 +15,17 @@ router.put(
 	multerMiddleware.upload.single("file"),
 	ideaController.uploadIdeaDocument,
 );
-router.get(
+router.post(
 	"/getideadocuments",
 	authMiddleware.verifyJWT,
 	ideaController.getIdeaDocuments,
 );
-router.get(
+router.post(
 	"/getdocumentfile",
 	authMiddleware.verifyJWT,
 	ideaController.getDocumentFile,
 );
-router.get(
+router.post(
 	"/getideabyid",
 	authMiddleware.verifyJWT,
 	ideaController.getIdeaById,

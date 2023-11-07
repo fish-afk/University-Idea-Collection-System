@@ -1,3 +1,7 @@
+let jwt_key = localStorage.getItem("jwtToken");
+let refreshToken = localStorage.getItem("refreshToken");
+let username = localStorage.getItem("username");
+
 //like animations
 function like() {
 	const like = document.querySelectorAll(".like");
@@ -35,21 +39,105 @@ function dislike() {
 	});
 }
 
-function comments() {
-	const icons = document.querySelectorAll(".comment-icon");
-	const commentSections = document.querySelectorAll(".comments");
+const fetchAllIdeas = async () => {
+	let post_body = { jwt_key, username };
 
-	icons.forEach((icon, index) => {
-		icon.addEventListener("click", () => {
-			// Toggle the visibility of the corresponding comment section
-			if (
-				commentSections[index].style.display === "none" ||
-				commentSections[index].style.display === ""
-			) {
-				commentSections[index].style.display = "block";
-			} else {
-				commentSections[index].style.display = "none";
-			}
+	let ideas;
+
+	await fetch("/api/ideas/getallideas", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			ideas = response?.data;
+		})
+		.catch((err) => {
+			console.error(err);
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst fetching ideas",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
 		});
-	});
-}
+
+	return ideas;
+};
+
+const populateDomWithIdeas = (ideas) => {
+	const idea_dom_part = document.getElementById("idea-list");
+	const pagination_part = document.getElementById("pagination");
+	const view_by = document.getElementById("view-by");
+
+	console.log(ideas);
+	if (ideas?.length < 1) {
+		idea_dom_part.innerHTML = `<div 
+				style="display:flex;background-color:white;width:100%;justify-content:center;height:50vh;align-items:center;">
+				<h1>No Ideas Posted Yet</h1></div>`;
+
+		pagination_part.style.display = "none";
+		view_by.style.display = "none";
+	} else {
+		for (let i = 0; i < ideas.length; i++) {
+			idea_dom_part.innerHTML += `<div class="idea one">
+                <div class="info">
+                    <div class="user">
+                        <img src="images/profile.jpg" alt="">
+                        <p>${ideas[i]?.username}</p>
+                    </div>
+                    <div class="tag">
+                        <p>Category:</p>
+                        <p class="category">${ideas[i]?.category_name}</p>
+                    </div>
+                </div>
+                <div class="content">
+					<h2>${ideas[i]?.idea_title}</h2>
+					<br>
+                    <p>${ideas[i]?.idea_body}</p>
+                    <div class="docs">
+                        <div class="name">
+                            <i class="fas fa-file"></i>
+                            <p>Document name-1</p>
+                        </div>
+                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="reactions">
+                    <div class="react">
+                        <div class="feedback likes">
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback dislikes">
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
+                            <p>0</p>
+                        </div>
+                        <div class="feedback comment-icon">
+                            <a href='/comments.html?idea_id=${ideas[i]?.idea_id}' target='_blank'>
+								<i class="comment far fa-comment" id="commenticon"></i>
+							</a>
+                            <p>2</p>
+                        </div>
+                    </div>
+                    <div class="report">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                `;
+		}
+	}
+};
+
+const main = async () => {
+	let ideas = await fetchAllIdeas();
+	populateDomWithIdeas(ideas);
+};
+
+main();

@@ -336,7 +336,20 @@ const dislikePost = (req, res) => {
 
 // Read all ideas
 const getAllIdeas = (req, res) => {
-	const query = "SELECT * FROM ideas";
+	const query = `SELECT
+    ideas.idea_id,
+    ideas.idea_title,
+    ideas.idea_body,
+    ideas.date_and_time_posted_on,
+    ideas.post_is_anonymous,
+    ideas.username AS idea_username,
+    users.username AS username,
+    idea_categories.name AS category_name
+FROM
+    ideas
+JOIN users ON ideas.username = users.username
+JOIN idea_categories ON ideas.category_id = idea_categories.category_id;
+`;
 	Mysql.connection.query(query, (err, results) => {
 		if (err) {
 			console.error("Error fetching ideas:", err);

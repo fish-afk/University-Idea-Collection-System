@@ -4,12 +4,12 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get(
+router.post(
 	"/getallcategories",
 	authMiddleware.verifyJWT,
 	categoriesController.getAllCategories,
 );
-router.get(
+router.post(
 	"/getcategorybyid",
 	authMiddleware.verifyJWT,
 	categoriesController.getCategoryById,

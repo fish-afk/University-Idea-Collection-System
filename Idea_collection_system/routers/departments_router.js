@@ -4,12 +4,12 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get(
+router.post(
 	"/getalldepartments",
 	authMiddleware.verifyJWT,
 	departmentsController.getAllDepartments,
 );
-router.get(
+router.post(
 	"/getdepartmentbyid",
 	authMiddleware.verifyJWT,
 	departmentsController.getDepartmentById,
