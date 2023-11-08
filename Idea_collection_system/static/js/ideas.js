@@ -230,6 +230,7 @@ const populateDomWithIdeas = (ideas) => {
 		pagination_part.style.display = "none";
 		view_by.style.display = "none";
 	} else {
+		idea_dom_part.innerHTML = ``;
 		for (let i = 0; i < ideas.length; i++) {
 			idea_dom_part.innerHTML += `<div class="idea one">
                 <div class="info">
@@ -311,6 +312,39 @@ const main = async () => {
 	await confirmJwt();
 	let ideas = await fetchAllIdeas();
 	populateDomWithIdeas(ideas);
+	document.getElementById("viewby").addEventListener("change", () => {
+		const value = document.getElementById("viewby").value;
+
+		if (value == 1) {
+			const sortedIdeas = ideas.sort((a, b) => b.num_likes - a.num_likes);
+			populateDomWithIdeas(sortedIdeas);
+		}
+
+		if (value == 2) {
+			const sortedIdeas = ideas.sort((a, b) => {
+				// Sort by whether the idea is not anonymous (non-anonymous first)
+				if (a.post_is_anonymous === 0 && b.post_is_anonymous === 1) {
+					return -1; // a comes before b
+				} else if (a.post_is_anonymous === 1 && b.post_is_anonymous === 0) {
+					return 1; // b comes before a
+				} else {
+					// If both are anonymous or both are not anonymous, compare by idea_body length
+					return b.idea_body.length - a.idea_body.length;
+				}
+			});
+
+			populateDomWithIdeas(sortedIdeas);
+		}
+
+		if (value == 3) {
+			const sortedIdeas = ideas.sort(
+				(a, b) =>
+					new Date(b.date_and_time_posted_on) -
+					new Date(a.date_and_time_posted_on),
+			);
+			populateDomWithIdeas(sortedIdeas);
+		}
+	});
 };
 
 main();
