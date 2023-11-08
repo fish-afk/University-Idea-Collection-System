@@ -27,6 +27,26 @@ qa_manager_signup_btn.addEventListener("click", () => {
 			role_id: 3,
 		};
 
+		if (username == "" || firstname == "" || lastname == "" || email == "") {
+			if (password.length < 8) {
+				Swal.fire({
+					title: "Error!",
+					text: "All fields required!",
+					icon: "error",
+					confirmButtonText: "Ok",
+				});
+			}
+		}
+		
+		if (password.length < 8) {
+			Swal.fire({
+				title: "Error!",
+				text: "Password should be 8 characters long!",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+		}
+
 		console.log(post_body);
 
 		fetch("/api/users/signup", {

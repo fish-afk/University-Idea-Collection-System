@@ -139,6 +139,17 @@ document
 	.getElementById("post-comment-btn")
 	.addEventListener("click", async () => {
 		const comment = document.getElementById("comment-post-body").value;
+
+		if (comment == "" || comment.length < 5) {
+			Swal.fire({
+				title: "Error!",
+				text: "Please enter a comment",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			return;
+		}
+		
 		const idea_id = urlParams.get(["idea_id"]);
 		const post_is_anonymous =
 			document.getElementById("anonymous-comment").value;

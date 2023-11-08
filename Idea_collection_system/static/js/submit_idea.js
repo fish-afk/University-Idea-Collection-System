@@ -113,6 +113,16 @@ const submitIdea = async () => {
 	const post_is_anonymous = document.getElementById("anonymous").value;
 	const category_id = document.getElementById("categories").value;
 
+	if (idea_title == "" || idea_title.length < 5 || idea_body == "" || idea_body.length < 5) {
+		Swal.fire({
+			title: "Error!",
+			text: "Please enter a longer idea title and idea body",
+			icon: "error",
+			confirmButtonText: "Ok",
+		});
+		return;
+	}
+
 	let post_body = {
 		idea_title,
 		idea_body,

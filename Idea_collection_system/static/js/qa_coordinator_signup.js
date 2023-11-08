@@ -53,6 +53,27 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 			confirmButtonText: "Ok",
 		});
 	} else {
+
+		if (username == "" || firstname == "" || lastname == "" || email == "") {
+			if (password.length < 8) {
+				Swal.fire({
+					title: "Error!",
+					text: "All fields required!",
+					icon: "error",
+					confirmButtonText: "Ok",
+				});
+			}
+		}
+		
+		if (password.length < 8) {
+			Swal.fire({
+				title: "Error!",
+				text: "Password should be 8 characters long!",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+		}
+
 		let post_body = {
 			username,
 			firstname,
