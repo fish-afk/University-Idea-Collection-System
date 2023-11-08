@@ -76,6 +76,7 @@ const confirmJwt = async () => {
 };
 
 const fetchAndPopulateCategoriesDom = async () => {
+	await confirmJwt()
 	let categories_dom = document.getElementById("categories");
 
 	let post_body = { username, jwt_key };
@@ -121,6 +122,8 @@ const submitIdea = async () => {
 		jwt_key,
 	};
 
+	let idea_id;
+
 	await fetch("/api/ideas/newidea", {
 		method: "POST",
 		headers: {
@@ -131,6 +134,7 @@ const submitIdea = async () => {
 	})
 		.then(async (res) => {
 			const response = await res.json();
+			idea_id = response?.idea_id;
 			Swal.fire({
 				title: "Info",
 				text: response?.message,
@@ -147,7 +151,35 @@ const submitIdea = async () => {
 			});
 			console.error(err);
 		});
+	
+	return idea_id;
 };
+
+const submitIdeaDocuments = async (idea_id) => {
+	const fileInput = document.getElementById("Documents");
+	const selectedFile = fileInput.files[0];
+
+	let formData = new FormData();
+	formData.append("username", username);
+	formData.append("jwt_key", jwt_key);
+	formData.append("file", selectedFile);
+	formData.append("idea_id", idea_id);
+
+	if (selectedFile) {
+		console.log(selectedFile);
+		await fetch("api/ideas/uploadideadocument", {
+			body: formData,
+			method: "PUT",
+		}).then(async (res) => {
+			const response = await res.json()
+			console.log(response)
+		});
+
+	} else {
+		console.log("no file uploaded");
+		return;
+	}
+}
 
 fetchAndPopulateCategoriesDom()
 
@@ -155,5 +187,6 @@ document
 	.getElementById("submit-idea-btn")
 	.addEventListener("click", async () => {
 		await confirmJwt();
-		await submitIdea();
+		const idea_id = await submitIdea();
+		submitIdeaDocuments(idea_id)
 	});

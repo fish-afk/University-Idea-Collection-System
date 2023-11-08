@@ -7,7 +7,7 @@ function myFunction() {
 	}
 }
 
-const setNavbarUsername = () => {
+const setNavbarUsername = async () => {
 	const userData = JSON.parse(localStorage?.getItem("userData"));
 	let navusernamelist = document.getElementsByClassName("nav-username");
 
@@ -16,7 +16,7 @@ const setNavbarUsername = () => {
 	}
 };
 
-const hideLinksBasedOnAccountType = () => {
+const hideLinksBasedOnAccountType = async () => {
 	const userData = JSON.parse(localStorage?.getItem("userData"));
 	let manageLinks = document.getElementsByClassName("nav-manage-link");
 	let statsLinks = document.getElementsByClassName("nav-stats-link");
@@ -32,5 +32,6 @@ const hideLinksBasedOnAccountType = () => {
 	}
 };
 
+
 setNavbarUsername();
-hideLinksBasedOnAccountType();
+hideLinksBasedOnAccountType()

@@ -147,6 +147,15 @@ const reportPost = (idea_id) => {
 		if (result.isConfirmed) {
 			// User has confirmed the input, now you can send it to the API
 			const inputValue = result.value;
+			if (inputValue == "" || !inputValue) {
+				Swal.fire({
+					title: "Error!",
+					text: "Please enter a report",
+					icon: "error",
+					confirmButtonText: "Ok",
+				});
+				return;
+			}
 			let post_body = { jwt_key, username, report: inputValue, idea_id };
 			await fetch("/api/reports/newreport", {
 				method: "POST",
@@ -206,9 +215,9 @@ const populateDomWithIdeas = (ideas) => {
                     <div class="tag">
                         <h3>Category:</h3>
                         <p class="category">${ideas[i]?.category_name}</p>
-						<button class='report-btn' onClick={reportPost(${ideas[i]?.idea_id})} id="report-${
+						<button class='report-btn' onClick={reportPost(${
 							ideas[i]?.idea_id
-						}">Report Post</button>
+						})} id="report-${ideas[i]?.idea_id}">Report Post</button>
                     </div>
                 </div>
 				<br>
@@ -218,12 +227,19 @@ const populateDomWithIdeas = (ideas) => {
                     <p>${ideas[i]?.idea_body}</p>
 					<br>
 					<br>
-                    <div class="docs">
+                    <div class="docs" style="display:${
+											!ideas[i]?.idea_documents ? "none" : ""
+										};">
+						
                         <div class="name">
                             <i class="fas fa-file"></i>
-                            <p style="color:wheat;">Download Attached Documents</p>
+                            <a target="_blank" href="/api/ideas/getdocumentfile?filename=${
+															ideas[i]?.idea_documents
+														}&token=${jwt_key}&username=${username}"><p style="color:wheat;">Download Attached Document</p></a>
                         </div>
-                        <a href=""><i class="fas fa-cloud-download-alt"></i></a>
+                        <a target="_blank" href="/api/ideas/getdocumentfile?filename=${
+													ideas[i]?.idea_documents
+												}&token=${jwt_key}&username=${username}"><i class="fas fa-cloud-download-alt"></i></a>
                     </div>
                 </div>
 

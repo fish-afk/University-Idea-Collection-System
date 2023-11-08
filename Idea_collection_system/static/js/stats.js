@@ -1,5 +1,12 @@
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(drawCharts);
+
+const userData = JSON.parse(localStorage.getItem('userData'))
+
+if (userData?.role_id <= 1) {
+	window.location.href = '/profile.html'
+}
+
 function drawCharts() {
 	//ideas per dept chart
 	var data = google.visualization.arrayToDataTable([

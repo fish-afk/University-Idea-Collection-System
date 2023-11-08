@@ -6,7 +6,8 @@ const {
 	hasClosurePassed,
 	setEnvValue,
 } = require("../common/common_utils");
-const moment = require('moment')
+const moment = require("moment");
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
@@ -20,11 +21,9 @@ const transport = nodemailer.createTransport({
 	},
 });
 
-
 function formatDate(date) {
 	return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
-
 
 // Create an idea
 const newIdeaPost = async (req, res) => {
@@ -33,7 +32,7 @@ const newIdeaPost = async (req, res) => {
 		todaysDate,
 		process.env.CLOSURE_DATE,
 	);
-	const username = req.decoded['username']
+	const username = req.decoded["username"];
 
 	if (hasClosurePassed_ == true) {
 		return res.send({
@@ -48,7 +47,7 @@ const newIdeaPost = async (req, res) => {
 		idea_body,
 		date_and_time_posted_on = formatDate(Date.now()),
 		category_id,
-		post_is_anonymous
+		post_is_anonymous,
 	} = req.body;
 
 	const query =
@@ -63,7 +62,7 @@ const newIdeaPost = async (req, res) => {
 			post_is_anonymous,
 			username,
 		],
-		(err, results) => {
+		(err, result) => {
 			if (err) {
 				console.error("Error creating an idea:", err);
 				res
@@ -112,6 +111,7 @@ const newIdeaPost = async (req, res) => {
 									return res.status(201).json({
 										status: "SUCCESS",
 										message: "Idea created successfully",
+										idea_id: result?.insertId,
 									});
 								}
 							},
@@ -124,29 +124,39 @@ const newIdeaPost = async (req, res) => {
 };
 
 function setClosureDateForIdeas(req, res) {
-	const privs = req.decoded['privs']
+	const privs = req.decoded["privs"];
 
 	if (privs != "admin") {
 		return res
 			.status(401)
 			.send({ status: "FAILURE", message: "Insufficient privileges" });
-	} else { 
-
+	} else {
 		const { newClosureDate } = req.body;
 
 		if (!newClosureDate) {
-			return res
-				.send({ status: "FAILURE", message: "Missing details" });
+			return res.send({ status: "FAILURE", message: "Missing details" });
 		} else {
 			setEnvValue("CLOSURE_DATE", newClosureDate);
 
-			return res.send({ status: "SUCCESS", message: "Set new closure date successfully" });
+			return res.send({
+				status: "SUCCESS",
+				message: "Set new closure date successfully",
+			});
 		}
 	}
 }
 
 function getDocumentFile(req, res) {
 	const Filename = req.query.filename;
+	const token = req.query.token;
+	const username = req.query.username;
+
+	let status = verifyJWT(username, token, res);
+
+	if (status != true) {
+		return;
+	}
+
 	if (Filename == undefined) {
 		return res
 			.status(400)
@@ -169,9 +179,55 @@ function getDocumentFile(req, res) {
 
 const getAllfilesForIdea_Zipped = (req, res) => {
 	// pending
+};
+
+function verifyJWT(username, token, res) {
+
+	let status = true;
+	if (!token || !username) {
+		status = false
+		return res
+			.status(401)
+			.send({ status: false, message: "Missing auth fields !" });
+	}
+	// Verify the JWT and check that it is valid
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+		if (err) {
+			status = false;
+			return res.status(401).send({ status: false, message: err.message });
+		}
+		if (decoded.exp < Date.now() / 1000) {
+			status = false;
+			return res
+				.status(401)
+				.send({ status: false, message: "JWT has expired" });
+		}
+		// If the JWT is valid, save the decoded user information in the request object
+		// so that it is available for the next middleware function
+		if (decoded.username != username) {
+			status = false;
+			return res.status(401).send({ status: false, message: "Token mismatch" }); // Token is not this users, but another users
+		}
+	});
+
+	return status;
+
 }
 
 function uploadIdeaDocument(req, res) {
+	const username = req.body["username"];
+	const jwt_key = req.body["jwt_key"];
+	let status = verifyJWT(username, jwt_key, res);
+
+	if (status != true) {
+		return;
+	}
+
+	const idea_id = req.body["idea_id"];
+	if (!idea_id) {
+		res.status(400).send({ status: false, message: "Idea Id Required." });
+		return;
+	}
 	if (!req.file) {
 		res.status(400).send({ status: false, message: "No file uploaded." });
 		return;
@@ -179,22 +235,20 @@ function uploadIdeaDocument(req, res) {
 		const filename = req.file.filename;
 		if (filename) {
 			const query = `INSERT INTO idea_documents (filename, idea_id) VALUES (?, ?)`;
-			Mysql.connection.query(
-				query,
-				[filename, req.body.idea_id],
-				(err, results) => {
-					if (err || !results) {
-						console.log(err);
-						return res
-							.status(500)
-							.send({ status: "FAILURE", message: "Internal error" });
-					} else {
-						return res
-							.status(200)
-							.send({ status: true, message: "File uploaded successfully." });
-					}
-				},
-			);
+			Mysql.connection.query(query, [filename, idea_id], (err, results) => {
+				if (err || !results) {
+					console.log(err);
+					return res.status(500).send({
+						status: "FAILURE",
+						message:
+							"Internal error: either the idea_id doesnt exist or some other error occured..",
+					});
+				} else {
+					return res
+						.status(200)
+						.send({ status: true, message: "File uploaded successfully." });
+				}
+			});
 		}
 	}
 }
@@ -342,13 +396,15 @@ const getAllIdeas = (req, res) => {
     ideas.idea_body,
     ideas.date_and_time_posted_on,
     ideas.post_is_anonymous,
-    ideas.username AS idea_username,
-    users.username AS username,
-    idea_categories.name AS category_name
+    ideas.username AS username,
+    idea_categories.name AS category_name,
+    GROUP_CONCAT(idea_documents.filename) AS idea_documents
 FROM
     ideas
-JOIN users ON ideas.username = users.username
-JOIN idea_categories ON ideas.category_id = idea_categories.category_id;
+JOIN idea_categories ON ideas.category_id = idea_categories.category_id
+LEFT JOIN idea_documents ON ideas.idea_id = idea_documents.idea_id
+GROUP BY
+    ideas.idea_id;
 `;
 	Mysql.connection.query(query, (err, results) => {
 		if (err) {
@@ -448,5 +504,5 @@ module.exports = {
 	getDocumentFile,
 	likePost,
 	dislikePost,
-	setClosureDateForIdeas
+	setClosureDateForIdeas,
 };

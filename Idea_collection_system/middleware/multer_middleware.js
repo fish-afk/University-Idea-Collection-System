@@ -1,8 +1,37 @@
 const multer = require("multer");
 const path = require("path");
 
-// using multer to store the uploaded documents that are posted with ideas.
+// Define an array of allowed file extensions
+const allowedFileExtensions = [
+	".xlsx",
+	".xls",
+	".doc",
+	".docx",
+	".ppt",
+	".pptx",
+	".txt",
+	".pdf",
+	".jpg",
+	".png",
+];
 
+// Create a custom file filter function
+const fileFilter = (req, file, cb) => {
+	const fileExtension = path.extname(file.originalname).toLowerCase();
+
+	if (
+		allowedFileExtensions.includes(fileExtension) ||
+		file.mimetype.startsWith("image/")
+	) {
+		// Allow the file to be uploaded
+		cb(null, true);
+	} else {
+		// Reject the file
+		cb({ message: "File type not supported", status: false});
+	}
+};
+
+// Configure multer with the custom file filter
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, "./uploads/");
@@ -15,6 +44,6 @@ const storage = multer.diskStorage({
 	},
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 module.exports = { upload };

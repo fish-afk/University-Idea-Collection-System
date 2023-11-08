@@ -20,9 +20,8 @@ router.post(
 	authMiddleware.verifyJWT,
 	ideaController.getIdeaDocuments,
 );
-router.post(
+router.get(
 	"/getdocumentfile",
-	authMiddleware.verifyJWT,
 	ideaController.getDocumentFile,
 );
 router.post(
