@@ -99,7 +99,7 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 				const data = await res.json();
 				Swal.fire({
 					title: "Info",
-					text: response?.message,
+					text: res?.message,
 					icon: "info",
 					confirmButtonText: "Ok",
 				});

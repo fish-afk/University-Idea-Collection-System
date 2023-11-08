@@ -196,6 +196,7 @@ INSERT INTO user_roles (role_name) VALUES ("admin");
 
 -- idea categories
 
+INSERT INTO idea_categories (name, description) VALUES ("Financial", "Financial ideas");
 INSERT INTO idea_categories (name, description) VALUES ("Institutional", "Institutional ideas");
 INSERT INTO idea_categories (name, description) VALUES ("Departmental", "Departmental ideas");
 INSERT INTO idea_categories (name, description) VALUES ("Personal", "Personal ideas");
