@@ -62,40 +62,69 @@ const confirmJwt = async () => {
 };
 
 //like animations
-function like() {
-	const like = document.querySelectorAll(".like");
+function like(idea_id) {
+	let post_body = { username, jwt_key, idea_id };
+	fetch("/api/ideas/likepost", {
+		method: "PATCH",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
 
-	like.forEach((like) => {
-		like.addEventListener("click", () => {
-			if (like.classList.contains("far")) {
-				// If not solid, switch it to solid
-				like.classList.remove("far");
-				like.classList.add("fas");
-			} else {
-				// If solid, switch it to not solid
-				like.classList.remove("fas");
-				like.classList.add("far");
-			}
+			Swal.fire({
+				title: "Info",
+				text: response?.message,
+				icon: "info",
+				confirmButtonText: "Ok",
+			}).then(() => {
+				window.location.reload();
+			});
+		})
+		.catch(async (err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst liking post",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
 		});
-	});
 }
 
-function dislike() {
-	const dislike = document.querySelectorAll(".dislike");
-
-	dislike.forEach((dislike) => {
-		dislike.addEventListener("click", () => {
-			if (dislike.classList.contains("far")) {
-				// If not solid, switch it to solid
-				dislike.classList.remove("far");
-				dislike.classList.add("fas");
-			} else {
-				// If solid, switch it to not solid
-				dislike.classList.remove("fas");
-				dislike.classList.add("far");
-			}
+function dislike(idea_id) {
+	let post_body = { username, jwt_key, idea_id };
+	fetch("/api/ideas/dislikepost", {
+		method: "PATCH",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			Swal.fire({
+				title: "Info",
+				text: response?.message,
+				icon: "info",
+				confirmButtonText: "Ok",
+			}).then(() => {
+				window.location.reload();
+			});
+		})
+		.catch(async (err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst liking post",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
 		});
-	});
 }
 
 const fetchAllIdeas = async () => {
@@ -207,7 +236,7 @@ const populateDomWithIdeas = (ideas) => {
                     <div class="user">
                         <img src="images/profile.jpg" alt="">
                         <p>${
-													ideas[i]?.post_is_anoymous == 1
+													ideas[i]?.post_is_anonymous == 1
 														? "anonymous"
 														: ideas[i]?.username
 												}</p>
@@ -247,12 +276,16 @@ const populateDomWithIdeas = (ideas) => {
                 <div class="reactions">
                     <div class="react">
                         <div class="feedback likes">
-                            <i class="like like far fa-thumbs-up" id="like" onclick="like()"></i>
-                            <p>0</p>
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like(${
+															ideas[i]?.idea_id
+														})"></i>
+                            <p>${ideas[i].num_likes}</p>
                         </div>
                         <div class="feedback dislikes">
-                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike()"></i>
-                            <p>0</p>
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike(${
+															ideas[i]?.idea_id
+														})"></i>
+                            <p>${ideas[i].num_dislikes}</p>
                         </div>
                         <div class="feedback comment-icon">
                             <a href='/comments.html?idea_id=${

@@ -360,7 +360,7 @@ const dislikePost = (req, res) => {
 					} else {
 						return res.send({
 							status: "SUCCESS",
-							message: "Liked Idea id: " + idea_id,
+							message: "DisLiked Idea id: " + idea_id,
 						});
 					}
 				});
@@ -378,7 +378,7 @@ const dislikePost = (req, res) => {
 						} else {
 							return res.send({
 								status: "SUCCESS",
-								message: "Liked Idea id: " + idea_id,
+								message: "DisLiked Idea id: " + idea_id,
 							});
 						}
 					},
@@ -398,11 +398,14 @@ const getAllIdeas = (req, res) => {
     ideas.post_is_anonymous,
     ideas.username AS username,
     idea_categories.name AS category_name,
-    GROUP_CONCAT(idea_documents.filename) AS idea_documents
+    GROUP_CONCAT(idea_documents.filename) AS idea_documents,
+    IFNULL(SUM(likes_and_dislikes.like_or_dislike = 1), 0) AS num_likes,
+    IFNULL(SUM(likes_and_dislikes.like_or_dislike = 0), 0) AS num_dislikes
 FROM
     ideas
 JOIN idea_categories ON ideas.category_id = idea_categories.category_id
 LEFT JOIN idea_documents ON ideas.idea_id = idea_documents.idea_id
+LEFT JOIN likes_and_dislikes ON ideas.idea_id = likes_and_dislikes.idea_id
 GROUP BY
     ideas.idea_id;
 `;

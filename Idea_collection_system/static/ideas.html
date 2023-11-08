@@ -92,14 +92,12 @@
     <section class="ideas">
         <div class="view-by" id="view-by">
             <div class="dropdown">
-                <label for="filter"><b>View By: </b></label>
-                <br>
-                <input class="dropdown" placeholder="Select a tag" list="tags" name="fiter" id="browser" required>
-                <datalist id="tags">
-                    <option value="Most Popular">
-                    <option value="Most Viewed">
-                    <option value="Latest">
-                </datalist>
+                <label for="filter" style="padding-right: 10px;"><b>View By: </b></label>
+                <select id="viewby">
+                    <option value="1" label="Most Popular">
+                    <option value="2" label="Most Viewed">
+                    <option value="3" label="Latest">
+                </select>
                 <br>
             </div>
 
