@@ -39,19 +39,22 @@ Windows:
 git clone https://github.com/fish-afk/Uog_COMP1640_Group1_EWSD_Assignment_2023_24.git
 ```
 
-### step 2: 
-open a terminal / windows cmd prompt inside the "Idea_collection_system" folder. Make sure its inside that folder.
+### step 2:
+Go to the "Idea_collection_system" folder and copy all the code found in the "database.sql" file and run it in your mysql database.
 
 ### step 3: 
+open a terminal / windows cmd prompt inside the "Idea_collection_system" folder. Make sure its inside that folder.
+
+### step 4: 
 run this command to install node packages.
 
 ```npm install```
 
-### step 4: 
+### step 5: 
 run this command to start up the server
 
 ```node index.js```
 
-### step 5: 
+### step 6: 
 go to browser on http://localhost:4455 and you're done.
 
