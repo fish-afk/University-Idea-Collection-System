@@ -135,6 +135,7 @@ const changePassword = () => {
 	const newPassword = document.getElementById("newpass").value;
 	const confirmnewPassword = document.getElementById("confirm-newpass").value;
 
+
 	if (newPassword !== confirmnewPassword) {
 		Swal.fire({
 			title: "Error!",
@@ -143,6 +144,16 @@ const changePassword = () => {
 			confirmButtonText: "Ok",
 		});
 	} else {
+		if (newPassword.length < 8) {
+			Swal.fire({
+				title: "Error!",
+				text: "Password should be 8 characters long!",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			return;
+		}
+		
 		fetch("/api/users/changepassword", {
 			method: "PATCH",
 			headers: {

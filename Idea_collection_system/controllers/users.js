@@ -372,16 +372,21 @@ const login = (req, res) => {
 				bcrypt.compare(password, user.password, async (error, result) => {
 					if (result && !error) {
 						let privs = "staff";
+						
+						if (user?.role_id == 1) {
+							privs = 'staff'
+						}
 
-						switch (user?.role_id) {
-							case "1":
-								privs = "staff";
-							case "2":
-								privs = "qa_coordinator";
-							case "3":
-								privs = "qa_manager";
-							case "4":
-								privs = "admin";
+						if (user?.role_id == 2) {
+							privs = "qa_coordinator";
+						}
+
+						if (user?.role_id == 3) {
+							privs = "qa_manager";
+						}
+
+						if (user?.role_id == 4) {
+							privs = "admin";
 						}
 
 						const jwtToken = authMiddleware.generateJwtToken(

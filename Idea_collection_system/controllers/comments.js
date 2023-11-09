@@ -5,7 +5,7 @@ const {
 	hasClosurePassed,
 	setEnvValue,
 } = require("../common/common_utils");
-const moment = require('moment')
+const moment = require("moment");
 
 require("dotenv").config();
 
@@ -39,7 +39,7 @@ const newCommentPost = (req, res) => {
 		});
 	}
 
-	const username = req.decoded['username']
+	const username = req.decoded["username"];
 
 	const {
 		comment,
@@ -50,7 +50,7 @@ const newCommentPost = (req, res) => {
 
 	const query =
 		"INSERT INTO comments (comment, date_and_time_posted_on, post_is_anonymous, idea_id, username) VALUES (?, ?, ?, ?, ?)";
-	
+
 	Mysql.connection.query(
 		query,
 		[comment, date_and_time_posted_on, post_is_anonymous, idea_id, username],
@@ -87,15 +87,16 @@ const newCommentPost = (req, res) => {
 								const record2 = results[0];
 								const email = record2?.email;
 
-								const info = await transport.sendMail({
-									to: email, // list of receivers
-									subject: "New comment post on your idea", // Subject line
-									text:
-										"A new comment was posted on your idea post by the user: " +
-										username, // plain text body
-								});
-
-								console.log(info);
+								if (email) {
+									const info = await transport.sendMail({
+										to: email, // list of receivers
+										subject: "New comment post on your idea", // Subject line
+										text:
+											"A new comment was posted on your idea post by the user: " +
+											username, // plain text body
+									});
+									console.log(info);
+								}
 
 								return res.status(201).json({
 									status: "SUCCESS",
@@ -135,7 +136,7 @@ function setClosureDateForComments(req, res) {
 
 // Read all comments for a specific idea
 const getCommentsByIdeaId = (req, res) => {
-	const idea_id = req.body['idea_id']
+	const idea_id = req.body["idea_id"];
 	const query = "SELECT * FROM comments WHERE idea_id = ?";
 	Mysql.connection.query(query, [idea_id], (err, results) => {
 		if (err) {
@@ -232,5 +233,5 @@ module.exports = {
 	getCommentById,
 	updateCommentById,
 	deleteCommentById,
-	setClosureDateForComments
+	setClosureDateForComments,
 };

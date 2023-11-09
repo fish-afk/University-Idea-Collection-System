@@ -4,6 +4,13 @@ let username = localStorage.getItem("username");
 
 //Hamburger menu on mobile devices
 
+const userData = JSON.parse(localStorage.getItem("userData"));
+
+if (userData?.role_id > 1) {
+	window.location.href = "/profile.html";
+}
+
+
 //enable submit idea button when user agrees to terms and conditions
 function enable() {
 	var check = document.getElementById("check");

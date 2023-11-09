@@ -1,13 +1,116 @@
-google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(drawCharts);
+let jwt_key = localStorage.getItem("jwtToken");
+let refreshToken = localStorage.getItem("refreshToken");
+let username = localStorage.getItem("username");
 
-const userData = JSON.parse(localStorage.getItem('userData'))
+const userData = JSON.parse(localStorage.getItem("userData"));
 
 if (userData?.role_id <= 1) {
-	window.location.href = '/profile.html'
+	window.location.href = "/profile.html";
 }
 
-function drawCharts() {
+const confirmJwt = async () => {
+	let post_body = { username, jwt_key };
+	await fetch("/api/users/confirmjwt", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+
+			if (response?.auth == false) {
+				await fetch("/api/users/refresh", {
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ refreshToken, username }),
+				})
+					.then(async (res) => {
+						const response = await res.json();
+
+						if (response?.status == true) {
+							localStorage.setItem("jwtToken", response?.jwt);
+						} else {
+							Swal.fire({
+								title: "Error!",
+								text: "Your Session has expired and you will need to log in again",
+								icon: "error",
+								confirmButtonText: "Ok",
+							});
+							window.location.href = "/login.html";
+						}
+					})
+					.catch((err) => {
+						Swal.fire({
+							title: "Error!",
+							text: "Unknown error occured whilst confirming jwt",
+							icon: "error",
+							confirmButtonText: "Ok",
+						});
+						console.error(err);
+					});
+			}
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured whilst confirming jwt",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+};
+
+async function getStats() {
+	let post_body = { username, jwt_key };
+
+
+	let stats;
+	await fetch("/api/stats/getallstats", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(post_body),
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			console.log(response)
+			stats = response;
+		})
+		.catch((err) => {
+			console.error(err);
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occured",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+		});
+	
+	return stats;
+}
+
+const populateExceptionReportsDom = (reports) => {
+	document.getElementById("ideas-without-comments").innerText =
+		reports.ideasWithoutComments;
+	
+	document.getElementById("anonymous-ideas").innerText =
+		reports.anonymousIdeasCount;
+	
+	document.getElementById("anonymous-comments").innerText =
+		reports.anonymousCommentsCount;
+	
+}
+
+function drawCharts(stats) {
 	//ideas per dept chart
 	var data = google.visualization.arrayToDataTable([
 		["Department", "Ideas", { role: "style" }],
@@ -98,3 +201,14 @@ function drawCharts() {
 	);
 	chart.draw(view, options);
 }
+
+const main = async () => {
+	await confirmJwt()
+	let stats = await getStats()
+	populateExceptionReportsDom(stats)
+
+	google.charts.load("current", { packages: ["corechart"] });
+	google.charts.setOnLoadCallback(drawCharts);
+}
+
+main()

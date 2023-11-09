@@ -20,6 +20,7 @@ const hideLinksBasedOnAccountType = async () => {
 	const userData = JSON.parse(localStorage?.getItem("userData"));
 	let manageLinks = document.getElementsByClassName("nav-manage-link");
 	let statsLinks = document.getElementsByClassName("nav-stats-link");
+	let submitLinks = document.getElementsByClassName('nav-submit-link')
 
 	if (userData?.role_id <= 1) {
 		for (let i = 0; i < manageLinks.length; i++) {
@@ -30,8 +31,23 @@ const hideLinksBasedOnAccountType = async () => {
 			statsLinks[i].parentElement.remove();
 		}
 	}
+
+	if (userData?.role_id > 1) {
+		for (let i = 0; i < submitLinks.length; i++) {
+			submitLinks[i].parentElement.remove();
+		}
+
+	}
+
 };
 
+const LogOut = () => {
+	const logoutBtn = document.getElementById("logout-btn");
+	logoutBtn.addEventListener('click', () => {
+		localStorage.clear()
+	})
+}
 
 setNavbarUsername();
 hideLinksBasedOnAccountType()
+LogOut()

@@ -98,15 +98,16 @@ const newIdeaPost = async (req, res) => {
 									const record2 = results[0];
 									const email = record2?.email;
 
-									const info = await transport.sendMail({
-										to: email, // list of receivers
-										subject: "New idea post on your department", // Subject line
-										text:
-											"A new idea was posted on your department by the user: " +
-											username, // plain text body
-									});
-
-									console.log(info);
+									if (email) {
+										const info = await transport.sendMail({
+											to: email, // list of receivers
+											subject: "New idea post on your department", // Subject line
+											text:
+												"A new idea was posted on your department by the user: " +
+												username, // plain text body
+										});
+										console.log(info);
+									}
 
 									return res.status(201).json({
 										status: "SUCCESS",
@@ -182,10 +183,9 @@ const getAllfilesForIdea_Zipped = (req, res) => {
 };
 
 function verifyJWT(username, token, res) {
-
 	let status = true;
 	if (!token || !username) {
-		status = false
+		status = false;
 		return res
 			.status(401)
 			.send({ status: false, message: "Missing auth fields !" });
@@ -211,7 +211,6 @@ function verifyJWT(username, token, res) {
 	});
 
 	return status;
-
 }
 
 function uploadIdeaDocument(req, res) {
