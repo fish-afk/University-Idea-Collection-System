@@ -7,6 +7,8 @@ if (userData?.role_id <= 1) {
 	window.location.href = "/profile.html";
 }
 
+
+
 const confirmJwt = async () => {
 	let post_body = { username, jwt_key };
 	await fetch("/api/users/confirmjwt", {
@@ -549,9 +551,35 @@ const UnhidePostsAndComments = async (accountUsername) => {
 	});
 };
 
-const fetchReportedPosts = async () => {};
+const fetchReportedPosts = async () => {
+	let post_body = { username, jwt_key };
 
-const disableReportedPost = async () => { };
+	let posts;
+	await fetch("/api/reports/getallreports", {
+		method: "POST",
+		body: JSON.stringify(post_body),
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			posts = response?.data;
+			console.log(posts);
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occurred when fetching reported posts",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+
+	return posts;
+};
 
 function formatDateToDDMMYYYY(date) {
 	const day = String(date.getDate()).padStart(2, "0");
@@ -560,6 +588,64 @@ function formatDateToDDMMYYYY(date) {
 
 	return `${day}/${month}/${year}`;
 }
+
+const populateDomWithReportedPosts = (posts) => {
+	const reportsDom = document.getElementById("reports-tbody");
+	const reportsContainer = document.getElementById("reports-container");
+
+	reportsDom.innerHTML = ``;
+
+	if (posts.length < 1) {
+		reportsContainer.innerHTML = `<br><br><center><h1>No posts have been reported yet. Looking good !</h1></center><br><br>`;
+	}
+
+	for (let i = 0; i < posts.length; i++) {
+		reportsDom.innerHTML = `
+		<tr class="row">
+                        <td>${posts[i].username}</td>
+                        <td>Idea ${posts[i].idea_id}</td>
+                        <td>${posts[i].report}</td>
+                        <td>${formatDateToDDMMYYYY(
+													new Date(posts[i].report_date_time),
+												)}</td>
+                        <td><button onClick="deletedReportedPost('${
+													posts[i].idea_id
+												}')" style="padding:0.5rem;color:white;background-color:red;">Delete This Idea Post</button></td>
+                    </tr>
+		`;
+	}
+};
+
+const deletedReportedPost = async (idea_id) => {
+	let post_body = { username, jwt_key, idea_id };
+
+	await fetch("/api/ideas/deleteidea", {
+		method: "DELETE",
+		body: JSON.stringify(post_body),
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			Swal.fire({
+				title: "Info",
+				text: response?.message,
+				icon: "info",
+				confirmButtonText: "Ok",
+			});
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occurred when deleting idea",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+};
 
 const populateDomWithCategories = (categories) => {
 	let categoriesDom = document.getElementById("categories-tbody");
@@ -642,6 +728,19 @@ const main = async () => {
 	await fetchAndPopulateClosureDates();
 	let users = await fetchAllUsers();
 	populateDomWithUsers(users);
+	let posts = await fetchReportedPosts();
+	populateDomWithReportedPosts(posts);
+	
 };
 
 main();
+
+const downloadDocumentsBtn = document.getElementById(
+	"download-documents-zipped-btn",
+);
+
+downloadDocumentsBtn.style.backgroundColor = "red";
+downloadDocumentsBtn.innerHTML = `
+<a style="color: cyan; font-size: 2rem; text-decoration: underline" target=_blank href="/api/ideas/getalldocumentszipped?username=${username}&token=${jwt_key}">
+	Download Idea Documents Zipped
+</a>`;

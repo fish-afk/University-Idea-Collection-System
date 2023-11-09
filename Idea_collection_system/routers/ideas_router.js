@@ -30,7 +30,7 @@ router.post(
 	ideaController.getIdeaById,
 );
 router.post("/newidea", authMiddleware.verifyJWT, ideaController.newIdeaPost);
-router.post(
+router.delete(
 	"/deleteidea",
 	authMiddleware.verifyJWT,
 	ideaController.deleteIdeaById,
@@ -56,5 +56,8 @@ router.patch(
 );
 
 router.post('/getclosuredates', authMiddleware.verifyJWT, ideaController.getClosureDates)
+
+router.get('/getalldocumentszipped', ideaController.getAllfilesForIdea_Zipped)
+
 
 module.exports = router;

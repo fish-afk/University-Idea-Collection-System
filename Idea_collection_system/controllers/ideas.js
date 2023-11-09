@@ -1,6 +1,8 @@
 const Mysql = require("../models/_mysql");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const fs = require("fs");
+const archiver = require('archiver');
 const {
 	getCurrentDate,
 	hasClosurePassed,
@@ -198,8 +200,9 @@ function getDocumentFile(req, res) {
 	const Filename = req.query.filename;
 	const token = req.query.token;
 	const username = req.query.username;
+	const expected_privs = ["admin", "qa_manager", "staff", "qa_coordinator"];
 
-	let status = verifyJWT(username, token, res);
+	let status = verifyJWT(username, token, expected_privs, res);
 
 	if (status != true) {
 		return;
@@ -226,10 +229,56 @@ function getDocumentFile(req, res) {
 }
 
 const getAllfilesForIdea_Zipped = (req, res) => {
-	// pending
-};
 
-function verifyJWT(username, token, res) {
+
+	const username = req.query['username']
+	const token = req.query['token']
+	const expected_privs = ['admin', 'qa_manager']
+
+	let status = verifyJWT(username, token, expected_privs, res);
+
+	if (status != true) {
+		return;
+	}
+
+  const sourceFolderPath = './uploads'; // Change this to the path of your uploads folder
+
+  const outputZipFileName = 'Documents.zip';
+  const outputZipFilePath = `./${outputZipFileName}`;
+
+  // Create a write stream to save the zip file
+  const output = fs.createWriteStream(outputZipFilePath);
+
+  // Create a new archiver instance
+  const archive = archiver('zip', {
+    zlib: { level: 9 }, // Compression level (0-9)
+  });
+
+  // Pipe the archive data to the output stream
+  archive.pipe(output);
+
+  // Add all files from the source folder to the archive
+  archive.directory(sourceFolderPath, false);
+
+  // Finalize the archive
+  archive.finalize();
+
+  output.on('close', () => {
+    res.setHeader('Content-Disposition', `attachment; filename=${outputZipFileName}`);
+    res.setHeader('Content-Type', 'application/zip');
+
+    const zipStream = fs.createReadStream(outputZipFilePath);
+    zipStream.pipe(res);
+  });
+
+  output.on('error', (err) => {
+    console.error('Error zipping files:', err);
+    res.status(500).send('Error zipping files.');
+  });
+}
+
+function verifyJWT(username, token, expected_privs = [], res) {
+
 	let status = true;
 	if (!token || !username) {
 		status = false;
@@ -249,6 +298,13 @@ function verifyJWT(username, token, res) {
 				.status(401)
 				.send({ status: false, message: "JWT has expired" });
 		}
+
+		if (!expected_privs.includes(decoded.privs)) {
+			status = false;
+			return res.status(401).send({ status: false, message: "Insufficient privileges" });
+		}
+
+		console.log('hit')
 		// If the JWT is valid, save the decoded user information in the request object
 		// so that it is available for the next middleware function
 		if (decoded.username != username) {
@@ -263,7 +319,9 @@ function verifyJWT(username, token, res) {
 function uploadIdeaDocument(req, res) {
 	const username = req.body["username"];
 	const jwt_key = req.body["jwt_key"];
-	let status = verifyJWT(username, jwt_key, res);
+	const expected_privs = ["admin", "qa_manager", "staff", "qa_coordinator"];
+
+	let status = verifyJWT(username, jwt_key,expected_privs, res);
 
 	if (status != true) {
 		return;
@@ -469,6 +527,8 @@ GROUP BY
 	});
 };
 
+
+
 // Read a single idea by idea_id
 const getIdeaById = (req, res) => {
 	const idea_id = req.query.idea_id;
@@ -556,5 +616,6 @@ module.exports = {
 	likePost,
 	dislikePost,
 	setNewClosureDates,
-	getClosureDates
+	getClosureDates,
+	getAllfilesForIdea_Zipped
 };

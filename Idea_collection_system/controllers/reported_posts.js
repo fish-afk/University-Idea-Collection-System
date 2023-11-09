@@ -38,7 +38,15 @@ const newReportedPost = (req, res) => {
 
 // Read all reported posts
 const getAllReportedPosts = (req, res) => {
-	const query = "SELECT * FROM reported_posts";
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	}
+
+	const query = "SELECT * FROM reported_posts WHERE idea_id IS NOT NULL";
 	Mysql.connection.query(query, (err, results) => {
 		if (err) {
 			console.error("Error fetching reported posts:", err);
@@ -53,6 +61,15 @@ const getAllReportedPosts = (req, res) => {
 
 // Read a single reported post by report_id
 const getReportedPostById = (req, res) => {
+
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	}
+	
 	const report_id = req.query.report_id;
 	const query = "SELECT * FROM reported_posts WHERE report_id = ?";
 	Mysql.connection.query(query, [report_id], (err, results) => {
