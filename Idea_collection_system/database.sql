@@ -218,6 +218,7 @@ INSERT INTO `users` (`username`, `firstname`, `lastname`, `email`, `password`, `
 	('staff_6', 'staff 3', 'staff 3', 'staff_1234444444@test.com', '$2b$10$bk3FL3MwDm7IVaEa2KWd1./hXxenPy/nifZ35wcfK0NEJKbc/RHua', NULL, 1, '2023-11-09 10:42:19', NULL, 0, 1, 2, 3),
 	('staff_7', 'staff 3', 'staff 3', 'staff_1234444444@test.com', '$2b$10$qg3q7nMAKSM1PbeU6ox16.kHC5bBBOgJjwxOu9pmBa02W8kboQxwu', NULL, 1, '2023-11-09 10:42:31', NULL, 0, 1, 1, 4),
 	('staff_8', 'staff 3', 'staff 3', 'staff_1234444444@test.com', '$2b$10$foRorwesD9/1YksJWqj9MeGrS0FW1TFncMDedZmnIMDS5pmhfYTbK', NULL, 1, '2023-11-09 10:42:37', NULL, 0, 1, 2, 4);
+	('admin', 'admin1 ', 'admin1', 'mirzashihab2@outlook.com', '$2b$10$aOee7jGFmASesM9EcV/QzuvJfwfzlqgboHwmYBnHCPZZcl195Jrqi', NULL, 1, '2023-11-09 17:33:33', NULL, 0, 4, NULL, NULL);
 
 
 -- dummy ideas
