@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const {
 	getCurrentDate,
 	hasClosurePassed,
-	setEnvValue,
+	
 } = require("../common/common_utils");
 const moment = require("moment");
 

@@ -6,12 +6,12 @@ const archiver = require('archiver');
 const {
 	getCurrentDate,
 	hasClosurePassed,
-	setEnvValue,
 } = require("../common/common_utils");
 const moment = require("moment");
 const jwt = require("jsonwebtoken");
 
-require("dotenv").config();
+const dotenv = require("dotenv")
+dotenv.config()
 
 //setup nodemailer for sending new idea post and new comment emails
 const transport = nodemailer.createTransport({
@@ -169,9 +169,9 @@ function setNewClosureDates(req, res) {
 		if (!newClosureDate || !newFinalClosureDate) {
 			return res.send({ status: "FAILURE", message: "Missing details" });
 		} else {
-			setEnvValue("CLOSURE_DATE", newClosureDate);
-			setEnvValue("FINAL_CLOSURE_DATE", newFinalClosureDate)
-
+			fs.writeFileSync("./common/closure.txt", newClosureDate, "utf8");
+			fs.writeFileSync("./common/final_closure.txt", newFinalClosureDate, "utf8");
+			
 			return res.send({
 				status: "SUCCESS",
 				message: "Set new closure date successfully",
@@ -190,8 +190,8 @@ function getClosureDates(req, res) {
 	} else {
 		return res.send({
 			status: "SUCCESS",
-			closure_date: process.env.CLOSURE_DATE,
-			final_closure_date: process.env.FINAL_CLOSURE_DATE,
+			closure_date: fs.readFileSync("./common/closure.txt", "utf8"),
+			final_closure_date: fs.readFileSync("./common/final_closure.txt", "utf8"),
 		});
 	}
 }
