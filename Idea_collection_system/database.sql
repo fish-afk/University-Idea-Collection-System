@@ -72,11 +72,11 @@ CREATE TABLE IF NOT EXISTS `users`
 
 PRIMARY KEY (`username`),
 KEY `FK_1` (`staff_type_id`),
-CONSTRAINT `FK_1` FOREIGN KEY `FK_1` (`staff_type_id`) REFERENCES `staff_type` (`type_id`),
+CONSTRAINT `FK_1` FOREIGN KEY `FK_1` (`staff_type_id`) REFERENCES `staff_type` (`type_id`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_2` (`department_id`),
-CONSTRAINT `FK_8` FOREIGN KEY `FK_2` (`department_id`) REFERENCES `departments` (`department_id`),
+CONSTRAINT `FK_8` FOREIGN KEY `FK_2` (`department_id`) REFERENCES `departments` (`department_id`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_3` (`role_id`),
-CONSTRAINT `FK_12_2` FOREIGN KEY `FK_3` (`role_id`) REFERENCES `user_roles` (`role_id`)
+CONSTRAINT `FK_12_2` FOREIGN KEY `FK_3` (`role_id`) REFERENCES `user_roles` (`role_id`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
@@ -88,15 +88,15 @@ CREATE TABLE IF NOT EXISTS `ideas`
  `idea_title`              text NOT NULL ,
  `idea_body`               text NOT NULL,
  `date_and_time_posted_on` datetime NOT NULL ,
- `category_id`             int NOT NULL ,
+ `category_id`             int NULL ,
  `post_is_anonymous`       tinyint NOT NULL ,
- `username`                varchar(255) NOT NULL ,
+ `username`                varchar(255) NULL ,
 
 PRIMARY KEY (`idea_id`),
 KEY `FK_1` (`username`),
-CONSTRAINT `FK_3` FOREIGN KEY `FK_1` (`username`) REFERENCES `users` (`username`),
+CONSTRAINT `FK_3` FOREIGN KEY `FK_1` (`username`) REFERENCES `users` (`username`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_2` (`category_id`),
-CONSTRAINT `FK_9` FOREIGN KEY `FK_2` (`category_id`) REFERENCES `idea_categories` (`category_id`)
+CONSTRAINT `FK_9` FOREIGN KEY `FK_2` (`category_id`) REFERENCES `idea_categories` (`category_id`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
@@ -107,11 +107,11 @@ CREATE TABLE IF NOT EXISTS `idea_documents`
 (
  `document_id`  int AUTO_INCREMENT NOT NULL ,
  `filename` text NOT NULL ,
- `idea_id`      int NOT NULL ,
+ `idea_id`      int NULL ,
 
 PRIMARY KEY (`document_id`),
 KEY `FK_1` (`idea_id`),
-CONSTRAINT `FK_6` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`)
+CONSTRAINT `FK_6` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
@@ -123,14 +123,14 @@ CREATE TABLE IF NOT EXISTS `comments`
  `comment`           text NOT NULL ,
  `date_and_time_posted_on` datetime NOT NULL ,
  `post_is_anonymous` tinyint NOT NULL ,
- `idea_id`           int NOT NULL ,
- `username`          varchar(255) NOT NULL ,
+ `idea_id`           int NULL ,
+ `username`          varchar(255) NULL ,
 
 PRIMARY KEY (`comment_id`),
 KEY `FK_1` (`idea_id`),
-CONSTRAINT `FK_2` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`),
+CONSTRAINT `FK_2` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_2` (`username`),
-CONSTRAINT `FK_12` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`)
+CONSTRAINT `FK_12` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 -- ************************************** `likes_and_dislikes`
@@ -139,14 +139,14 @@ CREATE TABLE IF NOT EXISTS `likes_and_dislikes`
 (
  `impression_id`   int AUTO_INCREMENT  NOT NULL ,
  `like_or_dislike` tinyint NOT NULL ,
- `idea_id`         int NOT NULL ,
- `username`        varchar(255) NOT NULL ,
+ `idea_id`         int NULL ,
+ `username`        varchar(255) NULL ,
 
 PRIMARY KEY (`impression_id`),
 KEY `FK_1` (`idea_id`),
-CONSTRAINT `FK_4` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`),
+CONSTRAINT `FK_4` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_2` (`username`),
-CONSTRAINT `FK_5` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`)
+CONSTRAINT `FK_5` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
@@ -157,14 +157,14 @@ CREATE TABLE IF NOT EXISTS `reported_posts`
  `report_id`        int AUTO_INCREMENT  NOT NULL ,
  `report`           text NOT NULL ,
  `report_date_time` datetime NOT NULL ,
- `idea_id`          int NOT NULL ,
- `username`         varchar(255) NOT NULL ,
+ `idea_id`          int NULL ,
+ `username`         varchar(255) NULL ,
 
 PRIMARY KEY (`report_id`),
 KEY `FK_1` (`idea_id`),
-CONSTRAINT `FK_10` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`),
+CONSTRAINT `FK_10` FOREIGN KEY `FK_1` (`idea_id`) REFERENCES `ideas` (`idea_id`) ON UPDATE CASCADE ON DELETE SET NULL,
 KEY `FK_2` (`username`),
-CONSTRAINT `FK_12_1` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`)
+CONSTRAINT `FK_12_1` FOREIGN KEY `FK_2` (`username`) REFERENCES `users` (`username`) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 
@@ -237,21 +237,16 @@ INSERT INTO `ideas` (`idea_id`, `idea_title`, `idea_body`, `date_and_time_posted
 -- dummy comments
 
 INSERT INTO `comments` (`comment_id`, `comment`, `date_and_time_posted_on`, `post_is_anonymous`, `idea_id`, `username`) VALUES
-	(1, 'nicely written !', '2023-11-09 10:56:14', 0, 1, 'slide2'),
-	(2, 'This is a well-thought-out idea with excellent potential. I appreciate your efforts and the creativity you\'ve put into this. Great job!', '2023-11-09 10:56:14', 1, 2, 'staff_1'),
 	(3, 'Your idea is impressive and shows a deep understanding of the subject matter. I\'m looking forward to seeing more of your work. Keep it up!', '2023-11-09 11:12:30', 0, 5, 'staff_3'),
 	(4, 'I find your idea truly fascinating and believe it has the potential to make a significant impact. Your dedication to innovation is commendable. Keep up the good work!', '2023-11-09 12:45:22', 1, 8, 'staff_4'),
 	(5, 'Your idea is not only creative but also very practical. It\'s clear that you\'ve put a lot of thought into this. Well done!', '2023-11-09 13:22:18', 0, 3, 'staff_6'),
 	(6, 'I\'m thoroughly impressed by your idea. The level of detail and originality is outstanding. I can\'t wait to see more from you!', '2023-11-09 14:07:59', 1, 10, 'staff_2'),
 	(7, 'Your work is nothing short of impressive. The effort and dedication you\'ve put into your idea are evident. Keep up the great work!', '2023-11-09 15:30:45', 0, 7, 'staff_5'),
 	(8, 'I find your idea to be a breath of fresh air. It\'s unique and shows your deep understanding of the subject. I look forward to more from you!', '2023-11-09 16:12:55', 1, 4, 'staff_7'),
-	(9, 'Your efforts are highly commendable. Your idea is a testament to your dedication and creative thinking. Great job!', '2023-11-09 17:45:01', 0, 1, 'staff_8'),
-	(10, 'I\'m impressed by your idea! It\'s clear that you\'ve put a lot of effort into it, and it shows. Great work!', '2023-11-09 18:32:10', 1, 6, 'staff_5'),
 	(11, 'Your idea is outstanding and very innovative. I\'m looking forward to more of your contributions. Keep it up!', '2023-11-09 19:15:27', 0, 9, 'staff_4'),
 	(12, 'Well done! Your idea showcases your creativity and passion for the topic. I appreciate your hard work.', '2023-11-09 20:03:45', 1, 5, 'staff_2'),
 	(13, 'I find your idea fascinating. It has the potential to make a significant impact. Keep up the good work!', '2023-11-09 21:28:14', 0, 3, 'staff_1'),
 	(14, 'I\'m genuinely impressed by your idea. The level of detail and originality is outstanding. I can\'t wait to see more from you!', '2023-11-09 22:17:30', 1, 7, 'staff_8'),
-	(15, 'Your dedication to innovation is commendable. Your idea is truly fascinating and shows your deep understanding of the subject. I look forward to more from you!', '2023-11-09 23:04:42', 0, 2, 'staff_6'),
 	(16, 'Your work is impressive and reflects your creative thinking. I can see a bright future ahead for your idea. Well done!', '2023-11-09 23:52:55', 1, 8, 'staff_3'),
 	(17, 'I\'m thoroughly impressed by your idea. It\'s a great example of creativity and originality. Keep up the excellent work!', '2023-11-10 00:41:10', 0, 4, 'staff_7'),
 	(19, 'Your idea is a breath of fresh air. It\'s unique and shows your deep understanding of the subject. I\'m excited to see what comes next!', '2023-11-10 01:29:25', 1, 10, 'staff_8');

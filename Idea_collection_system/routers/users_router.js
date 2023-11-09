@@ -12,6 +12,9 @@ router.patch('/changepassword', authMiddleware.verifyJWT, userController.changeP
 router.patch('/updatedetails', authMiddleware.verifyJWT, userController.updateAccountDetails)
 router.patch('/enableaccount', authMiddleware.verifyJWT, userController.enableAccount)
 router.patch('/disableaccount', authMiddleware.verifyJWT, userController.disableAccount);
+router.patch('/hideposts', authMiddleware.verifyJWT, userController.hidePostsAndComments)
+router.patch('/unhideposts', authMiddleware.verifyJWT, userController.UnhidePostsAndComments);
 router.post('/confirmjwt', authMiddleware.confirmJWT)
+router.post('/getallusers', authMiddleware.verifyJWT, userController.getAllUsers)
 
 module.exports = router;

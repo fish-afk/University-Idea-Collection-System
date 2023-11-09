@@ -12,12 +12,10 @@ const newDepartment = (req, res) => {
 				.status(500)
 				.send({ status: "FAILURE", message: "Error creating a department" });
 		} else {
-			res
-				.status(201)
-				.json({
-					status: "SUCCESS",
-					message: "Department created successfully",
-				});
+			res.status(201).json({
+				status: "SUCCESS",
+				message: "Department created successfully",
+			});
 		}
 	});
 };
@@ -61,7 +59,7 @@ const getDepartmentById = (req, res) => {
 
 // Update a department by department_id
 const updateDepartmentById = (req, res) => {
-	const department_id = req.params.department_id;
+	const department_id = req.body.department_id;
 	const { name, description } = req.body;
 	const query =
 		"UPDATE departments SET name = ?, description = ? WHERE department_id = ?";
@@ -75,12 +73,10 @@ const updateDepartmentById = (req, res) => {
 					.status(500)
 					.send({ status: "FAILURE", message: "Error updating department" });
 			} else {
-				res
-					.status(200)
-					.json({
-						status: "SUCCESS",
-						message: "Department updated successfully",
-					});
+				res.status(200).json({
+					status: "SUCCESS",
+					message: "Department updated successfully",
+				});
 			}
 		},
 	);
@@ -88,7 +84,7 @@ const updateDepartmentById = (req, res) => {
 
 // Delete a department by department_id
 const deleteDepartmentById = (req, res) => {
-	const department_id = req.params.department_id;
+	const department_id = req.body.department_id;
 	const query = "DELETE FROM departments WHERE department_id = ?";
 	Mysql.connection.query(query, [department_id], (err, results) => {
 		if (err) {
@@ -97,12 +93,10 @@ const deleteDepartmentById = (req, res) => {
 				.status(500)
 				.send({ status: "FAILURE", message: "Error deleting department" });
 		} else {
-			res
-				.status(200)
-				.json({
-					status: "SUCCESS",
-					message: "Department deleted successfully",
-				});
+			res.status(200).json({
+				status: "SUCCESS",
+				message: "Department deleted successfully",
+			});
 		}
 	});
 };

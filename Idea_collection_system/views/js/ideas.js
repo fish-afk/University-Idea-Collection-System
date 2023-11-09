@@ -232,22 +232,22 @@ const populateDomWithIdeas = (ideas) => {
 	} else {
 		idea_dom_part.innerHTML = ``;
 		for (let i = 0; i < ideas.length; i++) {
-			idea_dom_part.innerHTML += `<div class="idea one">
+			if (ideas[i]?.hidden_posts_and_comments != 1) {
+				
+				idea_dom_part.innerHTML += `<div class="idea one">
                 <div class="info">
                     <div class="user">
                         <img src="images/profile.jpg" alt="">
-                        <p>${
-													ideas[i]?.post_is_anonymous == 1
-														? "anonymous"
-														: ideas[i]?.username
-												}</p>
+                        <p>${ideas[i]?.post_is_anonymous == 1
+						? "anonymous"
+						: ideas[i]?.username
+					}</p>
                     </div>
                     <div class="tag">
                         <h3>Category:</h3>
                         <p class="category">${ideas[i]?.category_name}</p>
-						<button class='report-btn' onClick={reportPost(${
-							ideas[i]?.idea_id
-						})} id="report-${ideas[i]?.idea_id}">Report Post</button>
+						<button class='report-btn' onClick={reportPost(${ideas[i]?.idea_id
+					})} id="report-${ideas[i]?.idea_id}">Report Post</button>
                     </div>
                 </div>
 				<br>
@@ -257,19 +257,16 @@ const populateDomWithIdeas = (ideas) => {
                     <p>${ideas[i]?.idea_body}</p>
 					<br>
 					<br>
-                    <div class="docs" style="display:${
-											!ideas[i]?.idea_documents ? "none" : ""
-										};">
+                    <div class="docs" style="display:${!ideas[i]?.idea_documents ? "none" : ""
+					};">
 						
                         <div class="name">
                             <i class="fas fa-file"></i>
-                            <a target="_blank" href="/api/ideas/getdocumentfile?filename=${
-															ideas[i]?.idea_documents
-														}&token=${jwt_key}&username=${username}"><p style="color:wheat;">Download Attached Document</p></a>
+                            <a target="_blank" href="/api/ideas/getdocumentfile?filename=${ideas[i]?.idea_documents
+					}&token=${jwt_key}&username=${username}"><p style="color:wheat;">Download Attached Document</p></a>
                         </div>
-                        <a target="_blank" href="/api/ideas/getdocumentfile?filename=${
-													ideas[i]?.idea_documents
-												}&token=${jwt_key}&username=${username}"><i class="fas fa-cloud-download-alt"></i></a>
+                        <a target="_blank" href="/api/ideas/getdocumentfile?filename=${ideas[i]?.idea_documents
+					}&token=${jwt_key}&username=${username}"><i class="fas fa-cloud-download-alt"></i></a>
                     </div>
                 </div>
 
@@ -277,21 +274,18 @@ const populateDomWithIdeas = (ideas) => {
                 <div class="reactions">
                     <div class="react">
                         <div class="feedback likes">
-                            <i class="like like far fa-thumbs-up" id="like" onclick="like(${
-															ideas[i]?.idea_id
-														})"></i>
+                            <i class="like like far fa-thumbs-up" id="like" onclick="like(${ideas[i]?.idea_id
+					})"></i>
                             <p>${ideas[i].num_likes}</p>
                         </div>
                         <div class="feedback dislikes">
-                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike(${
-															ideas[i]?.idea_id
-														})"></i>
+                            <i class="dislike far fa-thumbs-down" id="dislike" onclick="dislike(${ideas[i]?.idea_id
+					})"></i>
                             <p>${ideas[i].num_dislikes}</p>
                         </div>
                         <div class="feedback comment-icon">
-                            <a href='/comments.html?idea_id=${
-															ideas[i]?.idea_id
-														}' target='_blank'>
+                            <a href='/comments.html?idea_id=${ideas[i]?.idea_id
+					}' target='_blank'>
 								<i class="comment far fa-comment" id="commenticon"></i>
 							</a>
                             
@@ -299,11 +293,12 @@ const populateDomWithIdeas = (ideas) => {
                     </div>
                     <div class="report">
                         Posted On: ${new Date(
-													ideas[i]?.date_and_time_posted_on,
-												)}
+						ideas[i]?.date_and_time_posted_on,
+					)}
                     </div>
                 </div>
                 `;
+			}
 		}
 	}
 };

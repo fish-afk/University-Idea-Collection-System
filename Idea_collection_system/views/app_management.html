@@ -99,27 +99,12 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Institutional</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Departmental</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Personal</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
+                <tbody id="categories-tbody">
+                    
                 </tbody>
             </table>
             <div class="buttons">
-                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
-                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
+                <button class="button" onclick="addNewCategory()"><i class="fas fa-plus"></i> Add New</button>
             </div>
         </div>
 
@@ -128,101 +113,7 @@
 
 
     <!---------admin categories section------------------------------>
-    <section class="admin">
-        <p>Admin Settings</p><br>
-        <div class="closure-date">
-            <p>Closure Date:</p>
-            <input type="date">
-        </div>
-        <div class="fclosure">
-            <p>Final Closure Date:</p>
-            <input type="date">
-        </div>
-
-        <br>
-
-
-        <!---------Staff details table------------>
-        <div class="table-container">
-            <table class="staff-table">
-                <thead class="table-head">
-                    <tr>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>DOB</th>
-                        <th>Department</th>
-                        <th>Type</th>
-                        <th>Active</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="row">
-                        <td>J.Miles</td>
-                        <td>Joseph</td>
-                        <td>Miles</td>
-                        <td>jmiles@mail.com</td>
-                        <td>1234abcd</td>
-                        <td>10/08/1998</td>
-                        <td>School of Science and Technology</td>
-                        <td>Academic</td>
-                        <td>Active</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                    <tr class="row">
-                        <td>Theresa.N</td>
-                        <td>Theresa</td>
-                        <td>Nyambe</td>
-                        <td>teresa@mail.com</td>
-                        <td>fwu7347HJV</td>
-                        <td>01/05/1988</td>
-                        <td>School of Science and Technology</td>
-                        <td>Support</td>
-                        <td>Active</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                    <tr class="row">
-                        <td>Keran.P</td>
-                        <td>Keran</td>
-                        <td>Peterson</td>
-                        <td>kpeterson@mail.com</td>
-                        <td>qwert12345</td>
-                        <td>10/08/1998</td>
-                        <td>School of Accounting and Finance</td>
-                        <td>Academic</td>
-                        <td>Active</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                    <tr class="row">
-                        <td>Jane.M</td>
-                        <td>Jane</td>
-                        <td>Mulenga</td>
-                        <td>mulengaj@mail.com</td>
-                        <td>fyyeq74f</td>
-                        <td>10/08/2002</td>
-                        <td>School of Business</td>
-                        <td>Academic</td>
-                        <td>Inactive</td>
-                        <td><i class="fas fa-marker"></i></td>
-                        <td><i class="fas fa-trash"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="buttons">
-                <button class="button" onclick=""><i class="fas fa-plus"></i> Add New</button>
-                <button class="button" onclick=""><i class="fas fa-save"></i> Save Changes</button>
-            </div>
-
-        </div>
-
-    </section>
+    
     <!---------reported posts table------------>
 
 
@@ -232,11 +123,11 @@
             <table class="reports-table">
                 <thead class="table-head">
                     <tr>
-                        <th>Username</th>
-                        <th>Idea</th>
                         <th>Reported By</th>
+                        <th>Idea</th>
+                        <th>Report Content</th>
                         <th>Report Time</th>
-                        <th>Disable Post</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -271,18 +162,21 @@
 
     <section class="ban-users">
 
-        <h1>Ban Users</h1>
+        <h1>System Users List</h1>
         <!---------Ban users table------------>
         <div class="table-container">
             <table class="ban-table">
                 <thead class="table-head">
                     <tr>
                         <th>Username</th>
+                        <th>Email</th>
+                        <th>Last Log In Date</th>
                         <th>Account Type</th>
-                        <th>Ban</th>
+                        <th>Active</th>
+                        
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="users-tbody">
                     <tr class="row">
                         <td>J.Miles</td>
                         <td>Academic</td>
@@ -309,6 +203,26 @@
 
         </div>
     </section>
+
+    <section class="admin">
+        <p>Closure Dates</p><br>
+        <div class="closure">
+            <div class="closure-date">
+                <p>Closure Date:</p>
+                <input type="date" id="closure-date">
+            </div>
+            <div class="fclosure">
+                <p>Final Closure Date:</p>
+                <input type="date" id="fclosure">
+            </div>
+            <br>
+            <button class="button" onclick="updateClosureDates()"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+    
+        <br>
+    
+    </section> 
+
     <footer>
         <div class="info">
             <div class="contact-details">

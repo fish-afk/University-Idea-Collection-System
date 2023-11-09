@@ -1529,3 +1529,9 @@ footer h2 {
     border-style: hidden;
     margin-top: 4rem;
 }
+
+.closure {
+    background-color: rgb(167, 185, 206);
+    padding: 2rem;
+    border-radius: 5px;
+}

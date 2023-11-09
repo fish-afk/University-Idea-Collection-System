@@ -2,6 +2,14 @@ const Mysql = require("../models/_mysql");
 
 // Create a new category
 const newCategory = (req, res) => {
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	}
+
 	const { name, description } = req.body;
 
 	const query = "INSERT INTO idea_categories (name, description) VALUES (?, ?)";
@@ -58,47 +66,57 @@ const getCategoryById = (req, res) => {
 
 // Update a category by category_id
 const updateCategoryById = (req, res) => {
-	const category_id = req.params.category_id;
-	const { name, description } = req.body;
-	const query =
-		"UPDATE idea_categories SET name = ?, description = ? WHERE category_id = ?";
-	Mysql.connection.query(
-		query,
-		[name, description, category_id],
-		(err, results) => {
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const category_id = req.body.category_id;
+		const { name } = req.body;
+		const query = "UPDATE idea_categories SET name = ? WHERE category_id = ?";
+		Mysql.connection.query(query, [name, category_id], (err, results) => {
 			if (err) {
 				console.error("Error updating category:", err);
 				res
 					.status(500)
 					.send({ status: "FAILURE", message: "Error updating category" });
 			} else {
-				res
-					.status(200)
-					.json({
-						status: "SUCCESS",
-						message: "Category updated successfully",
-					});
+				res.status(200).json({
+					status: "SUCCESS",
+					message: "Category updated successfully",
+				});
 			}
-		},
-	);
+		});
+	}
 };
 
 // Delete a category by category_id
 const deleteCategoryById = (req, res) => {
-	const category_id = req.params.category_id;
-	const query = "DELETE FROM idea_categories WHERE category_id = ?";
-	Mysql.connection.query(query, [category_id], (err, results) => {
-		if (err) {
-			console.error("Error deleting category:", err);
-			res
-				.status(500)
-				.send({ status: "FAILURE", message: "Error deleting category" });
-		} else {
-			res
-				.status(200)
-				.json({ status: "SUCCESS", message: "Category deleted successfully" });
-		}
-	});
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const category_id = req.body.category_id;
+		const query = "DELETE FROM idea_categories WHERE category_id = ?";
+		Mysql.connection.query(query, [category_id], (err, results) => {
+			if (err) {
+				console.error("Error deleting category:", err);
+				res
+					.status(500)
+					.send({ status: "FAILURE", message: "Error deleting category" });
+			} else {
+				res.status(200).json({
+					status: "SUCCESS",
+					message: "Category deleted successfully",
+				});
+			}
+		});
+	}
 };
 
 module.exports = {

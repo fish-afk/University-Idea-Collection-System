@@ -100,7 +100,6 @@ const getContributorsPerDepartment = () => {
 const getAllStats = async (req, res) => {
 	const privs = req.decoded["privs"]; // Assuming you have the user's privileges in req.user
 
-	console.log(privs);
 	if (privs != "admin" && privs != "qa_manager") {
 		return res
 			.status(401)

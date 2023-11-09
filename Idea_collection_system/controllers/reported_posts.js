@@ -1,16 +1,18 @@
 const Mysql = require("../models/_mysql");
-const moment = require('moment')
-
+const moment = require("moment");
 
 function formatDate(date) {
 	return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
-
 // Create a new reported post
 const newReportedPost = (req, res) => {
-    const username = req.decoded['username']
-	const { report, report_date_time = formatDate(Date.now()), idea_id } = req.body;
+	const username = req.decoded["username"];
+	const {
+		report,
+		report_date_time = formatDate(Date.now()),
+		idea_id,
+	} = req.body;
 
 	const query =
 		"INSERT INTO reported_posts (report, report_date_time, idea_id, username) VALUES (?, ?, ?, ?)";
@@ -95,7 +97,7 @@ const getReportedPostByIdeaId = (req, res) => {
 
 // Update a reported post by report_id
 const updateReportedPostById = (req, res) => {
-	const report_id = req.params.report_id;
+	const report_id = req.body.report_id;
 	const { report, report_date_time, idea_id, username } = req.body;
 	const query =
 		"UPDATE reported_posts SET report = ?, report_date_time = ?, idea_id = ?, username = ? WHERE report_id = ?";
@@ -120,7 +122,7 @@ const updateReportedPostById = (req, res) => {
 
 // Delete a reported post by report_id
 const deleteReportedPostById = (req, res) => {
-	const report_id = req.params.report_id;
+	const report_id = req.body.report_id;
 	const query = "DELETE FROM reported_posts WHERE report_id = ?";
 	Mysql.connection.query(query, [report_id], (err, results) => {
 		if (err) {
@@ -142,6 +144,6 @@ module.exports = {
 	getAllReportedPosts,
 	getReportedPostById,
 	updateReportedPostById,
-    deleteReportedPostById,
-    getReportedPostByIdeaId
+	deleteReportedPostById,
+	getReportedPostByIdeaId,
 };

@@ -130,7 +130,6 @@ const updateAccountDetails = (req, res) => {
 const disableAccount = (req, res) => {
 	const { accountUsername } = req.body;
 
-	const username = req.decoded["username"];
 	const privs = req.decoded["privs"];
 
 	if (privs != "admin" && privs != "qa_manager") {
@@ -150,7 +149,7 @@ const disableAccount = (req, res) => {
 				return res.status(200).send({
 					status: "SUCCESS",
 					message:
-						"Account for user " + username + " has been disabled successfully",
+						"Account for user " + accountUsername + " has been disabled successfully",
 				});
 			}
 		});
@@ -162,7 +161,6 @@ const disableAccount = (req, res) => {
 const enableAccount = (req, res) => {
 	const { accountUsername } = req.body;
 
-	const username = req.decoded["username"];
 	const privs = req.decoded["privs"];
 
 	if (privs != "admin" && privs != "qa_manager") {
@@ -182,12 +180,77 @@ const enableAccount = (req, res) => {
 				return res.status(200).send({
 					status: "SUCCESS",
 					message:
-						"Account for user " + username + " has been enabled successfully",
+						"Account for user " + accountUsername + " has been enabled successfully",
 				});
 			}
 		});
 	}
 };
+
+const hidePostsAndComments = (req, res) => {
+	const { accountUsername } = req.body;
+
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `UPDATE users SET hidden_posts_and_comments = 1 WHERE username = ?`;
+
+		Mysql.connection.query(query, [accountUsername], (err, results) => {
+			if (err) {
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.status(200).send({
+					status: "SUCCESS",
+					message:
+						"Posts And Comments for user " +
+						accountUsername +
+						" have been hidden successfully",
+				});
+			}
+		});
+	}
+};
+
+
+const UnhidePostsAndComments = (req, res) => {
+	const { accountUsername } = req.body;
+
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != "qa_manager") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `UPDATE users SET hidden_posts_and_comments = 0 WHERE username = ?`;
+
+		Mysql.connection.query(query, [accountUsername], (err, results) => {
+			if (err) {
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.status(200).send({
+					status: "SUCCESS",
+					message:
+						"Posts And Comments for user " +
+						accountUsername +
+						" have been revealed successfully",
+				});
+			}
+		});
+	}
+};
+
+
 
 const signup = (req, res) => {
 	const {
@@ -461,6 +524,31 @@ const refresh = async (req, res) => {
 	await authMiddleware.verifyRefreshToken(refreshToken, username, res);
 };
 
+const getAllUsers = (req, res) => {
+	const privs = req.decoded['privs']
+	if (privs != "admin" && privs != 'qa_manager') {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `SELECT username, firstname, lastname, email, role_id, staff_type_id, department_id, last_log_in, account_active, hidden_posts_and_comments FROM users`;
+		Mysql.connection.query(query, [], (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.send({
+					status: "SUCCESS",
+					data: results,
+				});
+			}
+		})
+	}
+}
+
 module.exports = {
 	signup,
 	login,
@@ -469,5 +557,8 @@ module.exports = {
 	updateAccountDetails,
 	enableAccount,
 	disableAccount,
-	getUserData
+	getUserData,
+	getAllUsers,
+	hidePostsAndComments,
+	UnhidePostsAndComments
 };

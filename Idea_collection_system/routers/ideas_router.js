@@ -50,9 +50,11 @@ router.patch(
 );
 
 router.patch(
-	"/setclosuredate",
+	"/setclosuredates",
 	authMiddleware.verifyJWT,
-	ideaController.setClosureDateForIdeas,
+	ideaController.setNewClosureDates,
 );
+
+router.post('/getclosuredates', authMiddleware.verifyJWT, ideaController.getClosureDates)
 
 module.exports = router;

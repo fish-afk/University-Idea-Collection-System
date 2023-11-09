@@ -25,6 +25,23 @@ function formatDate(date) {
 	return moment(date).format("YYYY-MM-DD HH:mm:ss");
 }
 
+
+const checkIFBanned = (username) => {
+	return new Promise((resolve, reject) => {
+		// Replace this with your other database query
+		const query = `SELECT * FROM users WHERE username = ? AND account_active = 0`;
+		Mysql.connection.query(query, [username], (err, results) => {
+			if (err) {
+				console.log(err)
+				reject("Db error");
+			} else {
+			
+				resolve(results);
+			}
+		});
+	});
+};
+
 // Create an idea
 const newIdeaPost = async (req, res) => {
 	const todaysDate = getCurrentDate();
@@ -34,97 +51,110 @@ const newIdeaPost = async (req, res) => {
 	);
 	const username = req.decoded["username"];
 
-	if (hasClosurePassed_ == true) {
-		return res.send({
-			status: "FAILURE",
-			message:
-				"Sorry, The closure date for ideas has passed for this academic year, and ideas can no longer be posted",
-		});
-	}
+	try {
+		const [checkIFBannedrecord] = await Promise.all([checkIFBanned(username)]);
+		if (checkIFBannedrecord.length > 0) {
+			return res.send({
+				status: "FAILURE",
+				message: "You have been banned from posting new ideas and comments",
+			});
+		}
 
-	const {
-		idea_title,
-		idea_body,
-		date_and_time_posted_on = formatDate(Date.now()),
-		category_id,
-		post_is_anonymous,
-	} = req.body;
+		if (hasClosurePassed_ == true) {
+			return res.send({
+				status: "FAILURE",
+				message:
+					"Sorry, The closure date for ideas has passed for this academic year, and ideas can no longer be posted",
+			});
+		}
 
-	const query =
-		"INSERT INTO ideas (idea_title, idea_body, date_and_time_posted_on, category_id, post_is_anonymous, username) VALUES (?, ?, ?, ?, ?, ?)";
-	Mysql.connection.query(
-		query,
-		[
+		const {
 			idea_title,
 			idea_body,
-			date_and_time_posted_on,
+			date_and_time_posted_on = formatDate(Date.now()),
 			category_id,
 			post_is_anonymous,
-			username,
-		],
-		(err, result) => {
-			if (err) {
-				console.error("Error creating an idea:", err);
-				res
-					.status(500)
-					.send({ status: "FAILURE", message: "Error creating an idea" });
-			} else {
-				const query1 = `SELECT * FROM users WHERE username = ?`;
+		} = req.body;
 
-				Mysql.connection.query(query1, [username], (err, results) => {
-					if (err) {
-						console.log(err);
-						return res.send({
-							status: "FAILURE",
-							message: "Unknown error",
-						});
-					} else {
-						const record = results[0];
-						const department_id = record?.department_id;
+		const query =
+			"INSERT INTO ideas (idea_title, idea_body, date_and_time_posted_on, category_id, post_is_anonymous, username) VALUES (?, ?, ?, ?, ?, ?)";
+		Mysql.connection.query(
+			query,
+			[
+				idea_title,
+				idea_body,
+				date_and_time_posted_on,
+				category_id,
+				post_is_anonymous,
+				username,
+			],
+			(err, result) => {
+				if (err) {
+					console.error("Error creating an idea:", err);
+					res
+						.status(500)
+						.send({ status: "FAILURE", message: "Error creating an idea" });
+				} else {
+					const query1 = `SELECT * FROM users WHERE username = ?`;
 
-						const query2 = `SELECT * FROM users WHERE department_id = ? AND role_id = 2`;
+					Mysql.connection.query(query1, [username], (err, results) => {
+						if (err) {
+							console.log(err);
+							return res.send({
+								status: "FAILURE",
+								message: "Unknown error",
+							});
+						} else {
+							const record = results[0];
+							const department_id = record?.department_id;
 
-						Mysql.connection.query(
-							query2,
-							[department_id],
-							async (err, results) => {
-								if (err) {
-									console.log(err);
-									return res.send({
-										status: "FAILURE",
-										message: "Unknown error",
-									});
-								} else {
-									const record2 = results[0];
-									const email = record2?.email;
+							const query2 = `SELECT * FROM users WHERE department_id = ? AND role_id = 2`;
 
-									if (email) {
-										const info = await transport.sendMail({
-											to: email, // list of receivers
-											subject: "New idea post on your department", // Subject line
-											text:
-												"A new idea was posted on your department by the user: " +
-												username, // plain text body
+							Mysql.connection.query(
+								query2,
+								[department_id],
+								async (err, results) => {
+									if (err) {
+										console.log(err);
+										return res.send({
+											status: "FAILURE",
+											message: "Unknown error",
 										});
-										console.log(info);
-									}
+									} else {
+										const record2 = results[0];
+										const email = record2?.email;
 
-									return res.status(201).json({
-										status: "SUCCESS",
-										message: "Idea created successfully",
-										idea_id: result?.insertId,
-									});
-								}
-							},
-						);
-					}
-				});
-			}
-		},
-	);
+										if (email) {
+											const info = await transport.sendMail({
+												to: email, // list of receivers
+												subject: "New idea post on your department", // Subject line
+												text:
+													"A new idea was posted on your department by the user: " +
+													username, // plain text body
+											});
+											console.log(info);
+										}
+
+										return res.status(201).json({
+											status: "SUCCESS",
+											message: "Idea created successfully",
+											idea_id: result?.insertId,
+										});
+									}
+								},
+							);
+						}
+					});
+				}
+			},
+		);
+	} catch (error) {
+		console.log(error);
+		return res.send({ status: "FAILURE", message: "Unknown error" });
+	}
 };
 
-function setClosureDateForIdeas(req, res) {
+function setNewClosureDates(req, res) {
 	const privs = req.decoded["privs"];
 
 	if (privs != "admin") {
@@ -132,18 +162,35 @@ function setClosureDateForIdeas(req, res) {
 			.status(401)
 			.send({ status: "FAILURE", message: "Insufficient privileges" });
 	} else {
-		const { newClosureDate } = req.body;
+		const { newClosureDate, newFinalClosureDate } = req.body;
 
-		if (!newClosureDate) {
+		if (!newClosureDate || !newFinalClosureDate) {
 			return res.send({ status: "FAILURE", message: "Missing details" });
 		} else {
 			setEnvValue("CLOSURE_DATE", newClosureDate);
+			setEnvValue("FINAL_CLOSURE_DATE", newFinalClosureDate)
 
 			return res.send({
 				status: "SUCCESS",
 				message: "Set new closure date successfully",
 			});
 		}
+	}
+}
+
+function getClosureDates(req, res) {
+	const privs = req.decoded["privs"];
+
+	if (privs != "admin" && privs != 'qa_manager') {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		return res.send({
+			status: "SUCCESS",
+			closure_date: process.env.CLOSURE_DATE,
+			final_closure_date: process.env.FINAL_CLOSURE_DATE,
+		});
 	}
 }
 
@@ -399,12 +446,14 @@ const getAllIdeas = (req, res) => {
     idea_categories.name AS category_name,
     GROUP_CONCAT(idea_documents.filename) AS idea_documents,
     IFNULL(SUM(likes_and_dislikes.like_or_dislike = 1), 0) AS num_likes,
-    IFNULL(SUM(likes_and_dislikes.like_or_dislike = 0), 0) AS num_dislikes
+    IFNULL(SUM(likes_and_dislikes.like_or_dislike = 0), 0) AS num_dislikes,
+    users.hidden_posts_and_comments
 FROM
     ideas
 JOIN idea_categories ON ideas.category_id = idea_categories.category_id
 LEFT JOIN idea_documents ON ideas.idea_id = idea_documents.idea_id
 LEFT JOIN likes_and_dislikes ON ideas.idea_id = likes_and_dislikes.idea_id
+LEFT JOIN users ON ideas.username = users.username
 GROUP BY
     ideas.idea_id;
 `;
@@ -440,7 +489,7 @@ const getIdeaById = (req, res) => {
 
 // Update an idea by idea_id
 const updateIdeaByID = (req, res) => {
-	const idea_id = req.params.idea_id;
+	const idea_id = req.body.idea_id;
 	const {
 		idea_title,
 		idea_body,
@@ -479,7 +528,7 @@ const updateIdeaByID = (req, res) => {
 
 // Delete an idea by idea_id
 const deleteIdeaById = (req, res) => {
-	const idea_id = req.params.idea_id;
+	const idea_id = req.body.idea_id;
 	const query = "DELETE FROM ideas WHERE idea_id = ?";
 	Mysql.connection.query(query, [idea_id], (err, results) => {
 		if (err) {
@@ -506,5 +555,6 @@ module.exports = {
 	getDocumentFile,
 	likePost,
 	dislikePost,
-	setClosureDateForIdeas,
+	setNewClosureDates,
+	getClosureDates
 };

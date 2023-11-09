@@ -19,13 +19,13 @@ router.post(
 	authMiddleware.verifyJWT,
 	categoriesController.newCategory,
 );
-router.post(
+router.delete(
 	"/deletecategory",
 	authMiddleware.verifyJWT,
 	categoriesController.deleteCategoryById,
 );
 router.patch(
-	"updatecategory",
+	"/updatecategory",
 	authMiddleware.verifyJWT,
 	categoriesController.updateCategoryById,
 );
