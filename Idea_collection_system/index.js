@@ -32,7 +32,7 @@ server.get('/', limiter, (req, res) => {
 	return res.redirect('/login.html')
 })
 
-server.use(express.static('static'))
+server.use(express.static('views'))
 server.use("/api/users", limiter, usersRouter);
 server.use("/api/ideas", limiter, ideasRouter);
 server.use('/api/comments', limiter, commentsRouter)
