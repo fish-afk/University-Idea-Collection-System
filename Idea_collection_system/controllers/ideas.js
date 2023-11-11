@@ -500,7 +500,7 @@ const getAllIdeas = (req, res) => {
     ideas.post_is_anonymous,
     ideas.username AS username,
     idea_categories.name AS category_name,
-    GROUP_CONCAT(idea_documents.filename) AS idea_documents,
+    idea_documents.filename AS idea_documents,
     IFNULL(SUM(likes_and_dislikes.like_or_dislike = 1), 0) AS num_likes,
     IFNULL(SUM(likes_and_dislikes.like_or_dislike = 0), 0) AS num_dislikes,
     users.hidden_posts_and_comments

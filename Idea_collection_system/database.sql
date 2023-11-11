@@ -291,3 +291,9 @@ INSERT INTO `likes_and_dislikes` (`impression_id`, `like_or_dislike`, `idea_id`,
 	(34, 1, 4, 'staff_8');
 
 
+INSERT INTO `idea_documents` (`document_id`, `filename`, `idea_id`) VALUES
+	(1, '1699448208219-707723893.jpg', 3),
+	(2, '1699519536524-388397323.jpg', 5),
+	(3, '1699519681732-894847961.png', 2),
+	(4, '1699519709369-309216593.png', 6),
+	(5, '1699519716033-723771104.png', 7);
