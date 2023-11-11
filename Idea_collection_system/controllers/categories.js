@@ -94,6 +94,7 @@ const updateCategoryById = (req, res) => {
 
 // Delete a category by category_id
 const deleteCategoryById = (req, res) => {
+	
 	const privs = req.decoded["privs"];
 
 	if (privs != "admin" && privs != "qa_manager") {

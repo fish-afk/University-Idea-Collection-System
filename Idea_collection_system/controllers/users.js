@@ -3,6 +3,9 @@ const bcrypt = require("bcrypt");
 const moment = require("moment");
 const authMiddleware = require("../middleware/auth_middleware");
 const SALT_ROUNDS = 10; // for hashing
+const fs = require('fs')
+const jwt = require("jsonwebtoken");
+const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
 function formatDate(date) {
 	return moment(date).format("YYYY-MM-DD HH:mm:ss");
@@ -82,7 +85,7 @@ const changePassword = (req, res) => {
 				[hashedPassword, username],
 				(err, results) => {
 					if (err) {
-						console.log(err)
+						console.log(err);
 						return res.status(500).send({
 							status: "FAILURE",
 							message: "Unknown error",
@@ -110,7 +113,7 @@ const updateAccountDetails = (req, res) => {
 		[firstname, lastname, email, username],
 		(err, results) => {
 			if (err) {
-				console.log(err)
+				console.log(err);
 				return res.status(500).send({
 					status: "FAILURE",
 					message: "Unknown error",
@@ -149,7 +152,9 @@ const disableAccount = (req, res) => {
 				return res.status(200).send({
 					status: "SUCCESS",
 					message:
-						"Account for user " + accountUsername + " has been disabled successfully",
+						"Account for user " +
+						accountUsername +
+						" has been disabled successfully",
 				});
 			}
 		});
@@ -180,7 +185,9 @@ const enableAccount = (req, res) => {
 				return res.status(200).send({
 					status: "SUCCESS",
 					message:
-						"Account for user " + accountUsername + " has been enabled successfully",
+						"Account for user " +
+						accountUsername +
+						" has been enabled successfully",
 				});
 			}
 		});
@@ -218,7 +225,6 @@ const hidePostsAndComments = (req, res) => {
 	}
 };
 
-
 const UnhidePostsAndComments = (req, res) => {
 	const { accountUsername } = req.body;
 
@@ -250,8 +256,6 @@ const UnhidePostsAndComments = (req, res) => {
 	}
 };
 
-
-
 const signup = (req, res) => {
 	const {
 		username,
@@ -264,16 +268,16 @@ const signup = (req, res) => {
 		department_id,
 	} = req.body;
 
-	console.log(username)
+	console.log(username);
 
 	if (role_id !== 1) {
 		const { high_priv_key = "" } = req.body;
 
 		if (high_priv_key !== process.env.HIGH_PRIV_SIGNUP_KEY) {
 			return res.send({
-				status: 'FAILURE',
-				message: 'High privilege signup key invalid'
-			})
+				status: "FAILURE",
+				message: "High privilege signup key invalid",
+			});
 		}
 	}
 
@@ -295,16 +299,7 @@ const signup = (req, res) => {
 		}
 	}
 
-	
-
-	if (
-		!username ||
-		!firstname ||
-		!lastname ||
-		!email ||
-		!password ||
-		!role_id 
-	) {
+	if (!username || !firstname || !lastname || !email || !password || !role_id) {
 		return res.send({
 			status: "FAILURE",
 			message: "One or more mandatory fields missing",
@@ -321,7 +316,7 @@ const signup = (req, res) => {
 			}
 
 			if (!user) {
-				if ((role_id == 2) && department_id) {
+				if (role_id == 2 && department_id) {
 					const query = `SELECT * FROM users WHERE department_id = ? AND role_id = 2`;
 					Mysql.connection.query(query, [department_id], (err, results) => {
 						if (err) {
@@ -435,9 +430,9 @@ const login = (req, res) => {
 				bcrypt.compare(password, user.password, async (error, result) => {
 					if (result && !error) {
 						let privs = "staff";
-						
+
 						if (user?.role_id == 1) {
-							privs = 'staff'
+							privs = "staff";
 						}
 
 						if (user?.role_id == 2) {
@@ -468,18 +463,21 @@ const login = (req, res) => {
 								auth: false,
 							});
 						} else {
-							const query = `UPDATE users SET last_log_in = ? WHERE username = ?`
-							Mysql.connection.query(query, [formatDate(Date.now()), username], (err, result) => {
-								if (err) {
-									console.log(err)
-								}
-							})
+							const query = `UPDATE users SET last_log_in = ? WHERE username = ?`;
+							Mysql.connection.query(
+								query,
+								[formatDate(Date.now()), username],
+								(err, result) => {
+									if (err) {
+										console.log(err);
+									}
+								},
+							);
 							return res.send({
 								auth: true,
 								jwtToken,
 								refreshToken,
 							});
-							
 						}
 					} else {
 						return res.send({
@@ -494,13 +492,13 @@ const login = (req, res) => {
 };
 
 const getUserData = (req, res) => {
-	const username = req.decoded['username']
+	const username = req.decoded["username"];
 
 	const query = `SELECT username, firstname, lastname, email, role_id, staff_type_id, department_id, last_log_in FROM users WHERE username = ?`;
 
 	Mysql.connection.query(query, [username], (err, results) => {
 		if (err || !results || results.length < 1) {
-			console.log(err)
+			console.log(err);
 			return res.status(500).send({
 				status: "FAILURE",
 				message: "Unknown error",
@@ -508,11 +506,11 @@ const getUserData = (req, res) => {
 		} else {
 			return res.send({
 				status: "SUCCESS",
-				data: results[0]
+				data: results[0],
 			});
 		}
-	})
-}
+	});
+};
 
 const refresh = async (req, res) => {
 	const refreshToken = req.body.refreshToken;
@@ -525,8 +523,8 @@ const refresh = async (req, res) => {
 };
 
 const getAllUsers = (req, res) => {
-	const privs = req.decoded['privs']
-	if (privs != "admin" && privs != 'qa_manager') {
+	const privs = req.decoded["privs"];
+	if (privs != "admin" && privs != "qa_manager") {
 		return res
 			.status(401)
 			.send({ status: "FAILURE", message: "Insufficient privileges" });
@@ -545,9 +543,111 @@ const getAllUsers = (req, res) => {
 					data: results,
 				});
 			}
-		})
+		});
 	}
+};
+
+function verifyJWT(username, token, expected_privs = [], res) {
+	let status = true;
+	if (!token || !username) {
+		status = false;
+		return res
+			.status(401)
+			.send({ status: false, message: "Missing auth fields !" });
+	}
+	// Verify the JWT and check that it is valid
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+		if (err) {
+			status = false;
+			return res.status(401).send({ status: false, message: err.message });
+		}
+		if (decoded.exp < Date.now() / 1000) {
+			status = false;
+			return res
+				.status(401)
+				.send({ status: false, message: "JWT has expired" });
+		}
+
+		if (!expected_privs.includes(decoded.privs)) {
+			status = false;
+			return res
+				.status(401)
+				.send({ status: false, message: "Insufficient privileges" });
+		}
+
+		// If the JWT is valid, save the decoded user information in the request object
+		// so that it is available for the next middleware function
+		if (decoded.username != username) {
+			status = false;
+			return res.status(401).send({ status: false, message: "Token mismatch" }); // Token is not this users, but another users
+		}
+	});
+
+	return status;
 }
+
+// Define an endpoint to trigger the CSV export
+const ExportCSV = (req, res) => {
+	const username = req.query["username"];
+	const token = req.query["token"];
+	const table = req.query['table'];
+	const expected_privs = ["admin", "qa_manager"];
+
+	let status = verifyJWT(username, token, expected_privs, res);
+
+	if (status != true) {
+		return;
+	}
+
+	if (!table) {
+		return res.send({status:'FAILURE', message: 'Table field required'})
+	}
+	try {
+		const tableName = table; // Replace with your table name
+		const csvFileName = "./common/exported_data.csv";
+
+		// Query to get all data from the MySQL table
+		const query = `SELECT * FROM ${tableName}`;
+
+		Mysql.connection.query(query, (err, results) => {
+			if (err) {
+				console.error("Error executing query: " + err.stack);
+				res.status(500).json({ error: "Internal Server Error" });
+				return;
+			}
+
+			if (!results[0]) {
+				return res.send({status: 'FAILURE', message: 'Table empty'})
+			}
+
+			// Create a CSV writer
+			const csvWriter = createCsvWriter({
+				path: csvFileName,
+				header: Object.keys(results[0]), // Assumes the table has columns with headers
+			});
+
+			// Write the data to the CSV file
+			csvWriter
+				.writeRecords(results)
+				.then(() => {
+					console.log(`CSV file "${csvFileName}" created successfully.`);
+					res.download(csvFileName, (downloadError) => {
+						if (downloadError) {
+							console.error("Error downloading CSV: " + downloadError);
+						}
+						// Delete the CSV file after download
+						fs.unlinkSync(csvFileName);
+					});
+				})
+				.catch((writeError) => {
+					console.error("Error writing to CSV: " + writeError);
+					res.status(500).json({ error: "Internal Server Error" });
+				});
+		});
+	} catch (err) {
+		res.status(500).send("Error exporting tables: " + err.message);
+	}
+};
 
 module.exports = {
 	signup,
@@ -560,5 +660,6 @@ module.exports = {
 	getUserData,
 	getAllUsers,
 	hidePostsAndComments,
-	UnhidePostsAndComments
+	UnhidePostsAndComments,
+	ExportCSV,
 };

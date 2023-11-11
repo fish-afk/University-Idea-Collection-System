@@ -744,3 +744,16 @@ downloadDocumentsBtn.innerHTML = `
 <a style="color: cyan; font-size: 2rem; text-decoration: underline" target=_blank href="/api/ideas/getalldocumentszipped?username=${username}&token=${jwt_key}">
 	Download Idea Documents Zipped
 </a>`;
+
+
+const downloadCsvBtn = document.getElementById(
+	"download-csv-btn",
+);
+
+
+const table_to_export = document.getElementById('export-table').value;
+downloadCsvBtn.style.backgroundColor = "green";
+downloadCsvBtn.innerHTML = `
+<a style="color: cyan; font-size: 2rem; text-decoration: underline;" target=_blank href="/api/users/exportcsv?username=${username}&token=${jwt_key}&table=${table_to_export}">
+	Download Table export as csv.
+</a>`;

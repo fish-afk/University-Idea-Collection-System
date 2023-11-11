@@ -200,6 +200,21 @@
 
 
         <button style="padding: 2rem; border-radius: 10px;" id="download-documents-zipped-btn"></button>
+
+        <label style="margin-top: 2rem;" for="export-table">Select table to export as CSV FILE:</label>
+        <select name="export-table" id="export-table">
+            <option value="users" label="users"></option>
+            <option value="ideas" label="ideas"></option>
+            <option value="comments" label="comments"></option>
+            <option value="idea_documents" label="idea_documents"></option>
+            <option value="idea_categories" label="idea_categories"></option>
+            <option value="user_roles" label="user_roles"></option>
+            <option value="staff_type" label="staff_type"></option>
+            <option value="departments" label="departments"></option>
+            <option value="reported_posts" label="reported_posts"></option>
+            <option value="like_and_dislikes" label="like_and_dislikes"></option>
+        </select>
+        <button style="padding: 2rem; border-radius: 10px;margin-top: 2rem;" id="download-csv-btn"></button>
     </section>
 
     <footer>

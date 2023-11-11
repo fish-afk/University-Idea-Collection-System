@@ -303,8 +303,6 @@ function verifyJWT(username, token, expected_privs = [], res) {
 			status = false;
 			return res.status(401).send({ status: false, message: "Insufficient privileges" });
 		}
-
-		console.log('hit')
 		// If the JWT is valid, save the decoded user information in the request object
 		// so that it is available for the next middleware function
 		if (decoded.username != username) {

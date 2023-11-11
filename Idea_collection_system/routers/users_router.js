@@ -16,5 +16,6 @@ router.patch('/hideposts', authMiddleware.verifyJWT, userController.hidePostsAnd
 router.patch('/unhideposts', authMiddleware.verifyJWT, userController.UnhidePostsAndComments);
 router.post('/confirmjwt', authMiddleware.confirmJWT)
 router.post('/getallusers', authMiddleware.verifyJWT, userController.getAllUsers)
+router.get('/exportcsv', userController.ExportCSV)
 
 module.exports = router;
