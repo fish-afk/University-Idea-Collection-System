@@ -55,7 +55,7 @@
                 </div>
             </a>
             <a href="contact.html">
-                <div class="nav-item">
+                <div class="nav-item nav-contact-link">
                     <p>Contact</p>
                 </div>
             </a>
@@ -88,7 +88,7 @@
 
     <!---------edit categories section------------------------------>
 
-    <section class="categories">
+    <section class="categories" id="high-priv-part1">
         <p>Idea Categories</p>
         <div class="table-container">
             <table class="categories-table">
@@ -113,7 +113,7 @@
 
     <section class="ban-users">
 
-        <h1>System Users List</h1>
+        <h1 id="user-list-heading">System Users List</h1>
         <!---------Ban users table------------>
         <div class="table-container">
             <table class="ban-table">
@@ -155,10 +155,16 @@
         </div>
     </section>
 
+    <section id="qa-coord-section">
+        <h1 id="ideas-count">Total Ideas Posted From Your Department: </h1>
+        <br>
+        <h1 id="comments-count">Total Comments Posted From Your Department: </h1>
+    </section>
+
     <!---------reported posts table------------>
 
 
-    <div class="reports">
+    <div class="reports" id="high-priv-part2">
         <h1>Reported Posts</h1>
         <div class="table-container" id="reports-container">
             <table class="reports-table">
@@ -181,7 +187,7 @@
         </div>
     </div>
 
-    <section class="admin">
+    <section class="admin" id="high-priv-part3">
         <p>Closure Dates</p><br>
         <div class="closure">
             <div class="closure-date">
@@ -199,7 +205,9 @@
         <br>
 
 
+        
         <button style="padding: 2rem; border-radius: 10px;" id="download-documents-zipped-btn"></button>
+
 
         <label style="margin-top: 2rem;" for="export-table">Select table to export as CSV FILE:</label>
         <select name="export-table" id="export-table">
@@ -215,6 +223,7 @@
             <option value="like_and_dislikes" label="like_and_dislikes"></option>
         </select>
         <button style="padding: 2rem; border-radius: 10px;margin-top: 2rem;" id="download-csv-btn"></button>
+       
     </section>
 
     <footer>

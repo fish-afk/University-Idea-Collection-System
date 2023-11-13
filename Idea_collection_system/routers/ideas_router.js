@@ -24,6 +24,7 @@ router.get(
 	"/getdocumentfile",
 	ideaController.getDocumentFile,
 );
+router.post('/gettotal', authMiddleware.verifyJWT, ideaController.gettotalideasperdept)
 router.post(
 	"/getideabyid",
 	authMiddleware.verifyJWT,

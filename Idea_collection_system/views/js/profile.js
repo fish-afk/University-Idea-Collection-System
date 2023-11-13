@@ -85,6 +85,7 @@ const hideLinksBasedOnAccountType = async () => {
 	let manageLinks = document.getElementsByClassName("nav-manage-link");
 	let statsLinks = document.getElementsByClassName("nav-stats-link");
 	let submitLinks = document.getElementsByClassName("nav-submit-link");
+	let contactLinks = document.getElementsByClassName("nav-contact-link");
 
 	if (userData?.role_id <= 1) {
 		for (let i = 0; i < manageLinks.length; i++) {
@@ -102,9 +103,19 @@ const hideLinksBasedOnAccountType = async () => {
 		}
 	}
 
+	if (userData?.role_id > 2) {
+		for (let i = 0; i < contactLinks.length; i++) {
+			contactLinks[i].parentElement.remove();
+		}
+	}
+
 	if (userData?.role_id == 2) {
+		for (let i = 0; i < statsLinks.length; i++) {
+			statsLinks[i].parentElement.remove();
+		}
+
 		for (let i = 0; i < manageLinks.length; i++) {
-			manageLinks[i].parentElement.remove();
+			manageLinks[i].innerHTML = `<p>My-Department</p>`;
 		}
 	}
 };

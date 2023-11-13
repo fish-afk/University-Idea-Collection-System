@@ -19,6 +19,7 @@ router.post(
 	authMiddleware.verifyJWT,
 	commentsController.newCommentPost,
 );
+router.post('/gettotal', authMiddleware.verifyJWT, commentsController.gettotalcommentsperdept)
 router.post(
 	"/deletecomment",
 	authMiddleware.verifyJWT,

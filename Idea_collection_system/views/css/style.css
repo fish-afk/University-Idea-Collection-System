@@ -1882,6 +1882,9 @@ footer h2 {
 
 }
 
+#qa-coord-section{
+    padding: 30px 100px;
+}
 
 @media (max-width:450px) {
 

@@ -44,6 +44,43 @@ const checkIFBanned = (username) => {
 	});
 };
 
+const gettotalideasperdept = (req, res) => {
+	const privs = req.decoded["privs"];
+	const { department_id } = req.body;
+	if (privs != "admin" && privs != "qa_manager" && privs != "qa_coordinator") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `SELECT
+    users.department_id,
+    COUNT(ideas.idea_id) AS total_ideas_posted
+FROM
+    users
+LEFT JOIN ideas ON users.username = ideas.username
+WHERE
+    users.department_id = ?
+GROUP BY
+    users.department_id;
+`;
+		Mysql.connection.query(query, [department_id], (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.send({
+					status: "SUCCESS",
+					data: results,
+				});
+			}
+		});
+	}
+};
+
+
 // Create an idea
 const newIdeaPost = async (req, res) => {
 	const todaysDate = getCurrentDate();
@@ -615,5 +652,6 @@ module.exports = {
 	dislikePost,
 	setNewClosureDates,
 	getClosureDates,
-	getAllfilesForIdea_Zipped
+	getAllfilesForIdea_Zipped,
+	gettotalideasperdept
 };

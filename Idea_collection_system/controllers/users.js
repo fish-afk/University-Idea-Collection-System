@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const moment = require("moment");
 const authMiddleware = require("../middleware/auth_middleware");
 const SALT_ROUNDS = 10; // for hashing
-const fs = require('fs')
+const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
@@ -547,6 +547,41 @@ const getAllUsers = (req, res) => {
 	}
 };
 
+const getallusersbydept = (req, res) => {
+	const privs = req.decoded["privs"];
+	const { department_id } = req.body;
+	if (privs != "admin" && privs != "qa_manager" && privs != "qa_coordinator") {
+		return res
+			.status(401)
+			.send({ status: "FAILURE", message: "Insufficient privileges" });
+	} else {
+		const query = `SELECT users.username, users.firstname, users.lastname, users.email, users.role_id, users.staff_type_id, users.department_id, users.last_log_in, users.account_active, users.hidden_posts_and_comments, COUNT(ideas.idea_id) AS ideas_posted
+FROM
+    users
+LEFT JOIN ideas ON users.username = ideas.username
+WHERE
+    users.department_id = ?
+GROUP BY
+    users.username, users.firstname, users.lastname, users.department_id;`;
+		Mysql.connection.query(query, [department_id], (err, results) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).send({
+					status: "FAILURE",
+					message: "Unknown error",
+				});
+			} else {
+				return res.send({
+					status: "SUCCESS",
+					data: results,
+				});
+			}
+		});
+	}
+};
+
+
+
 function verifyJWT(username, token, expected_privs = [], res) {
 	let status = true;
 	if (!token || !username) {
@@ -590,7 +625,7 @@ function verifyJWT(username, token, expected_privs = [], res) {
 const ExportCSV = (req, res) => {
 	const username = req.query["username"];
 	const token = req.query["token"];
-	const table = req.query['table'];
+	const table = req.query["table"];
 	const expected_privs = ["admin", "qa_manager"];
 
 	let status = verifyJWT(username, token, expected_privs, res);
@@ -600,7 +635,7 @@ const ExportCSV = (req, res) => {
 	}
 
 	if (!table) {
-		return res.send({status:'FAILURE', message: 'Table field required'})
+		return res.send({ status: "FAILURE", message: "Table field required" });
 	}
 	try {
 		const tableName = table; // Replace with your table name
@@ -617,7 +652,7 @@ const ExportCSV = (req, res) => {
 			}
 
 			if (!results[0]) {
-				return res.send({status: 'FAILURE', message: 'Table empty'})
+				return res.send({ status: "FAILURE", message: "Table empty" });
 			}
 
 			// Create a CSV writer
@@ -662,4 +697,5 @@ module.exports = {
 	hidePostsAndComments,
 	UnhidePostsAndComments,
 	ExportCSV,
+	getallusersbydept,
 };

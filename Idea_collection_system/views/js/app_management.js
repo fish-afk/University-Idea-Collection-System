@@ -367,6 +367,37 @@ const fetchAllUsers = async () => {
 	return users;
 };
 
+const fetchAllUsersByDepartment = async (department_id) => {
+	let post_body = { username, jwt_key, department_id };
+
+	let users;
+	await fetch("/api/users/getallusersbydept", {
+		method: "POST",
+		body: JSON.stringify(post_body),
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			users = response?.data;
+			console.log(users);
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occurred when fetching users",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+
+	return users;
+};
+
+
 const BanUser = async (accountUsername) => {
 	Swal.fire({
 		title: "Warning",
@@ -721,15 +752,124 @@ const populateDomWithUsers = (users) => {
 	}
 };
 
+const populateDomWithUsersForQaCoord = (users) => {
+	const usersTable = document.getElementById("users-tbody");
+
+	usersTable.innerHTML = ``;
+
+	for (let i = 0; i < users.length; i++) {
+		usersTable.innerHTML += `<tr class="row">
+                        <td>${users[i].username}</td>
+                        <td>${users[i].email}</td>
+						<td>${formatDateToDDMMYYYY(new Date(users[i].last_log_in))}</td>
+                        <td>${
+													users[i].role_id == 1
+														? "staff"
+														: users[i].role_id == 2
+														? "qa_coordinator"
+														: users[i].role_id == 3
+														? "qa_manager"
+														: "admin"
+												}
+						</td>
+						<td>${users[i].account_active == "1" ? "True" : "False"}</td>
+						<td>Ideas posted: ${users[i].ideas_posted}</td>
+                        
+
+                    </tr>`;
+	}
+
+	
+};
+
+const gettotalideasperdept = async (department_id) => {
+	let post_body = { username, jwt_key, department_id };
+
+	let total;
+	await fetch("/api/ideas/gettotal", {
+		method: "POST",
+		body: JSON.stringify(post_body),
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			console.log(response)
+			total = response.data[0].total_ideas_posted;
+			
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occurred when fetching idea",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+	
+	return total;
+}
+
+
+const gettotalcommentsperdept = async (department_id) => {
+	let post_body = { username, jwt_key, department_id };
+
+	let total;
+	await fetch("/api/comments/gettotal", {
+		method: "POST",
+		body: JSON.stringify(post_body),
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+	})
+		.then(async (res) => {
+			const response = await res.json();
+			console.log(response);
+			total = response.data[0].total_comments_posted;
+		})
+		.catch((err) => {
+			Swal.fire({
+				title: "Error!",
+				text: "Unknown error occurred when fetching idea",
+				icon: "error",
+				confirmButtonText: "Ok",
+			});
+			console.error(err);
+		});
+
+	return total;
+};
+
+
 const main = async () => {
 	await confirmJwt();
-	let categories = await fetchCategories();
-	populateDomWithCategories(categories);
-	await fetchAndPopulateClosureDates();
-	let users = await fetchAllUsers();
-	populateDomWithUsers(users);
-	let posts = await fetchReportedPosts();
-	populateDomWithReportedPosts(posts);
+
+	if (userData?.role_id > 2) {
+		let categories = await fetchCategories();
+		populateDomWithCategories(categories);
+		await fetchAndPopulateClosureDates();
+		let users = await fetchAllUsers();
+		populateDomWithUsers(users);
+		let posts = await fetchReportedPosts();
+		populateDomWithReportedPosts(posts);
+		document.getElementById("qa-coord-section").remove();
+	} else {
+		let users = await fetchAllUsersByDepartment(userData?.department_id);
+		populateDomWithUsersForQaCoord(users);
+		document.getElementById("user-list-heading").innerText = "Users in your department";
+		document.getElementById("high-priv-part1").remove();
+		document.getElementById("high-priv-part2").remove();
+		document.getElementById("high-priv-part3").remove();
+		let totalideas = await gettotalideasperdept(userData?.department_id)
+		document.getElementById("ideas-count").innerText += " " + totalideas;
+		let totalcomments = await gettotalcommentsperdept(userData?.department_id);
+		document.getElementById("comments-count").innerText += " " + totalcomments;
+	}
+	
 	
 };
 
@@ -757,3 +897,5 @@ downloadCsvBtn.innerHTML = `
 <a style="color: cyan; font-size: 2rem; text-decoration: underline;" target=_blank href="/api/users/exportcsv?username=${username}&token=${jwt_key}&table=${table_to_export}">
 	Download Table export as csv.
 </a>`;
+
+
