@@ -97,11 +97,13 @@ staff_signup_btn.addEventListener("click", () => {
 					text: data?.message,
 					icon: "info",
 					confirmButtonText: "Ok",
-				});
+				}).then(() => {
+					if (data?.status == "SUCCESS") {
+						window.location.href = "/login.html";
+					}
+				})
 
-				if (data?.status == "SUCCESS") {
-					window.location.href = "/login.html";
-				}
+				
 			})
 			.catch((err) => {
 				console.log(err);

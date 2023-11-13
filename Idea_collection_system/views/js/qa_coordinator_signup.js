@@ -97,16 +97,17 @@ qa_coordinator_signup_btn.addEventListener("click", () => {
 		})
 			.then(async (res) => {
 				const data = await res.json();
+				
 				Swal.fire({
 					title: "Info",
-					text: res?.message,
+					text: data?.message,
 					icon: "info",
 					confirmButtonText: "Ok",
+				}).then(() => {
+					if (data?.status == "SUCCESS") {
+						window.location.href = "/login.html";
+					}
 				});
-
-				if (data?.status == "SUCCESS") {
-					window.location.href = "/login.html";
-				}
 			})
 			.catch((err) => {
 				console.log(err);

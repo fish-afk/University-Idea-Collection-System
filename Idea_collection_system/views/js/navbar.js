@@ -39,6 +39,12 @@ const hideLinksBasedOnAccountType = async () => {
 
 	}
 
+	if (userData?.role_id == 2) {
+		for (let i = 0; i < manageLinks.length; i++) {
+			manageLinks[i].parentElement.remove();
+		}
+	}
+
 };
 
 const LogOut = () => {

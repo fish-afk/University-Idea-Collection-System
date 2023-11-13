@@ -28,16 +28,14 @@ function getCurrentDate() {
 	const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
 	const year = today.getFullYear();
 
-	return `${day}/${month}/${year}`;
+	return `${year}-${month}-${day}`;
 }
 
 function hasClosurePassed(currentDate, closureDate) {
-	const parts1 = currentDate.split("/"); // Split the first date string into day, month, and year
-	const parts2 = closureDate.split("/"); // Split the second date string into day, month, and year
 
 	// Create Date objects from the parts
-	const dateObj1 = new Date(`${parts1[2]}-${parts1[1]}-${parts1[0]}`);
-	const dateObj2 = new Date(`${parts2[2]}-${parts2[1]}-${parts2[0]}`);
+	const dateObj1 = new Date(currentDate);
+	const dateObj2 = new Date(closureDate);
 
 	if (dateObj1 >= dateObj2) {
 		return true;
