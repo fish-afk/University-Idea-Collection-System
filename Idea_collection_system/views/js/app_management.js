@@ -891,11 +891,23 @@ const downloadCsvBtn = document.getElementById(
 );
 
 
-const table_to_export = document.getElementById('export-table').value;
+let table_to_export = document.getElementById("export-table").value;
+
 downloadCsvBtn.style.backgroundColor = "green";
 downloadCsvBtn.innerHTML = `
-<a style="color: cyan; font-size: 2rem; text-decoration: underline;" target=_blank href="/api/users/exportcsv?username=${username}&token=${jwt_key}&table=${table_to_export}">
-	Download Table export as csv.
-</a>`;
+	<a style="color: cyan; font-size: 2rem; text-decoration: underline;" target=_blank href="/api/users/exportcsv?username=${username}&token=${jwt_key}&table=${table_to_export}">
+		Download Table export as csv.
+	</a>`;
+
+document.getElementById("export-table").addEventListener('change', () => {
+	let table_to_export = document.getElementById("export-table").value;
+	downloadCsvBtn.style.backgroundColor = "green";
+	downloadCsvBtn.innerHTML = `
+	<a style="color: cyan; font-size: 2rem; text-decoration: underline;" target=_blank href="/api/users/exportcsv?username=${username}&token=${jwt_key}&table=${table_to_export}">
+		Download Table export as csv.
+	</a>`;
+})
+
+
 
 
