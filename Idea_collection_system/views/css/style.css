@@ -21,6 +21,9 @@
 
 
 html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-size: 80%;
     overflow-x: hidden;
     scroll-padding-top: 9rem;
@@ -28,7 +31,9 @@ html {
 }
 
 body {
-    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
     background: var(--bg);
 }
@@ -52,6 +57,39 @@ body {
 
 .button:hover {
     background: #1099ee;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: darkgray lightgray;
+}
+
+.table-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #0184d5;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: lightgray;
 }
 
 th {
@@ -300,6 +338,7 @@ td {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    width: 97%;
 }
 
 .submit .container .info .tag {
@@ -644,11 +683,11 @@ td {
     width: 100%;
 }
 
-.comments .anonymous-select button{
+.comments .anonymous-select button {
     padding: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    
+
     background-color: #025785;
     border-radius: 5px;
     color: white;
@@ -660,7 +699,8 @@ td {
     background-color: #01131b;
     color: #ffffff;
 }
-#post-comment-btn{
+
+#post-comment-btn {
     margin-left: 70%;
 }
 
@@ -673,33 +713,34 @@ td {
 
 .pagination .box {
     padding: 4px 7px;
-    border: 2px solid #0275b1;
+    border: 2px solid rgba(67, 189, 255, 0.671);
     background-color: #fff;
     margin: 2px;
     border-radius: 2px;
     cursor: pointer;
 }
 
-.report-btn{
+.report-btn {
     margin-left: 4rem;
-        background-color: rgb(148, 85, 85);
-        color: white;
-        border-radius: 3px;
-        padding: 0.5rem;
-        padding-right: 1rem;
-        padding-left: 1rem;
-        transition: all 300ms;
+    background-color: rgb(148, 85, 85);
+    color: white;
+    border-radius: 3px;
+    padding: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    transition: all 300ms;
 }
 
-.report-btn:hover{
+.report-btn:hover {
     margin-left: 4rem;
-        background-color: red;
-        color: white;
-        border-radius: 3px;
-        padding: 0.5rem;
-        padding-right: 1rem;
-        padding-left: 1rem;
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+    padding: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
+
 /*end of css for ideas section*/
 
 /*END OF CSS FOR IDEAS PAGE*/
@@ -716,7 +757,6 @@ td {
 
 /*CSS FOR PROFILE PAGE*/
 
-/*end of edit profile section*/
 
 .profile-info {
     width: 100%;
@@ -812,11 +852,15 @@ td {
     border-style: hidden;
 }
 
-.form {
+.edit-details .form {
     align-items: center;
     font-size: 16px;
 }
 
+.edit-details p {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .textbox {
@@ -826,7 +870,7 @@ td {
     width: 70%;
     box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
     border-style: hidden;
-    margin-left: 4%;
+    margin-right: 4%;
 }
 
 .textbox1 {
@@ -836,7 +880,7 @@ td {
     width: 70%;
     box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
     border-style: hidden;
-    margin-left: 9%;
+    margin-right: 4%;
 }
 
 .textbox2 {
@@ -846,7 +890,7 @@ td {
     width: 70%;
     box-shadow: 0px 1px 10px rgba(2, 2, 2, 0.148);
     border-style: hidden;
-    margin-left: 2%;
+    margin-left: 4%;
 }
 
 
@@ -864,8 +908,8 @@ td {
 }
 
 .categories p {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.9rem;
+    font-weight: 800;
 }
 
 .categories .table-container {
@@ -917,9 +961,8 @@ td {
 }
 
 .admin p {
-
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.9rem;
+    font-weight: 800;
 }
 
 .admin .closure-date {
@@ -1008,17 +1051,20 @@ td {
 
 .statistics {
     display: flex;
+    width: 100%;
 }
 
 .statistics .charts {
     padding: 0 30px;
+    margin-top: 30px;
 }
 
 .ideas-numbers {
-    margin-top: 30px;
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 300px;
+    margin: 0 auto;
 }
 
 
@@ -1027,24 +1073,28 @@ td {
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 300px;
+    margin: 0 auto;
 }
 
 .contributor-numbers {
     display: flex;
     justify-content: center;
-    width: 1500px;
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
 }
 
 .exception-reports {
-    width: 100%;
     padding: 30px 50px;
+    width: 100%;
 }
 
 .exception-reports .reports {
     background-color: #fff;
     border-radius: 5px;
     padding: 15px;
-    width: 80%;
+    width: 100%;
     box-shadow: 0 0 15px rgba(2, 2, 2, 0.45);
 }
 
@@ -1064,22 +1114,19 @@ td {
 
 .login {
     display: flex;
+    height: 100%;
 }
 
 .login-img {
-    min-height: 100%;
+    min-height: 100vh;
     width: 50%;
     opacity: 0.9;
-    background-color: #fff;
 }
 
 .login img {
     object-fit: cover;
     object-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    display: block;
 
     box-shadow: 0px 10px 15px rgba(2, 2, 2, 0.7);
 }
@@ -1091,6 +1138,9 @@ td {
     background-color: rgb(255, 255, 255);
     height: 100%;
 
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: darkgray lightgray;
 }
 
 .login-form h1 {
@@ -1190,12 +1240,15 @@ input[type=password]:focus {
 
 /* CSS FOR TERMS AND CONDITIONS PAGE */
 .tc-background {
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(34, 34, 200, 1) 0%, rgba(93, 223, 249, 1) 100%);
+    background-image: url(../images/tc_background.jpg);
+    background-position: center;
+    height: 100vh;
     padding: 50px;
 }
 
 #scroll {
     aspect-ratio: 2/1;
+    width: 100%;
     padding: 40px;
     margin: auto;
     border: solid rgb(204, 204, 219);
@@ -1284,6 +1337,7 @@ td {
     padding: 30px 100px;
 }
 
+
 .reports .table-container {
     background-color: #fff;
     padding: 10px;
@@ -1325,6 +1379,10 @@ td {
 
 .ban-users {
     padding: 30px 100px;
+}
+
+.ban-users h1 {
+    font-size: 1.9rem;
 }
 
 .ban-users .table-container {
@@ -1390,9 +1448,11 @@ td {
 
 .contact .input {
     display: flex;
+
 }
 
 .contact input {
+    width: 50%;
     padding: 4px;
     margin: 3px;
     border-radius: 3px;
@@ -1483,6 +1543,14 @@ footer h2 {
         padding: 1.5rem 2rem;
     }
 
+    /*footer section*/
+
+    footer {
+        width: 100%;
+        padding: 15px 30px;
+        padding-bottom: 10px;
+    }
+
 }
 
 
@@ -1490,6 +1558,7 @@ footer h2 {
 
     #menu-btn {
         display: inline-block;
+        font-size: 1.7rem;
     }
 
     .navbar {
@@ -1503,7 +1572,7 @@ footer h2 {
         width: 100%;
         text-align: center;
         transition: 0.2s;
-
+        z-index: 99999;
         box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
     }
 
@@ -1518,7 +1587,564 @@ footer h2 {
         padding: .5rem;
         font-size: 2rem;
     }
+
+
+    /*css for navigation bar*/
+
+    .user-info .vertical-line {
+        border-left: 2px solid var(--border);
+    }
+
+
+    .user-info img {
+        height: 25px;
+        width: 25px;
+    }
+
+    /*login*/
+    .login-img {
+        height: 100%;
+    }
+
+    /*submit section*/
+
+    .submit {
+        padding: 20px 90px;
+        margin-bottom: 80px;
+        margin-top: 50px;
+    }
+
+    .submit h1 {
+        font-size: 2rem;
+    }
+
+    .submit .container .info .tag label {
+        font-size: 12px;
+    }
+
+    .submit .container .info .tag select {
+        font-size: 12px;
+    }
+
+    .submit .container .info .tag p {
+        font-size: 1.4rem;
+    }
+
+    .submit .container .info .tag ul {
+        padding-left: 5px;
+    }
+
+    .submit .content input {
+        font-size: 12px;
+    }
+
+    .submit textarea {
+        margin-top: 12px;
+        font-size: 12px;
+        min-height: 180px;
+        padding: 8px 16px;
+    }
+
+
+    .submit .agree {
+        margin-top: 10px;
+        font-size: 1.3rem;
+    }
+
+    .submit label {
+        padding-left: 5px;
+    }
+
+
+    .submit .button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+
+
+
+    /*  CONTACT PAGE */
+
+    .contact {
+        padding: 20px 90px;
+        margin-bottom: 80px;
+        margin-top: 50px;
+    }
+
+    .contact .input {
+        display: flex;
+    }
+
+    .contact input {
+        padding: 4px;
+        margin: 3px;
+    }
+
+    .contact .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact textarea {
+        margin: 3px;
+        padding: 4px;
+        border-radius: 3px;
+        box-shadow: 0px 5px 5px rgba(2, 2, 2, 0.5);
+    }
+
+    .contact .button {
+        margin-top: 10px;
+        width: 50%;
+        padding: 15px 0;
+    }
+
+
+
+    /*app management*/
+
+    .admin .closure input {
+        font-size: 10px;
+    }
+
+
+
+    /*CSS FOR PROFILE PAGE*/
+
+
+    .profile-info {
+        padding: 30px 70px;
+    }
+
+    .profile-info .container img {
+        height: 90px;
+        width: 90px;
+    }
+
+    .profile-info .info {
+        margin-right: 2%;
+    }
+
+    .profile-info .container {
+        padding: 10px;
+    }
+
+    .profile-info .container .info .job-info {
+        padding-left: 15px;
+        padding-right: 10px;
+    }
+
+    .profile-info .container .info .job-info .name {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .profile-info .container .info .job-info .title {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .profile-info .container .info .job-info .department {
+        font-size: 1.1rem;
+    }
+
+
+    .profile-info .container .login-details i {
+        font-size: 1.2rem;
+        padding-right: 5px;
+    }
+
+
+    /***** css for form profile  *****/
+
+    .edit-details {
+
+        width: 100%;
+        padding: 30px 70px;
+        margin-bottom: 40px;
+    }
+
+    .edit-details .button {
+        font-size: 1.5rem;
+    }
+
+    .edit-details img {
+        height: 95px;
+        width: 95px;
+        margin-bottom: 10px;
+    }
+
+    .edit-form {
+        padding: 30px 50px;
+    }
+
+    .edit-details .form {
+        font-size: 16px;
+    }
+
+    .edit-details h2 {
+        font-size: 2.3rem;
+    }
+
+    .edit-details p {
+        font-size: 1.6rem;
+    }
+
+    .edit-details input {
+        font-size: 1.6rem;
+    }
+
+    .textbox {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        margin-left: 4%;
+    }
+
+    .textbox1 {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        border-style: hidden;
+        margin-left: 9%;
+    }
+
+    .textbox2 {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        margin-left: 2%;
+    }
+
+
+    /***** end of css for profile info section *****/
+
+    /* CSS FOR STATISTICS PAGE */
+
+    .statistics {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .statistics .charts {
+        padding: 0 30px;
+    }
+
+    .statistics .ideas-numbers {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        width: 90%;
+    }
+
+
+
+    .statistics .piechart {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .statistics .contributor-numbers {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+    }
+
+    .statistics .exception-reports {
+        padding: 30px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .statistics .exception-reports .reports {
+        padding: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .statistics .exception-reports .number-comment {
+        font-size: 5rem;
+    }
+
+    .statistics .exception-reports p {
+        font-size: 1.5rem;
+    }
+
+    /* END OF CSS FOR STATISTICS PAGE */
+
+
 }
+
+
+@media (max-width:450px) {
+
+    html {
+        font-size: 35%;
+    }
+
+    /*buttons*/
+    .button {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    /*login*/
+    .login .login-form {
+        padding: 20px 20px;
+    }
+
+    /*submit section*/
+
+    .submit {
+        width: 100%;
+        padding: 10px 15px;
+        margin-bottom: 100px;
+        margin-top: 50px;
+    }
+
+    .submit h1 {
+        font-size: 1.8rem;
+    }
+
+    .submit .container .info .tag label {
+        font-size: 9px;
+    }
+
+
+    .submit .container .info .tag select {
+        font-size: 9px;
+    }
+
+    .submit .container .info .tag p {
+        font-size: 1rem;
+    }
+
+    .submit .container .info .tag ul {
+        padding-left: 5px;
+    }
+
+
+    .submit .agree {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+    }
+
+    .submit label {
+        padding-left: 5px;
+    }
+
+
+    .submit .button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        width: 50%;
+    }
+
+
+
+
+    /*CSS FOR PROFILE PAGE*/
+
+
+    .profile-info {
+        padding: 20px 50px;
+    }
+
+    .profile-info .container img {
+        height: 50px;
+        width: 50px;
+    }
+
+
+    .profile-info .container .info .job-info .name {
+        font-size: 1.7rem;
+        font-weight: 700;
+    }
+
+    .profile-info .container .info .job-info .title {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .profile-info .container .info .job-info .department {
+        font-size: 1.1rem;
+    }
+
+
+    .profile-info .container .login-details i {
+        font-size: 1.2rem;
+        padding-right: 5px;
+    }
+
+
+    /***** css for form profile  *****/
+
+    .edit-details {
+        padding: 20px 50px;
+        margin-bottom: 40px;
+    }
+
+    .edit-details .button {
+        font-size: 1.5rem;
+    }
+
+
+    .edit-form {
+        padding: 20px 20px;
+    }
+
+    .form {
+        font-size: 16px;
+    }
+
+    .edit-details .form {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .edit-form .form h2 {
+        font-size: 2rem;
+    }
+
+    .edit-form .form p {
+        font-size: 1.6rem;
+    }
+
+    .edit-form .form input {
+        font-size: 1.6rem;
+    }
+
+    .edit-details .change-password-form {
+        padding: 20px 20px;
+    }
+
+    .textbox {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        margin-left: 4%;
+    }
+
+    .textbox1 {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        border-style: hidden;
+        margin-left: 9%;
+    }
+
+    .textbox2 {
+        box-sizing: 5%;
+        font-size: 19px;
+        font-weight: 16px;
+        width: 70%;
+        margin-left: 2%;
+    }
+
+
+    /***** end of css for profile info section *****/
+
+
+    /*categories section*/
+    .categories {
+        padding: 24px 60px;
+    }
+
+    .categories .buttons {
+        width: 150px;
+    }
+
+    .categories .button {
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+    .ban-users {
+        padding: 24px 60px;
+    }
+
+    .reports {
+        padding: 24px 60px;
+    }
+
+    .admin {
+        padding: 24px 60px;
+    }
+
+    .admin select {
+        font-size: 1.4rem;
+    }
+
+    .closure .button {
+        font-size: 1.3rem;
+    }
+
+    /*statistics*/
+    .statistics .ideas-numbers {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        width: 70%;
+    }
+
+
+
+    .statistics .piechart {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+    }
+
+    .statistics .contributor-numbers {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+    }
+
+
+
+    /*ideas section*/
+
+    .ideas {
+        padding: 30px 60px;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .change-password-form {
     position: relative;
