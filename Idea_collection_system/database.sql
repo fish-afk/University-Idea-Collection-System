@@ -1,6 +1,8 @@
 
 -- DATABASE CREATION
 
+DROP DATABASE IF EXISTS Idea_Collection_System;
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 CREATE DATABASE IF NOT EXISTS Idea_Collection_System;
 USE Idea_Collection_System;
 

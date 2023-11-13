@@ -100,7 +100,7 @@ const getContributorsPerDepartment = () => {
 const getAllStats = async (req, res) => {
 	const privs = req.decoded["privs"]; // Assuming you have the user's privileges in req.user
 
-	if (privs != "admin" && privs != "qa_manager") {
+	if (privs != "admin" && privs != "qa_manager" && privs != 'qa_coordinator') {
 		return res
 			.status(401)
 			.json({ status: "FAILURE", message: "Insufficient privileges" });
