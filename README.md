@@ -5,7 +5,7 @@
 
 Any documentation related to the system will be found in the current folder. The system itself will be found in the "Idea_collection_system" folder.
 
-## How to run this project locally
+## How to run this project locally.
 
 ## Prerequisites: 
 
