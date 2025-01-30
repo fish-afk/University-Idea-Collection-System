@@ -1,7 +1,7 @@
 # UoG Group project for Enterprise web software development
 
 
-## Idea collection system for a university
+## Idea collection system for a university.
 
 Any documentation related to the system will be found in the current folder. The system itself will be found in the "Idea_collection_system" folder.
 
